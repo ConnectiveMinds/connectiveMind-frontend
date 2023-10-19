@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar } from "../Components/navbar";
+import { NavBar } from "../Components/NavBar/navbar";
 
 const CreateGroup: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +21,9 @@ const CreateGroup: React.FC = () => {
 
   return (
     <div>
-      <Navbar />
+      <NavBar isHomePage={false} isLandingpage={false} name={''} error={false} onChange={function (): void {
+        throw new Error('Function not implemented.');
+      } } />
 
       <div className="max-w-lg mx-auto mt-8 p-8 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-semibold mb-4">Create a Group</h2>
