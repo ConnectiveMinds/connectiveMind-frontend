@@ -23,15 +23,17 @@ export function SideBar(props: ISideBar) {
     return (
       <li>
         <SideBarItems
-          icons=<svg
-            width="13"
-            height="18"
-            viewBox="0 0 13 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M12.61 9L0 18V0L12.61 9Z" fill="black" />
-          </svg>
+          icons={
+            <svg
+              width="13"
+              height="18"
+              viewBox="0 0 13 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M12.61 9L0 18V0L12.61 9Z" fill="black" />
+            </svg>
+          }
           text={item.text}
         />
       </li>

@@ -4,7 +4,6 @@ interface IButton {
   width: number;
 }
 export function CustomButton(props: IButton) {
-  console.log(`dsfs ${props.height}`);
   return (
     <div>
       <button

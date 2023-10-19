@@ -1,10 +1,10 @@
-import { ChangeEvent } from "react";
 import { NavBar } from "../../../Components/NavBar/navbar";
 import { SideBar } from "../../../Components/NavBar/sidebar";
 import { HorizontalDivider } from "../../../Components/Divider/horizontalDivider";
 import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
 import { RecommendedProjects } from "../components/recommendsection";
 import { Events } from "../components/eventssection";
+import { ChangeEvent } from "react";
 
 export function HomePage() {
   return (
@@ -14,6 +14,7 @@ export function HomePage() {
         isLandingpage={false}
         name={""}
         error={false}
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         onChange={function (e: ChangeEvent<HTMLInputElement>): void {
           throw new Error("Function not implemented.");
         }}

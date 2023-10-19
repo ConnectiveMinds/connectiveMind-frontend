@@ -21,7 +21,7 @@ export function ProjectCard(props: IProjectCard) {
           <div className="TeamName w-32 h-7 text-black text-2xl font-normal font-['Inria Serif'] tracking-tight">
             {props.name}
           </div>
-          <CustomButton text="Join" height={8} width={24}></CustomButton>
+          <CustomButton text="Join" height={8} width={32}></CustomButton>
         </div>
         <div className="max-w-full max-h-fit bg-gray-200 rounded-lg relative mt-4 p-4 text-black text-base font-normal font-['Inria Serif'] tracking-tight">
           <p>{props.description}</p>

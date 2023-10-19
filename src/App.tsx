@@ -1,18 +1,21 @@
-import { Route, Routes } from "react-router-dom";
-import { LandingPage } from "./features/LandingPage";
+import { Routes, Route } from "react-router";
 import { HomePage } from "./features/HomePage/pages/HomePage";
-import { SignIn } from "./features/SignIn";
+import { LandingPage } from "./features/LandingPage";
+import { Login } from "./features/SignIn";
 import { SignUp } from "./features/SignUp";
+import { BrowserRouter } from "react-router-dom";
 
 const App = () => {
   return (
     <div>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/Home" element={<HomePage />} />
-        <Route path="/SignIn" element={<SignUp />} />
-        <Route path="/SignUp" element={<SignIn />} />
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/SignUp" element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
