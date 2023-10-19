@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 * {
   background: fixed white;
   margin: 0;
@@ -55,7 +60,7 @@
 .description .intro {
   width: 50%;
   display: inline-block;
-  /* border-style: dashed; */
+  
   vertical-align: middle;
   padding: 20vh 0px;
 }

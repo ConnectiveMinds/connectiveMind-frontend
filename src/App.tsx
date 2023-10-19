@@ -1,20 +1,22 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { LandingPage } from "./Pages/LandingPage";
 import { HomePage } from "./Pages/HomePage";
-import { SignIn } from "./Pages/SignIn";
+import { Login} from "./Pages/SignIn";
 import { SignUp } from "./Pages/SignUp";
 
 
 const App = () => {
     return (
         <div>
+            <BrowserRouter>
             <Routes>
                 <Route path='/' element={<LandingPage />} />
                 <Route path='/Home' element={<HomePage />} />
                 <Route path='/SignIn' element={<SignUp />} />
-                <Route path='/SignUp' element={<SignIn/>} />
+                <Route path='/login' element={<Login/>} />
             </Routes>
+            </BrowserRouter>
             
             
         </div>
