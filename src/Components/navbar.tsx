@@ -8,7 +8,7 @@ export function Navbar(){
             className="logo"
             src="src\Data\Connective 1.png"
             alt="logo"
-        
+          
           />
         </li>
         <li><button className="SignIn">Sign In</button></li>

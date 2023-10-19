@@ -5,13 +5,19 @@
   box-sizing: border-box;
 }
 
-.navbar {
+.body{
   margin: 1rem;
-  padding: 2rem;
+  padding:1rem;
+}
+
+.navbar {
+  
   text-align: center;
   overflow: hidden;
   align-items: center;
   box-sizing: border-box;
+  position: sticky;
+  
 }
 
 .navbar li {
@@ -20,17 +26,22 @@
   padding: 50px 20px;
 }
 
-.navbar li button {
+button {
   width: 100px;
   border-radius: 0.5rem;
+  border: 0px;
+  box-shadow:2px 2px 4px #000000;
+  height: 25px;
 }
 
-.navbar li button.SignUp {
+button.SignUp {
   background-color: rgba(119, 65, 170, 1);
   color: white;
+  
 }
 
 .navbar li button.SignIn {
+  border: 0px;
   color: rgba(119, 65, 170, 1);
 }
 
@@ -38,16 +49,16 @@
   float: left;
   margin: 20px;
   padding: 0px;
+  
 }
 
 .navbar li img {
-  height: 5rem;
+  height: 6rem;
 }
 
 .description {
-  height: 70vh;
-  margin: 1rem;
-  padding: 2rem;
+  height: 60vh;
+  
   overflow: hidden;
   display: flex;
 }
@@ -68,8 +79,10 @@
 }
 
 .description .images {
+   
   display: inline-block;
   width: 50%;
+  
 }
 
 .bulb-bg {
@@ -77,22 +90,50 @@
   position: absolute;
   z-index: 2;
   opacity: 0.5;
-  width: 50%;
+  width:min-content;
+
+  height: 70vh;
 }
 
 .bulb {
+   
   display: inline;
   position: relative;
   z-index: 1;
-  width: 100%;
+  width: 90%;
+  height: 70vh;
+  vertical-align: top;
 }
 
 .description header {
   display: inline-block;
   font-weight: bolder;
   font-size: 2rem;
+  
 }
 
 .description header span {
   color: rgba(119, 65, 170, 1);
+}
+
+.explore h1{
+  color: rgba(119, 65, 170, 1);
+  text-shadow: 2px 2px 4px #292424ac;
+  margin-bottom: 30px;
+}
+
+.explore .recommendation{
+  
+  display: flex;
+  position: relative;
+
+}
+
+.explore .container{
+  margin: auto;
+  overflow: hidden;
+  border-top:1px solid #413d3d;
+  border-bottom:1px solid #413d3d;  
+  width: 40ch;  
+  
 }
