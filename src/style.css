@@ -1,0 +1,83 @@
+* {
+  background: fixed white;
+  margin: 0.5rem;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  margin: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  overflow: hidden;
+  align-items: center;
+}
+
+.navbar li {
+  display: inline-block;
+  float: right;
+  padding: 20px;
+  margin: 0px;
+}
+
+.navbar li button {
+  width: 100px;
+  margin: 40%;
+  border-radius: 0.5rem;
+}
+
+.navbar li button.SignUp {
+  background-color: rgba(119, 65, 170, 1);
+  color: white;
+}
+
+.navbar li button.SignIn {
+  color: rgba(119, 65, 170, 1);
+}
+
+.navbar li.logo {
+  float: left;
+  margin: 20px;
+  padding: 0px;
+}
+
+.navbar li img {
+  height: 5rem;
+}
+
+.body {
+  column-count: 2;
+  column-width: 40px;
+  column-gap: 10px;
+  height: 70vh;
+  width: 100vw;
+  margin: 0.5rem;
+}
+
+.body .intro {
+  top: 50%;
+  translate: Y(-50%);
+}
+
+.bulb-bg {
+  position: absolute;
+  z-index: 2;
+  opacity: 0.5;
+  object-fit: cover;
+  height: 70vh;
+}
+
+.bulb {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+header {
+  font-weight: bolder;
+  font-size:2rem;
+}
+
+header span {
+  color: rgba(119, 65, 170, 1);
+}
