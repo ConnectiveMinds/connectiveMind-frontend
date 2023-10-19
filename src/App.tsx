@@ -4,6 +4,7 @@ import { LandingPage } from "./Pages/LandingPage";
 import { HomePage } from "./Pages/HomePage";
 import { Login} from "./Pages/SignIn";
 import { SignUp } from "./Pages/SignUp";
+import CreateGroup from "./Pages/CreateGroup";
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
                 <Route path='/Home' element={<HomePage />} />
                 <Route path='/SignIn' element={<SignUp />} />
                 <Route path='/login' element={<Login/>} />
+                <Route path='/CreateGroup' element={<CreateGroup/>} />
             </Routes>
             </BrowserRouter>
             
