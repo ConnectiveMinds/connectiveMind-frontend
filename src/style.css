@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
-* {
+/* * {
   background: fixed white;
   margin: 0;
   padding: 0;
@@ -60,7 +59,7 @@
 .description .intro {
   width: 50%;
   display: inline-block;
-  
+
   vertical-align: middle;
   padding: 20vh 0px;
 }
@@ -100,4 +99,4 @@
 
 .description header span {
   color: rgba(119, 65, 170, 1);
-}
+} */
