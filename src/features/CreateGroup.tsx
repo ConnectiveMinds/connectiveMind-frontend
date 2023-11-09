@@ -67,7 +67,7 @@ const CreateGroup: React.FC = () => {
           </div>
 
           <div className="flex justify-end"> 
-          <button type="submit" className="bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 focus:outline-none">
+          <button type="submit" className="bg-purple-500 text-white py-2 px-4 rounded-lg transition-all duration-200  hover:shadow-lg hover:transform hover:scale-105">
               Create
             </button>
           </div>

@@ -32,7 +32,7 @@ const JoinRequestPage: React.FC = () => {
           onClick={() => setCurrentSection('sent')}
           className={`${
             currentSection === 'sent' ? 'bg-purple-500' : 'bg-gray-300'
-          } text-white py-2 px-4 rounded-lg transition-all duration-300 focus:outline-none focus:ring focus:border-blue-300 hover:shadow-lg hover:transform hover:scale-105 ` }
+          } text-white py-2 px-4 rounded-lg transition-all duration-300 focus:outline-none focus:ring focus:border-blue-200 hover:shadow-lg hover:transform hover:scale-105 ` }
         >
           Sent Requests
         </button>
@@ -40,7 +40,7 @@ const JoinRequestPage: React.FC = () => {
           onClick={() => setCurrentSection('received')}
           className={`${
             currentSection === 'received' ? 'bg-purple-500' : 'bg-gray-300'
-          } text-white py-2 px-4 rounded-lg transition-all duration-300 focus:outline-none focus:ring focus:border-green-300 hover:shadow-lg hover:transform hover:scale-105`}
+          } text-white py-2 px-4 rounded-lg transition-all duration-300 focus:outline-none focus:ring focus:border-green-200 hover:shadow-lg hover:transform hover:scale-105`}
         >
           Received Requests
         </button>
