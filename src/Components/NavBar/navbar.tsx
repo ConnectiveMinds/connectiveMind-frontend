@@ -24,13 +24,13 @@ export function NavBar(props: INavBarProps) {
             Home
           </a>
           <a
-            href="#"
+            href="CreateGroup"
             className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4"
           >
             Create Group
           </a>
           <a
-            href="#"
+            href="join-requests"
             className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4"
           >
             Join Request
