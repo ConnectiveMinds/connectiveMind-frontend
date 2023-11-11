@@ -13,7 +13,7 @@ export function Description() {
           culpa delectus magni in quisquam quia ut sed vel blanditiis fugit!
           Temporibus, iure.
               </div>
-              <button className="SignUp">Explore</button>
+              <button className="colored">Explore</button>
       </div>
       <div className="images">
         <img className="bulb-bg" src="src\Data\Ellipse 1.png" alt="" />
