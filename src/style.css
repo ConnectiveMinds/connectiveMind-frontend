@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 
-* {
+
+/* * {
   background: fixed white;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
 .navbar {
   margin: 1rem;

@@ -5,6 +5,7 @@ import { HomePage } from "./Pages/HomePage";
 import { Login} from "./Pages/SignIn";
 import { SignUp } from "./Pages/SignUp";
 import { MyCalendar } from "./Components/calendar";
+import { EventForm } from "./Components/eventform";
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path='/SignIn' element={<SignUp />} />
                 <Route path='/login' element={<Login/>} />
                 <Route path='/calendar' element={<MyCalendar/>} />
+                <Route path="/eventform" element={<EventForm/>}/>
             </Routes>
             </BrowserRouter>
             

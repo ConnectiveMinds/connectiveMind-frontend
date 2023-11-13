@@ -3,6 +3,7 @@ import { authApi } from "../services/authApi";
 import {setupListeners } from "@reduxjs/toolkit/query/react";
 import authReducer from  "../features/authSlice"
 import dateReducer from  "../features/calendarSlice"
+// import { dateApi } from "../services/calendarApi";
 export const store = configureStore(
     {
         reducer:
@@ -10,6 +11,7 @@ export const store = configureStore(
             auth:authReducer,
             [authApi.reducerPath]:authApi.reducer,
             dates:dateReducer,
+            // [dateApi.reducerPath]:dateApi.reducer
         },
         middleware:(getDefaultMiddleware)=>
         getDefaultMiddleware().concat(authApi.middleware),
