@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+     @apply box-border m-0 p-0;
+  background: fixed white;
+}
+
+.nav-elements {
+   @apply list-none float-right px-5 py-[50px];
+}
+
+.colored {
+  @apply w-20 shadow-[2px_2px_4px_#000000] h-[25px] bg-[rgba(119,65,170,1)] text-[white] m-2.5 rounded-lg border-0 hover:cursor-pointer hover:scale-110;
+}
+
+.not-colored{
+    @apply w-20 shadow-[2px_2px_4px_#000000] h-[25px] bg-[white] text-[rgba(119,65,170,1)] m-2.5 rounded-lg border-0 hover:cursor-pointer hover:scale-110;
+}
+
+.logo{
+  @apply float-left m-5 p-0;
+}
+
+.description {
+  @apply h-[30rem] overflow-hidden flex;
+}
+
+.description .intro {
+  @apply w-6/12 inline-block align-middle px-8 py-[20vh];
+}
+
+.description .intro .about {
+  @apply w-full align-middle inline-block leading-normal;
+}

@@ -3,27 +3,27 @@ import React from "react";
 export function Description() {
   return (
     <div className="description">
-      <div className="intro" >
-        <header>
-          Meet<span>ConnectiveMinds</span>{" "}
+      <div className="intro">
+        <header className="inline-block font-semibold text-[2rem] drop-shadow-2xl">
+          Meet
+          <span className="text-[rgba(119,65,170,1)]">ConnectiveMinds</span>{" "}
         </header>
         <div className="about">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
           reprehenderit sit beatae ducimus, consectetur dignissimos nisi. Ipsum
           culpa delectus magni in quisquam quia ut sed vel blanditiis fugit!
           Temporibus, iure.
-              </div>
-              <button className="colored">Explore</button>
+        </div>
+        <button className="colored">Explore</button>
       </div>
-      <div className="images">
-        <img className="bulb-bg" src="src\Data\Ellipse 1.png" alt="" />
+      <div className="inline-block w-6/12">
         <img
-          className="bulb"
-          src="src\Data\Connective Minds (3) 1.png"
+          className="inline-block absolute z-[2] opacity-80 w-min h-[70vh]"
+          src="src\Data\Ellipse 1.png"
           alt=""
         />
-          </div>
-      
+        <img src="src\Data\Connective Minds (3) 1.png" alt="" />
+      </div>
     </div>
   );
 }

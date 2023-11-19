@@ -6,7 +6,7 @@ import { Explore } from "../Components/Explore";
 
 export function LandingPage() {
   return (
-    <div className="body">
+    <div className="m-4 p-4">
       <Navbar />
       <Description />
       <Explore
