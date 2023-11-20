@@ -1,6 +1,7 @@
-import React from "react";
+import React,{useRef} from "react";
 
 export function Description() {
+  
   return (
     <div className="description">
       <div className="intro">
@@ -18,11 +19,11 @@ export function Description() {
       </div>
       <div className="inline-block w-6/12">
         <img
-          className="inline-block absolute z-[2] opacity-80 w-min h-[70vh]"
+          className="inline-block absolute z-[2] opacity-80 w-min h-[70vh] right-8"
           src="src\Data\Ellipse 1.png"
           alt=""
         />
-        <img src="src\Data\Connective Minds (3) 1.png" alt="" />
+        <img className="inline-block right-1 absolute" src="src\Data\Connective Minds (3) 1.png" alt="" />
       </div>
     </div>
   );
