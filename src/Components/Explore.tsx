@@ -12,7 +12,7 @@ type ExploreProps = {
 export function Explore() {
     return (
       <div className="m-4">
-        <h1 className="inline-block font-semibold text-[2rem] text-[rgba(119,65,170,1)]">
+        <h1 className="inline-block font-bold text-[2rem] text-[rgba(119,65,170,1)]">
           Explore
         </h1>
         <Carousel/>

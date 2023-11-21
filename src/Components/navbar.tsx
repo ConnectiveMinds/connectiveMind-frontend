@@ -12,12 +12,12 @@ export function Navbar(){
           />
         </li>
         <a href="/SignIn">
-          <li className="nav-elements">
+          <li className="nav-elements float-right">
             <button className="not-colored">Sign In</button>
           </li>
         </a>
         <a href="/SignUp">
-          <li className="nav-elements">
+          <li className="nav-elements float-right">
             <button className="colored">Sign Up</button>
           </li>
         </a>

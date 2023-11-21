@@ -9,7 +9,7 @@
 }
 
 .nav-elements {
-   @apply list-none float-right px-5 py-[50px];
+   @apply list-none  px-5 py-[20px];
 }
 
 .colored {
