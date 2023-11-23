@@ -2,9 +2,11 @@ import { NavBar } from "../../../Components/NavBar/navbar";
 import { SideBar } from "../../../Components/NavBar/sidebar";
 import { HorizontalDivider } from "../../../Components/Divider/horizontalDivider";
 import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
-import { RecommendedProjects } from "../components/recommendsection";
+
 import { Events } from "../components/eventssection";
 import { ChangeEvent } from "react";
+
+import { RecommendedProjects } from "../components/recommendsection";
 
 export function HomePage() {
   return (
@@ -32,6 +34,7 @@ export function HomePage() {
           ]}
         ></SideBar>
         <VerticalDivider />
+
         <RecommendedProjects
           projects={[
             {

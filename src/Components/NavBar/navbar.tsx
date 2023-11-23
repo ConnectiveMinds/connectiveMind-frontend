@@ -65,14 +65,14 @@ export function NavBar(props: INavBarProps) {
               </svg>
             }
             height={12}
-            width={64}
+            width={44}
             type="text"
             label="Name"
             value={props.name}
             name="name"
             error={props.error}
             onChange={props.onChange}
-            placeholder="Please enter your name"
+            placeholder="Search"
           />
         ) : (
           <></>
