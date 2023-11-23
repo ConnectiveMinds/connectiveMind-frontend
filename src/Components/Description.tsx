@@ -17,13 +17,13 @@ export function Description() {
         </div>
         <button className="colored">Explore</button>
       </div>
-      <div className="inline-block w-[50%]">
+      <div className="inline-block">
         <img
-          className="inline-block absolute z-[2] opacity-80 w-min h-[70vh] right-8"
+          className="inline-block absolute z-[2] opacity-80  h-[70vh] "
           src="src\Data\Ellipse 1.png"
           alt=""
         />
-        <img className="inline-block right-1 absolute" src="src\Data\Connective Minds (3) 1.png" alt="" />
+        <img className="inline-block absolute" src="src\Data\Connective Minds (3) 1.png" alt="" />
       </div>
     </div>
   );

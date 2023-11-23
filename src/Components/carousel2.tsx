@@ -16,11 +16,11 @@ const Carousel2 = () => {
     swipe: true,
   };
   return (
-    <div className=" flex 1/2 w-[50%] ">
-      <div className=" mt-20 w-[100%] ">
+    <div className="1/2 flex">
+      <div className=" mt-20 w-[100%]">
         <Slider {...settings}>
           {data.map((d) => (
-            <div className=" h-[30vh] bg-[rgba(119,65,170,1)] p-4 rounded-[20px] ">
+            <div className=" flex bg-[rgba(119,65,170,1)] p-4 rounded-[20px] ">
               <ul className="flex items-center ">
                 <li>
                   <div className="rounded-[100%] bg-[white] border-black  overflow-auto">

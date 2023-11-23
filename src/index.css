@@ -13,7 +13,7 @@
 }
 
 .colored {
-  @apply w-24 shadow-[2px_2px_4px_#000000] h-[25px] bg-[rgba(119,65,170,1)] text-[white] m-2.5 rounded-lg border-0 hover:cursor-pointer hover:scale-110;
+  @apply  flex justify-center items-center w-24 shadow-[2px_2px_4px_#000000] h-[25px] bg-[rgba(119,65,170,1)] text-[white] m-2.5 rounded-lg border-0 hover:cursor-pointer hover:scale-110;
 }
 
 .not-colored{
