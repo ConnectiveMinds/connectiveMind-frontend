@@ -18,7 +18,7 @@ export function NavBar(props: INavBarProps) {
       <>
         <div className="text-base flex gap-12">
           <a
-            href="#"
+            href="Home"
             className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4"
           >
             Home
