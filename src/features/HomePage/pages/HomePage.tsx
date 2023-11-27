@@ -6,7 +6,8 @@ import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
 import { Events } from "../components/eventssection";
 import { ChangeEvent } from "react";
 
-import { RecommendedProjects } from "../components/recommendsection";
+// import { RecommendedProjects } from "../components/recommendsection";
+import { ChatSection } from "../components/chatsection";
 
 export function HomePage() {
   return (
@@ -34,7 +35,8 @@ export function HomePage() {
           ]}
         ></SideBar>
         <VerticalDivider />
-
+        <ChatSection />
+        {/* 
         <RecommendedProjects
           projects={[
             {
@@ -71,7 +73,7 @@ export function HomePage() {
               ],
             },
           ]}
-        />
+        /> */}
         <Events></Events>
       </div>
     </div>
