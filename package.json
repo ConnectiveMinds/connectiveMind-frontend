@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
+    "@types/socket.io-client": "^3.0.0",
+    "esbuild": "^0.19.5",
     "axios": "^1.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

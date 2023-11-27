@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import { NavBar } from "../Components/NavBar/navbar";
-
+import { createGroup } from '../services/homepageServices';
 const CreateGroup: React.FC = () => {
   const [formData, setFormData] = useState({
     teamName: '',
@@ -8,16 +9,24 @@ const CreateGroup: React.FC = () => {
     skillsRequired: '',
   });
 
+  const { teamName, projectDescription, skillsRequired } = formData;
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log(formData);
+
+    try {
+      const response = await createGroup(teamName, projectDescription, skillsRequired);
+      console.log(response);
+    } catch (error: any) {
+      console.error('Error:', error.message);
+    }
   };
+  
 
   return (
     <div>
@@ -75,6 +84,8 @@ const CreateGroup: React.FC = () => {
       </div>
     </div>
   );
+  
 };
 
 export default CreateGroup;
+
