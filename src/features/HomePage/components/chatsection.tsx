@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { ChatCard } from "../../../Components/Cards/chat_card";
 import { TextField } from "../../../Components/TextField/texfield";
 import { io } from "socket.io-client";
+import { getmessages } from "../../../services/homepageServices";
+import axios from "axios";
+import { AuthToken, getchat } from "../../../utils/apiroutes";
 const socket = io("http://localhost:3000");
 interface IChat {
   message: string;
@@ -15,6 +18,12 @@ export function ChatSection() {
   const [currentMessage, setMessage] = useState("");
   const [messagelist, setMessageList] = useState<Array<IChat>>([]);
 
+  useEffect(() => {
+    getmessages("655f3df9b2d841821f3a38d4").then((data) => {
+      setMessageList(data["data"]);
+    });
+  }, []);
+
   const handlesendmessage = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -22,8 +31,8 @@ export function ChatSection() {
     if (currentMessage != "") {
       const messageData = {
         message: currentMessage,
-        senderId: "sfdf",
-        teamId: "23",
+        senderId: "64eb17f7fd2129889d14983d",
+        teamId: "655f3df9b2d841821f3a38d4",
       };
 
       await socket.emit("send_message", messageData);
@@ -33,7 +42,9 @@ export function ChatSection() {
   };
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      setMessageList((list) => [...list, data]);
+      if (data.success) {
+        setMessageList((list) => [...list, data]);
+      }
     });
   }, [socket]);
 

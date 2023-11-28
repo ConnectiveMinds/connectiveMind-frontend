@@ -1,5 +1,5 @@
 import { ReactEventHandler, ReactNode, useState } from "react";
-
+import { IHomePage } from "../../features/HomePage/pages/HomePage";
 interface ISideBarItems {
   text: string;
   icons?: ReactNode;
@@ -23,8 +23,8 @@ function SideBarItems(props: ISideBarItems) {
 
 interface ISideBarButtons {
   isExpanded?: boolean;
-
   text: string;
+  id: string;
 }
 export function SideBarButtons(props: ISideBarButtons) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -149,13 +149,13 @@ export function SideBarButtons(props: ISideBarButtons) {
   );
 }
 interface ISideBar {
-  items: ISideBarButtons[];
+  groups: IHomePage[];
 }
 export function SideBar(props: ISideBar) {
-  const listitems = props.items.map((item) => {
+  const listitems = props.groups.map((item) => {
     return (
       <li>
-        <SideBarButtons text={item.text} />
+        <SideBarButtons text={item.title} id={item._id} />
       </li>
     );
   });
