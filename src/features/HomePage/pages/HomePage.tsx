@@ -1,14 +1,30 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NavBar } from "../../../Components/NavBar/navbar";
 import { SideBar } from "../../../Components/NavBar/sidebar";
 import { HorizontalDivider } from "../../../Components/Divider/horizontalDivider";
 import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
 
 import { Events } from "../components/eventssection";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
-import { RecommendedProjects } from "../components/recommendsection";
+// import { RecommendedProjects } from "../components/recommendsection";
+import { ChatSection } from "../components/chatsection";
+import { getIdeaByUserId } from "../../../services/homepageServices";
+export interface IHomePage {
+  title: string;
+  _id: string;
+}
 
 export function HomePage() {
+  const [grouplist, setgroupList] = useState<Array<IHomePage>>([]);
+
+  useEffect(() => {
+    getIdeaByUserId().then((data) => {
+      console.log(data["data"]._id);
+      setgroupList(data["data"]);
+    });
+  }, []);
+
   return (
     <div>
       <NavBar
@@ -23,18 +39,10 @@ export function HomePage() {
       ></NavBar>
       <HorizontalDivider />
       <div className="flex flex-row">
-        <SideBar
-          items={[
-            {
-              text: "kinmell",
-            },
-            {
-              text: "Upaaya",
-            },
-          ]}
-        ></SideBar>
+        <SideBar groups={grouplist}></SideBar>
         <VerticalDivider />
-
+        <ChatSection />
+        {/* 
         <RecommendedProjects
           projects={[
             {
@@ -71,7 +79,7 @@ export function HomePage() {
               ],
             },
           ]}
-        />
+        /> */}
         <Events></Events>
       </div>
     </div>
