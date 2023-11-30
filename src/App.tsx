@@ -1,11 +1,13 @@
 import { Routes, Route } from "react-router";
 import { HomePage } from "./features/HomePage/pages/HomePage";
-import { LandingPage } from "./features/LandingPage";
+
 import { Login } from "./features/SignIn";
-import { SignUp } from "./features/SignUp";
+
 import { BrowserRouter } from "react-router-dom";
 import CreateGroup from "./features/CreateGroup";
 import JoinRequest from "./features/JoinRequest";
+import { LandingPage } from "./features/LandingPage/pages/LandingPage";
+import { SignUp } from "./features/SignUp/pages/SignUp";
 
 
 const App = () => {
