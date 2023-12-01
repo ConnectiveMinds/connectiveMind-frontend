@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import {
-  creategroup,
+  group,
   ownerId,
   AuthToken,
   getchat,
   getGroupsByUserId,
+  getallgroups,
 } from "../utils/apiroutes";
 
 export const createGroup = async (
@@ -15,7 +16,7 @@ export const createGroup = async (
 ) => {
   try {
     const response = await axios.post(
-      creategroup,
+      group,
       {
         ownerId: ownerId,
         title: teamName,
@@ -51,7 +52,22 @@ export const getmessages = async (projectId: string) => {
     throw new Error(`Error: ${error.message}`);
   }
 };
+export const getAllProjects = async () => {
+  try {
+    const response = await axios.get(getallgroups, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: AuthToken,
+      },
+    });
+    console.log(response);
 
+    return response.data;
+  } catch (e: any) {
+    throw new Error(`Error: ${e.message}`);
+    /* empty */
+  }
+};
 export const getIdeaByUserId = async () => {
   try {
     const response = await axios.get(getGroupsByUserId, {
@@ -60,6 +76,27 @@ export const getIdeaByUserId = async () => {
         Authorization: AuthToken,
       },
     });
+
+    return response.data;
+  } catch (e: any) {
+    throw new Error(`Error: ${e.message}`);
+    /* empty */
+  }
+};
+
+export const updatejoinRequest = async (projectId: string) => {
+  try {
+    const response = await axios.patch(
+      group + projectId,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: AuthToken,
+        },
+      }
+    );
+
     return response.data;
   } catch (e: any) {
     throw new Error(`Error: ${e.message}`);

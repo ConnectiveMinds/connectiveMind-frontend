@@ -1,14 +1,13 @@
 import { Routes, Route } from "react-router";
 import { HomePage } from "./features/HomePage/pages/HomePage";
 
-import { Login } from "./features/SignIn";
+import { Login } from "./features/Auth/pages/SignIn";
 
 import { BrowserRouter } from "react-router-dom";
-import CreateGroup from "./features/CreateGroup";
-import JoinRequest from "./features/JoinRequest";
+import CreateGroup from "./features/HomePage/components/CreateGroup";
+import JoinRequest from "./features/HomePage/components/JoinRequest";
 import { LandingPage } from "./features/LandingPage/pages/LandingPage";
-import { SignUp } from "./features/SignUp/pages/SignUp";
-
+import { SignUp } from "./features/Auth/pages/SignUp";
 
 const App = () => {
   return (
@@ -21,12 +20,10 @@ const App = () => {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/CreateGroup" element={<CreateGroup />} />
           <Route path="/join-requests" element={<JoinRequest />} />
-          
         </Routes>
       </BrowserRouter>
     </div>
   );
 };
-
 
 export default App;

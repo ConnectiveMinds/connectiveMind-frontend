@@ -10,7 +10,9 @@ export function RecommendedProjects(props: IRecommendedProjects) {
     return (
       <li className="mt-4">
         <ProjectCard
-          name={project.name}
+          ownerId={project.ownerId}
+          _id={project._id}
+          title={project.title}
           description={project.description}
           skills={project.skills}
         ></ProjectCard>
