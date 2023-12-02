@@ -4,7 +4,7 @@ import React from 'react';
 interface JoinRequestItemProps {
   message: string;
   description: string; 
-  onAccept: () => void;
+  onAccept?: () => void;
   onDecline: () => void;
 }
 
@@ -16,12 +16,16 @@ const JoinRequestItem: React.FC<JoinRequestItemProps> = ({ message, description,
         <p className="text-gray-500">{description}</p> {/* Display description */}
       </div>
       <div>
-        <button onClick={onAccept} className="bg-purple-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-blue-500">
-          Accept
-        </button>
-        <button onClick={onDecline} className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-red-500 ">
-          Decline
-        </button>
+      {onAccept && (
+          <button onClick={onAccept} className="bg-purple-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-blue-500">
+            Accept
+          </button>
+        )}
+        {onDecline && (
+          <button onClick={onDecline} className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-red-500">
+            Decline
+          </button>
+        )}
       </div>
     </div>
   );
