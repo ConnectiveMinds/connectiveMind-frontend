@@ -1,29 +1,36 @@
 // src/pages/JoinRequestPage.tsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import JoinRequestSection from "./JoinRequestSection";
 import { NavBar } from "../../../Components/NavBar/navbar";
+import { getIncomingRequest } from "../../../services/request.services";
+export interface IRequest {
+  ownerId: string;
+  title: string;
+  joinRequest: IJoinRequest[];
+  _id: string;
+  email: string;
+}
+export interface IJoinRequest {
+  _id: string;
+  email: string;
+}
 
 const JoinRequestPage: React.FC = () => {
   const [currentSection, setCurrentSection] = useState<"sent" | "received">(
     "sent"
   );
 
-  const sentRequests = [
-    "Group A",
-    "Group B",
-    // Add more sent requests
-  ];
-
-  const receivedRequests = [
-    "User 1",
-    "User 2",
-    // Add more received requests
-  ];
-
+  const [receivedRequests, setReceivedRequest] = useState<Array<IRequest>>([]);
+  useEffect(() => {
+    getIncomingRequest().then((data) => {
+      console.log(data.data);
+      setReceivedRequest(data.data);
+    });
+  }, []);
   return (
     <>
       <NavBar
-        isHomePage={false}
+        isHomePage={true}
         isLandingpage={false}
         name={""}
         error={false}
@@ -56,7 +63,7 @@ const JoinRequestPage: React.FC = () => {
             Received Requests
           </button>
         </div>
-        {currentSection === "sent" && (
+        {/* {currentSection === "sent" && (
           <JoinRequestSection
             title="Sent Requests"
             requests={sentRequests}
@@ -67,7 +74,7 @@ const JoinRequestPage: React.FC = () => {
               console.log(`Declined request for ${request}`)
             }
           />
-        )}
+        )} */}
         {currentSection === "received" && (
           <JoinRequestSection
             title="Received Requests"
