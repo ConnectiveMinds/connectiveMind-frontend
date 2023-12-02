@@ -17,6 +17,8 @@ interface InputProps {
 }
 
 export function TextField(props: InputProps) {
+  const paddingRight = props.precedingIcons ? `${props.precedingIcons.toString().length * 3}px` : '3rem';
+
   return (
     <div>
       <div className="relative overflow-x-clip overflow-y-scroll">
@@ -27,6 +29,7 @@ export function TextField(props: InputProps) {
           type={props.type}
           className="pl-10 pr-4 py-2 shadow rounded-xl bg-white shadow-gray-400 focus:outline-none  break-normal w-full"
           placeholder={props.placeholder}
+          style={{paddingRight}}
         />
         <div
           className="absolute inset-y-0 left-0 pl-3  
