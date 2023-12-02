@@ -5,8 +5,6 @@ import { ChatCard } from "../../../Components/Cards/chat_card";
 import { TextField } from "../../../Components/TextField/texfield";
 import { io } from "socket.io-client";
 import { getmessages } from "../../../services/homepageServices";
-import axios from "axios";
-import { AuthToken, getchat } from "../../../utils/apiroutes";
 const socket = io("http://localhost:3000");
 interface IChat {
   message: string;

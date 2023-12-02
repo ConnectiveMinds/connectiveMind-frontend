@@ -9,19 +9,27 @@ import { ChangeEvent, useEffect, useState } from "react";
 
 // import { RecommendedProjects } from "../components/recommendsection";
 import { ChatSection } from "../components/chatsection";
-import { getIdeaByUserId } from "../../../services/homepageServices";
+import {
+  getAllProjects,
+  getIdeaByUserId,
+} from "../../../services/homepageServices";
+import { RecommendedProjects } from "../components/recommendsection";
+import { getallgroups, ownerId } from "../../../utils/apiroutes";
+import { IProjectCard } from "../../../Components/Cards/projects_card";
 export interface IHomePage {
   title: string;
   _id: string;
 }
 
 export function HomePage() {
-  const [grouplist, setgroupList] = useState<Array<IHomePage>>([]);
-
+  const [mygrouplist, setmygroupList] = useState<Array<IHomePage>>([]);
+  const [allideaslist, setallgrouplist] = useState<Array<IProjectCard>>([]);
   useEffect(() => {
     getIdeaByUserId().then((data) => {
-      console.log(data["data"]._id);
-      setgroupList(data["data"]);
+      setmygroupList(data["data"]);
+    });
+    getAllProjects().then((data) => {
+      setallgrouplist(data["data"]);
     });
   }, []);
 
@@ -39,47 +47,11 @@ export function HomePage() {
       ></NavBar>
       <HorizontalDivider />
       <div className="flex flex-row">
-        <SideBar groups={grouplist}></SideBar>
+        <SideBar groups={mygrouplist}></SideBar>
         <VerticalDivider />
-        <ChatSection />
-        {/* 
-        <RecommendedProjects
-          projects={[
-            {
-              name: "Upaaya",
-              description:
-                "A very good application where prabesh is carpenter but in real does plumbing A very good application where prabesh is carpenter but in real does plumbing A very good application where prabesh is carpenter but in real does plumbing A very good application where prabesh is carpenter but in real does plumbing  ",
-              skills: [
-                {
-                  name: "Flutter",
-                },
-                {
-                  name: "NodeJs",
-                },
-                {
-                  name: "Js",
-                },
-              ],
-            },
+        {/* <ChatSection /> */}
 
-            {
-              name: "Kinmell",
-              description:
-                "A very good application where prabesh is pros but in real does  A very good application where prabesh is carpenter but in real does plumbing A very good application where prabesh is carpenter but in real does plumbing A very good application where prabesh is carpenter but in real does plumbing  ",
-              skills: [
-                {
-                  name: "Flutter",
-                },
-                {
-                  name: "NodeJs",
-                },
-                {
-                  name: "Js",
-                },
-              ],
-            },
-          ]}
-        /> */}
+        <RecommendedProjects projects={allideaslist} />
         <Events></Events>
       </div>
     </div>

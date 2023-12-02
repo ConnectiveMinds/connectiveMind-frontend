@@ -1,8 +1,11 @@
 export const host = "http://localhost:3000";
 export const ownerId = "64eb17f7fd2129889d14983d";
 
-export const creategroup = host + "/api/v1/idea/create/";
+export const group = `${host}/api/v1/idea/crud/`;
+
 export const getGroupsByUserId = `${host}/api/v1/idea/get/`;
+export const getallgroups = `${host}/api/v1/idea/get/all`;
 export const getchat = `${host}/api/v1/chat/get/`;
+export const userSignUp = `${host}/api/v1/user/auth/signup`;
 export const AuthToken =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGViMTdmN2ZkMjEyOTg4OWQxNDk4M2QiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3OTJAZ21haWwuY29tIiwiaWF0IjoxNzAxMTg1NjEzLCJleHAiOjE3MDEyNzIwMTN9.RU20yEjqda7Sc2DTHm8mo-8VJlSJg4W9jB6k0ugsL44";
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5ZWI4YWYxMjQxMzQ4ODRlMjNjYjEiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3OTJAZ21haWwuY29tIiwiaWF0IjoxNzAxNDQ0NDE3LCJleHAiOjE3MDE1MzA4MTd9.DDa72CLxmfWmsEI-zgyMQPzBH5JxZJ1AAqlT44BHMf8";
