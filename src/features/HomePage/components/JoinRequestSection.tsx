@@ -1,27 +1,37 @@
 // src/components/JoinRequestSection.tsx
-import React from 'react';
-import JoinRequestItem from './JoinRequestItem';
+import React from "react";
+import JoinRequestItem from "./JoinRequestItem";
+import { IRequest } from "./JoinRequest";
 
 interface JoinRequestSectionProps {
   title: string;
-  requests: string[];
-  onAccept: (request: string) => void;
-  onDecline: (request: string) => void;
+  requests: IRequest[];
+  onAccept: (request: IRequest) => void;
+  onDecline: (request: IRequest) => void;
 }
 
-const JoinRequestSection: React.FC<JoinRequestSectionProps> = ({ title, requests, onAccept, onDecline }) => {
+const JoinRequestSection: React.FC<JoinRequestSectionProps> = (
+  props: JoinRequestSectionProps
+) => {
   return (
-    <div className="w-full"> {/* Make the JoinRequestSection full width */}
-      <h3 className="text-2xl font-semibold mb-4">{title}</h3>
-      {requests.map((request, index) => (
-        <JoinRequestItem
-          key={index}
-          message={request}
-          description={`Description for ${request}`}
-          onAccept={() => onAccept(request)}
-          onDecline={() => onDecline(request)}
-        />
-      ))}
+    <div className="w-full">
+      {" "}
+      {/* Make the JoinRequestSection full width */}
+      <h3 className="text-2xl font-semibold mb-4">{props.title}</h3>
+      {props.requests.map((request) => {
+        console.log(request);
+        return request.joinRequest.map((joinRequest) => {
+          return (
+            <JoinRequestItem
+              key={request._id}
+              request={joinRequest}
+              description={`${joinRequest.email} has requested join ${request.title}`}
+              onAccept={() => props.onAccept(request)}
+              onDecline={() => props.onDecline(request)}
+            />
+          );
+        });
+      })}
     </div>
   );
 };

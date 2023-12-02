@@ -1,25 +1,37 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/components/JoinRequestItem.tsx
-import React from 'react';
+import React from "react";
+import { IJoinRequest, IRequest } from "./JoinRequest";
 
 interface JoinRequestItemProps {
-  message: string;
-  description: string; 
+  request: IJoinRequest;
+  description: string;
   onAccept: () => void;
   onDecline: () => void;
 }
 
-const JoinRequestItem: React.FC<JoinRequestItemProps> = ({ message, description, onAccept, onDecline }) => {
+const JoinRequestItem: React.FC<JoinRequestItemProps> = (
+  props: JoinRequestItemProps
+) => {
+  console.log(props.request.email);
   return (
     <div className="bg-white shadow-md p-4 mb-4 flex justify-between items-center transition-all duration-200 hover:shadow-lg hover:transform hover:scale-105">
       <div>
-        <p className="text-lg">{message}</p>
-        <p className="text-gray-500">{description}</p> {/* Display description */}
+        <p className="text-lg">{props.request.email}</p>
+        <p className="text-gray-500">{props.description}</p>{" "}
+        {/* Display description */}
       </div>
       <div>
-        <button onClick={onAccept} className="bg-purple-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-blue-500">
+        <button
+          onClick={props.onAccept}
+          className="bg-purple-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-blue-500"
+        >
           Accept
         </button>
-        <button onClick={onDecline} className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-red-500 ">
+        <button
+          onClick={props.onDecline}
+          className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-red-500 "
+        >
           Decline
         </button>
       </div>
