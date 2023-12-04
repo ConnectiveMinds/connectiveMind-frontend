@@ -1,15 +1,19 @@
 import axios from "axios";
-import {group } from "../utils/apiroutes";
+import {getallgroups} from "../utils/apiroutes";
 
 export const getGroups = async () => {
     try {
-        const response = await axios.get(group);
-        console.log(response.data);
-        return response.data;
+        const response = await axios
+          .get(getallgroups)
+          .then(function (response) {
+            console.log(response.data);
+          });
+       
+        return response;
     }
     
     catch (error: any) {
-        throw new error(`Error: ${error.message}`);
+        throw new Error(`Error: ${error.message}`);
     }
    
 }
