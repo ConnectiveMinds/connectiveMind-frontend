@@ -16,18 +16,19 @@ const Carousel2 = () => {
     swipe: true,
   };
   return (
-    <div className="1/2 flex">
+    <>
+      <div className="1/2 flex">
       <div className=" mt-20 w-[100%]">
         <Slider {...settings}>
           {data.map((d) => (
             <div className=" flex bg-[rgba(119,65,170,1)] p-4 rounded-[20px] ">
               <ul className="flex items-center ">
-                <li>
+                <li key={d.description}>
                   <div className="rounded-[100%] bg-[white] border-black  overflow-auto">
                     <img className="h-16 inline-block" src={d.image} alt="" />
                   </div>
                 </li>
-                <li>
+                <li key={d.name}>
                   <h3 className="inline-block text-[1.5rem] font-semibold text-[white] p-5">
                     {d.name}
                   </h3>
@@ -39,6 +40,8 @@ const Carousel2 = () => {
         </Slider>
       </div>
     </div>
+    </>
+    
   );
 };
 

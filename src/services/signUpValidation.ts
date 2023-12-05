@@ -27,7 +27,8 @@ function validation(values:any) {
     if (values.confirmPassword === "" || (values.confirmPassword !== values.password)){
         error.confirmPassword="Passwords didn't match"
     }
-
+    console.log(error);
+    
     return error;
 }
 

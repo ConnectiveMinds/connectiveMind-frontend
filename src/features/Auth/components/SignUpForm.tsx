@@ -10,6 +10,7 @@ const SignUpForm: React.FC  = () => {
      confirmPassword:""
    });
   
+  
   const [errors, setErrors] = useState({
     userName: "",
     email: "",
@@ -17,7 +18,9 @@ const SignUpForm: React.FC  = () => {
     confirmPassword: ""
   });
 
-   const { userName, email, password } = formData;
+
+  const { userName, email, password } = formData;
+  
 
    const handleChange = (
      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -25,12 +28,13 @@ const SignUpForm: React.FC  = () => {
      console.log(" no error in handleChage");
      const { name, value } = e.target;
      setFormData({ ...formData, [name]: value });
-   };
+  };
+  
 
    const handleSubmit = async (e: React.FormEvent) => {
      e.preventDefault();
 
-     console.log("erorororor");
+    //  console.log("erorororor");
 
      try {
        const response = await signUp(
@@ -43,20 +47,25 @@ const SignUpForm: React.FC  = () => {
   };
   
   const handleValidation = (e: React.FormEvent) => {
+    e.preventDefault();
     console.log(" no error in handleValidation");
     setErrors(validation(formData));
-    // handleSubmit(e);
-  }
+    console.log(errors);
+  };
+
 
   return (
     <div className="w-[100%] border-2 border-[purple] rounded-[20px] p-4">
+      
       <h1 className="font-bold text-[2rem]">Sign Up</h1>
+
       <p>
         Have an account?{" "}
         <a href="/login">
           <span className="text-[purple]">Sign In</span>
         </a>
       </p>
+
       <form  className="mt-10" onSubmit={handleSubmit}>
         <input
           className="w-[100%] block p-1 mt-2 rounded-md drop-shadow-lg"
@@ -68,6 +77,7 @@ const SignUpForm: React.FC  = () => {
           onChange={handleChange}
         />
         {errors.email && <p className="text-[red]">{errors.email}</p>}
+
         <input
           className="w-[100%] block p-1 mt-8  rounded-md drop-shadow-lg"
           type="text"
@@ -78,6 +88,7 @@ const SignUpForm: React.FC  = () => {
           onChange={handleChange}
         />
         {errors.userName && <p className="text-[red]">{errors.userName}</p>}
+
         <input
           className="w-[100%] block p-1 mt-8  rounded-md drop-shadow-lg"
           type="password"
@@ -88,6 +99,7 @@ const SignUpForm: React.FC  = () => {
           onChange={handleChange}
         />
         {errors.password && <p className="text-[red]">{errors.password}</p>}
+        
         <input
           className="w-[100%] block p-1 mt-8 rounded-md drop-shadow-lg"
           type="password"
@@ -99,7 +111,7 @@ const SignUpForm: React.FC  = () => {
         />
         {errors.confirmPassword && <p className="text-[red]">{errors.confirmPassword}</p>}
 
-        <button className="block p-1 mt-8 rounded-md drop-shadow-lg colored">
+        <button type="submit" onClick={handleValidation} className="block p-1 mt-8 rounded-md drop-shadow-lg colored">
           Sign Up
         </button>
       </form>
