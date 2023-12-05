@@ -7,12 +7,12 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Carousel2 = () => {
   const settings = {
-    arrows: false,
-    dots: true,
+    arrows: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 4,
+    slidesToScroll: 1,
     swipe: true,
   };
   return (

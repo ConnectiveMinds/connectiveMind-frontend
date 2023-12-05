@@ -3,6 +3,7 @@ import Carousel2 from "../components/carousel2";
 import SignUpForm from "../components/SignUpForm";
 
 export function SignUp() {
+  
   return (
     <div className="m-8 p-4">
       <img className=" p-0 h-24" src="../src/Data/Connective 1.png" alt="" />

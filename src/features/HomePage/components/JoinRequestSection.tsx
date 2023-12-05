@@ -26,7 +26,7 @@ const JoinRequestSection: React.FC<JoinRequestSectionProps> = (
               key={request._id}
               request={joinRequest}
               description={`${joinRequest.email} has requested join ${request.title}`}
-              onAccept={() => props.onAccept(request)}
+              onAccept={props.title === "Received Requests" ? () => props.onAccept(request) : undefined}
               onDecline={() => props.onDecline(request)}
             />
           );

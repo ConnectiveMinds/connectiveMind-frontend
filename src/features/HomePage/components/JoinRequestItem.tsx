@@ -6,7 +6,7 @@ import { IJoinRequest, IRequest } from "./JoinRequest";
 interface JoinRequestItemProps {
   request: IJoinRequest;
   description: string;
-  onAccept: () => void;
+  onAccept?: () => void;
   onDecline: () => void;
 }
 
@@ -22,18 +22,16 @@ const JoinRequestItem: React.FC<JoinRequestItemProps> = (
         {/* Display description */}
       </div>
       <div>
-        <button
-          onClick={props.onAccept}
-          className="bg-purple-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-blue-500"
-        >
-          Accept
-        </button>
-        <button
-          onClick={props.onDecline}
-          className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-red-500 "
-        >
-          Decline
-        </button>
+      {props.onAccept && (
+          <button onClick={props.onAccept} className="bg-purple-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-blue-500">
+            Accept
+          </button>
+        )}
+        {props.onDecline && (
+          <button onClick={props.onDecline} className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-red-500">
+            Decline
+          </button>
+        )}
       </div>
     </div>
   );

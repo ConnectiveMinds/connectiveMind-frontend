@@ -1,18 +1,27 @@
 
 import data from "../../../Data/projects.json";
 
+
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { getGroups } from "../../../services/CarouelServices";
+
+
+
+
 
 const Carousel = () => {
+  const projects = getGroups();
+  console.log(projects);
   const settings = {
-    arrows: false,
-    dots: true,
+    arrows: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 4,
+    slidesToScroll: 1,
     swipe: true,
   };
   return (
