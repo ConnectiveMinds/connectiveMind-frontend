@@ -49,6 +49,7 @@ const SignUpForm: React.FC = () => {
   return (
     <div className="w-[100%] border-2 border-[purple] rounded-[20px] p-4">
       <h1 className="font-bold text-[2rem]">Sign Up</h1>
+
       <p>
         Have an account?{" "}
         <a href="/login">
@@ -66,6 +67,7 @@ const SignUpForm: React.FC = () => {
           onChange={handleChange}
         />
         {errors.email && <p className="text-[red]">{errors.email}</p>}
+
         <input
           className="w-[100%] block p-1 mt-8  rounded-md drop-shadow-lg"
           type="text"
@@ -76,6 +78,7 @@ const SignUpForm: React.FC = () => {
           onChange={handleChange}
         />
         {errors.userName && <p className="text-[red]">{errors.userName}</p>}
+
         <input
           className="w-[100%] block p-1 mt-8  rounded-md drop-shadow-lg"
           type="password"
@@ -86,6 +89,7 @@ const SignUpForm: React.FC = () => {
           onChange={handleChange}
         />
         {errors.password && <p className="text-[red]">{errors.password}</p>}
+
         <input
           className="w-[100%] block p-1 mt-8 rounded-md drop-shadow-lg"
           type="password"
