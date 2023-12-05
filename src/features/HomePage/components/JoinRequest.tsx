@@ -23,7 +23,6 @@ const JoinRequestPage: React.FC = () => {
   const [receivedRequests, setReceivedRequest] = useState<Array<IRequest>>([]);
   useEffect(() => {
     getIncomingRequest().then((data) => {
-      console.log(data.data);
       setReceivedRequest(data.data);
     });
   }, []);
