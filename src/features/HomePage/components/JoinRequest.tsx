@@ -2,28 +2,35 @@
 import React, { useEffect, useState } from "react";
 import JoinRequestSection from "./JoinRequestSection";
 import { NavBar } from "../../../Components/NavBar/navbar";
-import { getIncomingRequest } from "../../../services/request.services";
+import {
+  getIncomingRequest,
+  getSentRequset,
+} from "../../../services/request.services";
 export interface IRequest {
   ownerId: string;
   title: string;
   joinRequest: IJoinRequest[];
   _id: string;
-  email: string;
+  name: string;
 }
 export interface IJoinRequest {
   _id: string;
-  email: string;
+  name: string;
 }
 
 const JoinRequestPage: React.FC = () => {
   const [currentSection, setCurrentSection] = useState<"sent" | "received">(
     "sent"
   );
-
+  const [sentRequest, setSentRequest] = useState<Array<IRequest>>([]);
   const [receivedRequests, setReceivedRequest] = useState<Array<IRequest>>([]);
   useEffect(() => {
     getIncomingRequest().then((data) => {
       setReceivedRequest(data.data);
+    });
+
+    getSentRequset().then((data) => {
+      setSentRequest(data.data);
     });
   }, []);
   return (
@@ -62,10 +69,11 @@ const JoinRequestPage: React.FC = () => {
             Received Requests
           </button>
         </div>
-        {/* {currentSection === "sent" && (
+        {currentSection === "sent" && (
           <JoinRequestSection
+            isSentRequest={true}
             title="Sent Requests"
-            requests={sentRequests}
+            requests={sentRequest}
             onAccept={(request) =>
               console.log(`Accepted request for ${request}`)
             }
@@ -73,7 +81,7 @@ const JoinRequestPage: React.FC = () => {
               console.log(`Declined request for ${request}`)
             }
           />
-        )} */}
+        )}
         {currentSection === "received" && (
           <JoinRequestSection
             title="Received Requests"
@@ -84,6 +92,7 @@ const JoinRequestPage: React.FC = () => {
             onDecline={(request) =>
               console.log(`Declined request from ${request}`)
             }
+            isSentRequest={false}
           />
         )}
       </div>

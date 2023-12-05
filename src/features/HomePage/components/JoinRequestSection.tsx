@@ -4,6 +4,7 @@ import JoinRequestItem from "./JoinRequestItem";
 import { IRequest } from "./JoinRequest";
 
 interface JoinRequestSectionProps {
+  isSentRequest: boolean;
   title: string;
   requests: IRequest[];
   onAccept: (request: IRequest) => void;
@@ -23,8 +24,12 @@ const JoinRequestSection: React.FC<JoinRequestSectionProps> = (
           return (
             <JoinRequestItem
               key={request._id}
-              request={joinRequest}
-              description={`${joinRequest.email} has requested join ${request.title}`}
+              request={request}
+              description={
+                props.isSentRequest
+                  ? `You Sent Request to join ${request.title}`
+                  : `${joinRequest.name} has requested to  join ${request.title}`
+              }
               onAccept={
                 props.title === "Received Requests"
                   ? () => props.onAccept(request)
