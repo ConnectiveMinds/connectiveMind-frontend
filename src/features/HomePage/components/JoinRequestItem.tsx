@@ -4,7 +4,7 @@ import React from "react";
 import { IJoinRequest, IRequest } from "./JoinRequest";
 
 interface JoinRequestItemProps {
-  request: IJoinRequest;
+  request: IRequest;
   description: string;
   onAccept?: () => void;
   onDecline: () => void;
@@ -16,7 +16,7 @@ const JoinRequestItem: React.FC<JoinRequestItemProps> = (
   return (
     <div className="bg-white shadow-md p-4 mb-4 flex justify-between items-center transition-all duration-200 hover:shadow-lg hover:transform hover:scale-105">
       <div>
-        <p className="text-lg">{props.request.email}</p>
+        <p className="text-lg">{props.request.title}</p>
         <p className="text-gray-500">{props.description}</p>{" "}
         {/* Display description */}
       </div>
