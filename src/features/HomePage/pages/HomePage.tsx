@@ -6,15 +6,11 @@ import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
 
 import { Events } from "../components/eventssection";
 import { ChangeEvent, useEffect, useState } from "react";
-
-// import { RecommendedProjects } from "../components/recommendsection";
-import { ChatSection } from "../components/chatsection";
 import {
   getAllProjects,
   getIdeaByUserId,
 } from "../../../services/homepageServices";
 import { RecommendedProjects } from "../components/recommendsection";
-import { getallgroups, ownerId } from "../../../utils/apiroutes";
 import { IProjectCard } from "../../../Components/Cards/projects_card";
 export interface IHomePage {
   title: string;

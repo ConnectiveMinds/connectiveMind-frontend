@@ -31,7 +31,7 @@ export function ProjectCard(props: IProjectCard) {
       </li>
     );
   });
-  console.log(skilllist);
+
   return (
     <div className="max-w-fit max-h-fit bg-white rounded-[10px] border-2 border-zinc-300">
       <div className="p-4">

@@ -1,52 +1,50 @@
-import {useState} from 'react'
-import { signUp } from '../../../services/signUpPageServices';
-import validation from '../../../services/signUpValidation';
+import { useState } from "react";
+import { signUp } from "../../../services/signUpPageServices";
+import validation from "../../../services/signUpValidation";
 
-const SignUpForm: React.FC  = () => {
-   const [formData, setFormData] = useState({
-     userName: "",
-     email: "",
-     password: "",
-     confirmPassword:""
-   });
-  
+const SignUpForm: React.FC = () => {
+  const [formData, setFormData] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   const [errors, setErrors] = useState({
     userName: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
-   const { userName, email, password } = formData;
+  const { userName, email, password } = formData;
 
-   const handleChange = (
-     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-   ) => {
-     console.log(" no error in handleChage");
-     const { name, value } = e.target;
-     setFormData({ ...formData, [name]: value });
-   };
-
-   const handleSubmit = async (e: React.FormEvent) => {
-     e.preventDefault();
-
-     console.log("erorororor");
-
-     try {
-       const response = await signUp(
-         userName,email,password
-       );
-       console.log(response);
-     } catch (error: any) {
-       console.error("Error:", error.message);
-     }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    console.log(" no error in handleChage");
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
-  
-  const handleValidation = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    console.log("erorororor");
+
+    try {
+      const response = await signUp(userName, email, password);
+      console.log(response);
+    } catch (error: any) {
+      console.error("Error:", error.message);
+    }
+  };
+
+  const handleValidation = () => {
     console.log(" no error in handleValidation");
     setErrors(validation(formData));
     // handleSubmit(e);
-  }
+  };
 
   return (
     <div className="w-[100%] border-2 border-[purple] rounded-[20px] p-4">
@@ -57,7 +55,7 @@ const SignUpForm: React.FC  = () => {
           <span className="text-[purple]">Sign In</span>
         </a>
       </p>
-      <form  className="mt-10" onSubmit={handleSubmit}>
+      <form className="mt-10" onSubmit={handleSubmit}>
         <input
           className="w-[100%] block p-1 mt-2 rounded-md drop-shadow-lg"
           type="email"
@@ -97,14 +95,19 @@ const SignUpForm: React.FC  = () => {
           onChange={handleChange}
           required
         />
-        {errors.confirmPassword && <p className="text-[red]">{errors.confirmPassword}</p>}
+        {errors.confirmPassword && (
+          <p className="text-[red]">{errors.confirmPassword}</p>
+        )}
 
-        <button className="block p-1 mt-8 rounded-md drop-shadow-lg colored">
+        <button
+          className="block p-1 mt-8 rounded-md drop-shadow-lg colored"
+          onClick={handleValidation}
+        >
           Sign Up
         </button>
       </form>
     </div>
   );
-}                                             
+};
 
-export default SignUpForm
+export default SignUpForm;

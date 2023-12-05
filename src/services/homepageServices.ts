@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import axios from "axios";
+import { api } from "./apiServices";
 import {
   group,
   ownerId,
-  AuthToken,
   getchat,
   getGroupsByUserId,
   getallgroups,
@@ -15,22 +13,13 @@ export const createGroup = async (
   skillsRequired: string
 ) => {
   try {
-    const response = await axios.post(
-      group,
-      {
-        ownerId: ownerId,
-        title: teamName,
-        description: projectDescription,
-        skills: [skillsRequired],
-        status: "open",
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: AuthToken,
-        },
-      }
-    );
+    const response = await api.post(group, {
+      ownerId: ownerId,
+      title: teamName,
+      description: projectDescription,
+      skills: [skillsRequired],
+      status: "open",
+    });
 
     return response.data;
   } catch (error: any) {
@@ -41,12 +30,7 @@ export const createGroup = async (
 export const getmessages = async (projectId: string) => {
   try {
     const url = getchat + projectId;
-    const response = await axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: AuthToken,
-      },
-    });
+    const response = await api.get(url);
     return response.data;
   } catch (error: any) {
     throw new Error(`Error: ${error.message}`);
@@ -54,13 +38,7 @@ export const getmessages = async (projectId: string) => {
 };
 export const getAllProjects = async () => {
   try {
-    const response = await axios.get(getallgroups, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: AuthToken,
-      },
-    });
-    console.log(response);
+    const response = await api.get(getallgroups);
 
     return response.data;
   } catch (e: any) {
@@ -70,12 +48,7 @@ export const getAllProjects = async () => {
 };
 export const getIdeaByUserId = async () => {
   try {
-    const response = await axios.get(getGroupsByUserId, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: AuthToken,
-      },
-    });
+    const response = await api.get(getGroupsByUserId);
 
     return response.data;
   } catch (e: any) {
@@ -86,16 +59,7 @@ export const getIdeaByUserId = async () => {
 
 export const updatejoinRequest = async (projectId: string) => {
   try {
-    const response = await axios.patch(
-      group + projectId,
-      {},
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: AuthToken,
-        },
-      }
-    );
+    const response = await api.patch(group + projectId, {}, {});
 
     return response.data;
   } catch (e: any) {
