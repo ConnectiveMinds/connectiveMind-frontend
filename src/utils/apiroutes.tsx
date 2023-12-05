@@ -9,4 +9,4 @@ export const incomingRequest = `${host}/api/v1/idea/get/joinrequest`;
 export const getchat = `${host}/api/v1/chat/get/`;
 export const userSignUp = `${host}/api/v1/user/auth/signup`;
 export const AuthToken =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5ZWI4YWYxMjQxMzQ4ODRlMjNjYjEiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3OTJAZ21haWwuY29tIiwiaWF0IjoxNzAxNDQ0NDE3LCJleHAiOjE3MDE1MzA4MTd9.DDa72CLxmfWmsEI-zgyMQPzBH5JxZJ1AAqlT44BHMf8";
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGViNDg5YTBiOTVkZDg4Y2UwMTI2Y2YiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3OTJAZ21haWwuY29tIiwiaWF0IjoxNzAxNzk5NTI4LCJleHAiOjE3MDE4ODU5Mjh9.2nEZLcOXDipeSX6jEQFEUT_xSD1LBbz9QrpPhXPjjuk";

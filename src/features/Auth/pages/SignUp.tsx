@@ -1,4 +1,4 @@
-import React from "react";
+
 import Carousel2 from "../components/carousel2";
 import SignUpForm from "../components/SignUpForm";
 

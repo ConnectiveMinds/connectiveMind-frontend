@@ -12,6 +12,7 @@ export const signUp = async (name: string, email: string, password: string) => {
         status: "open",
         gender: "M",
         phoneNo: 988767676867,
+        address:"afnfsnn"
       },
       {
         headers: {
