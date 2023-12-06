@@ -1,94 +1,72 @@
-import { useState } from 'react'
-import { useNavigate} from 'react-router';
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
-import validation from '../../../services/signUpValidation';
-import { signUp } from '../../../services/signUpPageServices';
-import isErrorEmpty from '../../../services/errorsEmpty';
+import validation from "../../../services/signUpValidation";
+import { signUp } from "../../../services/signUpPageServices";
+import isErrorEmpty from "../../../services/errorsEmpty";
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
 
-   const [formData, setFormData] = useState({
-     userName: "",
-     email: "",
-     password: "",
-     confirmPassword: "",
-     phoneNo:0
-   });
-  
+  const [formData, setFormData] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phoneNo: 0,
+  });
+
   //  const[reset,setVersion]=useState(0)
-  
-  
+
   const [errors, setErrors] = useState({
     userName: "",
     email: "",
     password: "",
     confirmPassword: "",
-    phoneNo:""
+    phoneNo: "",
   });
 
+  const { userName, email, password, phoneNo } = formData;
 
-  const { userName, email, password,phoneNo } = formData;
-  
-
-   const handleChange = (
-     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-   ) => {
-     console.log(" no error in handleChage");
-     const { name, value } = e.target;
-     setFormData({ ...formData, [name]: value });
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    console.log(" no error in handleChage");
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
     //  handleValidation(e);
   };
 
-   const handleSubmit = async (e: React.FormEvent) => {
-     e.preventDefault();
-      console.log("handleSubmit working")
-     let isSignedUp = true;
-       console.log(typeof(phoneNo));
-       
-     try {
-       const response = await signUp(
-         userName,email,password,Number(phoneNo)
-       );
-       
-       
-     } catch (error: any) {
-       
-       console.error("Error:", error);
-       isSignedUp = false;
-        }
-       
-     isSignedUp?navigate("/home"):console.log("signUp failed");
-
-  };
-  
-  const handleValidation = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log("erorororor");
+    console.log("handleSubmit working");
+    let isSignedUp = true;
+    console.log(typeof phoneNo);
 
     try {
-      const response = await signUp(userName, email, password);
-      console.log(response);
+      const response = await signUp(userName, email, password, Number(phoneNo));
+      console.log(response.Data);
+      
     } catch (error: any) {
-      console.error("Error:", error.message);
+      console.error("Error:", error);
+      isSignedUp = false;
     }
+
+    isSignedUp ? navigate("/home") : console.log("signUp failed");
   };
 
-  const handleValidation = () => {
+  const handleValidation = (e: React.FormEvent) => {
+    e.preventDefault();
     console.log(" no error in handleValidation");
     const tempErrors = validation(formData);
     setErrors(tempErrors);
-    console.log((errors));
+    console.log(errors);
 
-    
     console.log(tempErrors);
-    
-    
+
     if (isErrorEmpty(tempErrors)) {
       handleSubmit(e);
     }
-    
   };
 
   return (
