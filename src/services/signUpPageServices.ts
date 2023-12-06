@@ -1,8 +1,10 @@
 import axios from "axios";
 import { AuthToken, userSignUp } from "../utils/apiroutes";
 
-export const signUp = async (name: string, email: string, password: string) => {
+export const signUp = async (name: string, email: string, password: string,phoneNo:number) => {
   try {
+    console.log("hello");
+    
     const response = await axios.post(
       userSignUp,
       {
@@ -11,7 +13,7 @@ export const signUp = async (name: string, email: string, password: string) => {
         password: password,
         status: "open",
         gender: "M",
-        phoneNo: 988767676867,
+        phoneNo: phoneNo,
         address:"afnfsnn"
       },
       {
@@ -21,10 +23,14 @@ export const signUp = async (name: string, email: string, password: string) => {
         },
       }
     );
+    console.log("hello2");
+    
     console.log(response.data);
 
     return response.data;
   } catch (error: any) {
+    console.log("inside catch");
+    
     throw new Error(`Error: ${error.message}`);
   }
 };

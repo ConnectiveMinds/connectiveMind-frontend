@@ -12,7 +12,8 @@ const SignUpForm: React.FC = () => {
      userName: "",
      email: "",
      password: "",
-     confirmPassword:""
+     confirmPassword: "",
+     phoneNo:0
    });
   
   //  const[reset,setVersion]=useState(0)
@@ -22,11 +23,12 @@ const SignUpForm: React.FC = () => {
     userName: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    phoneNo:""
   });
 
 
-  const { userName, email, password } = formData;
+  const { userName, email, password,phoneNo } = formData;
   
 
    const handleChange = (
@@ -42,16 +44,19 @@ const SignUpForm: React.FC = () => {
    const handleSubmit = async (e: React.FormEvent) => {
      e.preventDefault();
       console.log("handleSubmit working")
-     const isSignedUp = true;
+     let isSignedUp = true;
+       console.log(typeof(phoneNo));
        
      try {
        const response = await signUp(
-         userName,email,password
+         userName,email,password,Number(phoneNo)
        );
-       console.log(response);
+       
        
      } catch (error: any) {
-       console.error("Error:", error.message);
+       
+       console.error("Error:", error);
+       isSignedUp = false;
         }
        
      isSignedUp?navigate("/home"):console.log("signUp failed");
@@ -87,7 +92,7 @@ const SignUpForm: React.FC = () => {
         </a>
       </p>
 
-      <form className="mt-10" >
+      <form className="mt-10">
         <input
           className="w-full mt-4 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 shadow-md"
           type="email"
@@ -112,6 +117,20 @@ const SignUpForm: React.FC = () => {
         />
         {errors.userName && (
           <p className="text-[red] text-[0.75rem]">{errors.userName}</p>
+        )}
+
+        <input
+          className="w-full mt-4 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 shadow-md"
+          type="number"
+          placeholder="phoneNo"
+          name="phoneNo"
+          required
+          value={formData.phoneNo}
+          onChange={handleChange}
+          onSubmit={handleValidation}
+        />
+        {errors.phoneNo && (
+          <p className="text-[red] text-[0.75rem]">{errors.phoneNo}</p>
         )}
 
         <input
