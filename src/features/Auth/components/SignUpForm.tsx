@@ -39,7 +39,6 @@ const SignUpForm: React.FC = () => {
      setFormData({ ...formData, [name]: value });
     //  handleValidation(e);
   };
-  
 
    const handleSubmit = async (e: React.FormEvent) => {
      e.preventDefault();
@@ -65,6 +64,18 @@ const SignUpForm: React.FC = () => {
   
   const handleValidation = (e: React.FormEvent) => {
     e.preventDefault();
+
+    console.log("erorororor");
+
+    try {
+      const response = await signUp(userName, email, password);
+      console.log(response);
+    } catch (error: any) {
+      console.error("Error:", error.message);
+    }
+  };
+
+  const handleValidation = () => {
     console.log(" no error in handleValidation");
     const tempErrors = validation(formData);
     setErrors(tempErrors);
@@ -79,7 +90,6 @@ const SignUpForm: React.FC = () => {
     }
     
   };
-
 
   return (
     <div className=" w-[100%] max-w-lg mx-auto mt-8 p-8 bg-white rounded-3xl shadow-lg border-2 border-[purple] ">
@@ -170,6 +180,6 @@ const SignUpForm: React.FC = () => {
       </form>
     </div>
   );
-}                                             
+};
 
-export default SignUpForm
+export default SignUpForm;
