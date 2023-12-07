@@ -48,7 +48,8 @@ const Login = () => {
   useEffect(() => {
     if (isLoginSuccess) {
       toast.success("User Login successfully");
-      dispatch(setUser({ token: loginData.token }));
+      dispatch(setUser({ Token: loginData.token }));
+
       navigate("/home");
     }
   }, [isLoginSuccess]);

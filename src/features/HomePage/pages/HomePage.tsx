@@ -12,6 +12,7 @@ import {
 } from "../../../services/homepageServices";
 import { RecommendedProjects } from "../components/recommendsection";
 import { IProjectCard } from "../../../Components/Cards/projects_card";
+import { ChatSection } from "../components/chatsection";
 export interface IHomePage {
   title: string;
   _id: string;
@@ -45,7 +46,7 @@ export function HomePage() {
       <div className="flex flex-row">
         <SideBar groups={mygrouplist}></SideBar>
         <VerticalDivider />
-        {/* <ChatSection /> */}
+        {/* <ChatSection projectId="656f1f4e68d8461d93396425" /> */}
 
         <RecommendedProjects projects={allideaslist} />
         <Events></Events>
