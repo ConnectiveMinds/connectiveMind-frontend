@@ -1,9 +1,9 @@
 function validation(values:any) {
     const error = {userName:"",email:"",password:"",confirmPassword:"",phoneNo:""}
     const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     const phoneNoPattern = /^\d{12,}$/;
-    console.error("error here");
+   
     
 
     if (values.userName === "") {
@@ -22,7 +22,7 @@ function validation(values:any) {
     }
     else if (!passwordPattern.test(values.password)) {
         error.password =
-          " Password should contain at least 5 characters,one uppercase letter, one lowercase letter, one number, and one special character";
+          " Password should contain at least 6 characters,one uppercase letter, one lowercase letter, one number, and one special character";
     }
 
     if (values.confirmPassword === "" || (values.confirmPassword !== values.password)){
@@ -33,7 +33,7 @@ function validation(values:any) {
         error.phoneNo = "Phone number should be at least 12 digit long";
       }
 
-    console.log(error);
+   
     
     return error;
 }
