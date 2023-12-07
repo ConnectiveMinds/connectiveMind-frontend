@@ -1,94 +1,77 @@
-import { useState } from 'react'
-import { useNavigate} from 'react-router';
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
-import validation from '../../../services/signUpValidation';
-import { signUp } from '../../../services/signUpPageServices';
-import isErrorEmpty from '../../../services/errorsEmpty';
+import validation from "../../../services/signUpValidation";
+import { signUp } from "../../../services/signUpPageServices";
+import isErrorEmpty from "../../../services/errorsEmpty";
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
 
-   const [formData, setFormData] = useState({
-     userName: "",
-     email: "",
-     password: "",
-     confirmPassword: "",
-     phoneNo:0
-   });
-  
-  //  const[reset,setVersion]=useState(0)
-  
-  
+  const registeredPattern = /600/;
+
+  const [isRegistered, setIsRegistered] = useState(false);
+
+  const [formData, setFormData] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phoneNo: "",
+  });
+
+  //validation errors of input fields
   const [errors, setErrors] = useState({
     userName: "",
     email: "",
     password: "",
     confirmPassword: "",
-    phoneNo:""
+    phoneNo: "",
   });
 
+  const { userName, email, password, phoneNo } = formData;
 
-  const { userName, email, password,phoneNo } = formData;
-  
-
-   const handleChange = (
-     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-   ) => {
-     console.log(" no error in handleChage");
-     const { name, value } = e.target;
-     setFormData({ ...formData, [name]: value });
-    //  handleValidation(e);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-   const handleSubmit = async (e: React.FormEvent) => {
-     e.preventDefault();
-      console.log("handleSubmit working")
-     let isSignedUp = true;
-       console.log(typeof(phoneNo));
-       
-     try {
-       const response = await signUp(
-         userName,email,password,Number(phoneNo)
-       );
-       
-       
-     } catch (error: any) {
-       
-       console.error("Error:", error);
-       isSignedUp = false;
-        }
-       
-     isSignedUp?navigate("/home"):console.log("signUp failed");
+  //invoked when form is submitted
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
+    let isSignedUp = true; //to check if the user signUp is successful
+
+    try {
+      const response = await signUp(userName, email, password, Number(phoneNo));
+      console.log(response.Data);
+    } catch (error: any) {
+      console.error(error);
+      //checks if user is already registered
+      if (registeredPattern.test(error)) {
+        console.log("error 600");
+        setIsRegistered(true);
+      }
+      //if any error in signing up isSignedUp becomes false
+      isSignedUp = false;
+    }
+
+    isSignedUp ? navigate("/home") : console.log("signUp failed");
   };
-  
+
+  //validation check of form input fields
   const handleValidation = (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log("erorororor");
-
-    try {
-      const response = await signUp(userName, email, password);
-      console.log(response);
-    } catch (error: any) {
-      console.error("Error:", error.message);
-    }
-  };
-
-  const handleValidation = () => {
-    console.log(" no error in handleValidation");
     const tempErrors = validation(formData);
     setErrors(tempErrors);
-    console.log((errors));
 
-    
-    console.log(tempErrors);
-    
-    
+    //if no validation errors submit the form
     if (isErrorEmpty(tempErrors)) {
       handleSubmit(e);
     }
-    
   };
 
   return (
@@ -131,7 +114,6 @@ const SignUpForm: React.FC = () => {
 
         <input
           className="w-full mt-4 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 shadow-md"
-          type="number"
           placeholder="phoneNo"
           name="phoneNo"
           required
@@ -168,6 +150,12 @@ const SignUpForm: React.FC = () => {
         />
         {errors.confirmPassword && (
           <p className="text-[red] text-[0.75rem]">{errors.confirmPassword}</p>
+        )}
+
+        {isRegistered && (
+          <p className=" mt-4 text-[red] text-[0.75rem]">
+            {"email id or phone number is already registered"}
+          </p>
         )}
 
         <button
