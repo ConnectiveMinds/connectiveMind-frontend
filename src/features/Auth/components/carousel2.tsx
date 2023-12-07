@@ -17,7 +17,7 @@ const Carousel2 = () => {
   };
   return (
     <>
-      <div className="1/2 flex">
+      <div className="flex">
       <div className=" mt-20 w-[100%]">
         <Slider {...settings}>
           {data.map((d) => (

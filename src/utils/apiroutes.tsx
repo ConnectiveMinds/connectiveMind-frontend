@@ -8,8 +8,7 @@ export const incomingRequest = `/v1/idea/get/joinrequest`;
 export const sentRequest = `/v1/idea/get/sentrequest`;
 
 export const getchat = `/v1/chat/get/`;
+export const crudchat = `/v1/chat/crud/`;
 export const userSignUp = `${host}/api/v1/user/auth/signup`;
 export const AuthToken =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5ZWI4YWYxMjQxMzQ4ODRlMjNjYjEiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3OTJAZ21haWwuY29tIiwiaWF0IjoxNzAxNzQ3NTgyLCJleHAiOjE3MDE4MzM5ODJ9.Klq66b7VvGmQ1wwdNBPWTTOZ2MQNbhTryXa9515Jwbs";
-export const Token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZlYTBhMDQzZTg4NDhhMDk5MTU2MjIiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3MkBnbWFpbC5jb20iLCJpYXQiOjE3MDE3ODQzMzEsImV4cCI6MTcwMTg3MDczMX0.jcj4d7aQX6hXO0RHknv0Vpyk_uM36u5Sp3PnQiWtrwE";
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGViNDg5YTBiOTVkZDg4Y2UwMTI2Y2YiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3OTJAZ21haWwuY29tIiwiaWF0IjoxNzAxODcyNDg5LCJleHAiOjE3MDE5NTg4ODl9.BY_f0qJ87F7WbUcAIOMPexfZgCGE8IQtqqxg92NE-wM";

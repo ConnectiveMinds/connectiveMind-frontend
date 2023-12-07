@@ -20,6 +20,7 @@ export const authSlice = createSlice({
           token: action.payload.token,
         })
       );
+
       state.token = action.payload.token;
     },
   },
