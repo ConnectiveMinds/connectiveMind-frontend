@@ -3,7 +3,7 @@ function validation(values:any) {
     const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     const phoneNoPattern = /^\d{12,}$/;
-    // console.error("error here");
+   
     
 
     if (values.userName === "") {
@@ -33,7 +33,7 @@ function validation(values:any) {
         error.phoneNo = "Phone number should be at least 12 digit long";
       }
 
-    // console.log(error);
+   
     
     return error;
 }
