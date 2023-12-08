@@ -11,4 +11,10 @@ export const getchat = `/v1/chat/get/`;
 export const crudchat = `/v1/chat/crud/`;
 export const userSignUp = `${host}/api/v1/user/auth/signup`;
 export const AuthToken =
+<<<<<<< HEAD
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGViNDg5YTBiOTVkZDg4Y2UwMTI2Y2YiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3OTJAZ21haWwuY29tIiwiaWF0IjoxNzAyMDA0OTQ3LCJleHAiOjE3MDIwOTEzNDd9.PkfXJ0cOpv9saKpUPery-AWY5eAXDTT8SKnGjuiXMFU";
+export const Token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGViNDg5YTBiOTVkZDg4Y2UwMTI2Y2YiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3OTJAZ21haWwuY29tIiwiaWF0IjoxNzAyMDA0OTQ3LCJleHAiOjE3MDIwOTEzNDd9.PkfXJ0cOpv9saKpUPery-AWY5eAXDTT8SKnGjuiXMFU";
+=======
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGViNDg5YTBiOTVkZDg4Y2UwMTI2Y2YiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3OTJAZ21haWwuY29tIiwiaWF0IjoxNzAxODcyNDg5LCJleHAiOjE3MDE5NTg4ODl9.BY_f0qJ87F7WbUcAIOMPexfZgCGE8IQtqqxg92NE-wM";
+>>>>>>> b8a13acaf299c2f9d7644fc8632455af4c3c777f

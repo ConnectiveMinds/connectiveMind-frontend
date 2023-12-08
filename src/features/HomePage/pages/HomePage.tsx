@@ -4,6 +4,8 @@ import { SideBar } from "../../../Components/NavBar/sidebar";
 import { HorizontalDivider } from "../../../Components/Divider/horizontalDivider";
 import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
 
+import Review from "../components/review";
+
 import { Events } from "../components/eventssection";
 import { ChangeEvent, useEffect, useState } from "react";
 import {
@@ -46,11 +48,12 @@ export function HomePage() {
       <div className="flex flex-row">
         <SideBar groups={mygrouplist}></SideBar>
         <VerticalDivider />
-        {/* <ChatSection projectId="656f1f4e68d8461d93396425" /> */}
+        <ChatSection projectId="656f1f4e68d8461d93396425" />
 
-        <RecommendedProjects projects={allideaslist} />
+        {/* <RecommendedProjects projects={allideaslist} /> */}
         <Events></Events>
       </div>
+      <Review/>
     </div>
   );
 }

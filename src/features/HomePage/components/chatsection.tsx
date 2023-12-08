@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { useEffect, useState } from "react";
-import { ChatCard } from "../../../Components/Cards/chat_card";
+import { ChatCard, IChatCard } from "../../../Components/Cards/chat_card";
 import { TextField } from "../../../Components/TextField/texfield";
 import { io } from "socket.io-client";
 import { getmessages } from "../../../services/homepageServices";
@@ -10,17 +10,18 @@ const socket = io("http://localhost:3000");
 interface IChat {
   message?: string;
   projectId: string;
-  senderId?: string;
+  senderId?: IChatCard;
 }
 
 export function ChatSection(props: IChat) {
   const [currentMessage, setMessage] = useState("");
   const [messagelist, setMessageList] = useState<Array<IChat>>([]);
-
+  const [currentUser, setCurrentUser] = useState("");
   useEffect(() => {
-    getmessages("656f1f4e68d8461d93396425").then((data) => {
+    getmessages(props.projectId).then((data) => {
       setMessageList(data["data"]);
     });
+    setCurrentUser(JSON.parse(localStorage.getItem("user")!).data.userId);
   }, []);
 
   const handlesendmessage = async (
@@ -29,6 +30,7 @@ export function ChatSection(props: IChat) {
     if (currentMessage != " ") {
       await socket.emit("join_room", props.projectId);
       saveChat(currentMessage, props.projectId).then(async (data) => {
+        console.log(data);
         setMessageList((list) => [...list, data["data"]]);
         await socket.emit("send_message", data["data"]);
         setMessage(" ");
@@ -41,7 +43,7 @@ export function ChatSection(props: IChat) {
         setMessageList((list) => [...list, data]);
       }
     });
-  }, [socket]);
+  }, []);
 
   return (
     <div className="ml-8 mr-8">
@@ -52,12 +54,13 @@ export function ChatSection(props: IChat) {
         <div className="p-3 box-content mt-auto h-[800px] w-[1000px] rounded-lg bg-gray-400 overflow-y-scroll">
           {messagelist.map((message) => {
             let issender = false;
-            message.senderId === "sfdfs"
+            message.senderId?._id === currentUser
               ? (issender = true)
               : (issender = false);
             return (
               <ChatCard
-                username={message.senderId!}
+                _id={message.senderId!._id}
+                name={message.senderId!.name}
                 message={message.message!}
                 avatar={""}
                 issender={issender}

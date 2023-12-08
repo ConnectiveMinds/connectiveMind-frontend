@@ -1,20 +1,24 @@
 
-import data from "../../../Data/projects.json";
-
-
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { getGroups } from "../../../services/CarouelServices";
+import { getAllProjects } from "../../../services/homepageServices";
+import { useEffect, useState } from "react";
 
 
 
 
 
 const Carousel = () => {
-  const projects = getGroups();
-  console.log(projects);
+  const [allGroups, setAllGroups] = useState([]);
+
+  useEffect(() => {
+   
+    getAllProjects().then((data) => {
+      setAllGroups(data["data"]);
+    });
+  }, []);
+
   const settings = {
     arrows: true,
     dots: false,
@@ -25,18 +29,21 @@ const Carousel = () => {
     swipe: true,
   };
   return (
-    <div className=" flex 3/4 justify-center">
-      <div className=" inline-block mt-20 border-t-2 border-b-2 w-[40ch]">
-        <Slider {...settings}>
-          {data.map((d) => (
+    <div className="flex justify-center mt-20">
+      <div className=" max-h-32 overflow-hidden inline-block border-t-2 border-b-2 w-[40ch] p-2">
+        <Slider {...settings} className="overflow-hidden">
+          {allGroups.map((d: any) => (
             <div className="bg-white">
-              <h2 className="text-[rgb(151,97,208)] font-semibold">
-                {d.topic}
+              <h2 className="text-[rgb(151,97,208)] font-semibold text-[1.5rem] mb-2">
+                {d.title}
               </h2>
               <p>{d.description}</p>
+              <button className="top-8">...read more</button>
             </div>
           ))}
         </Slider>
+        
+        
       </div>
     </div>
   );
