@@ -3,24 +3,30 @@ import { RootState } from "../../../app/store";
 
 export interface AuthState {
   token: string | null;
+  userId: string | null;
 }
 
-const initialState: AuthState = {
-  token: null,
+export interface UserAuthState {
+  user: AuthState | null;
+}
+const initialState: UserAuthState = {
+  user: null,
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<{ token: string }>) => {
+    setUser: (state, action: PayloadAction<{ user: AuthState }>) => {
+      console.log(action.payload.user.token);
       localStorage.setItem(
         "user",
         JSON.stringify({
-          token: action.payload.token,
+          data: action.payload.user,
         })
       );
-      state.token = action.payload.token;
+
+      state.user = action.payload.user;
     },
   },
 });

@@ -155,7 +155,7 @@ export function SideBar(props: ISideBar) {
   const listitems = props.groups.map((item) => {
     return (
       <li>
-        <SideBarButtons text={item.title} id={item._id} />
+        <SideBarButtons key={item._id} text={item.title} id={item._id} />
       </li>
     );
   });
