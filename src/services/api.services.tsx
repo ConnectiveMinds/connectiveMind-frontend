@@ -11,6 +11,7 @@ import {
   host,
   incomingRequest,
   sentRequest,
+  userSignUp,
 } from "../utils/apiroutes";
 
 export const api = axios.create({ baseURL: `${host}/api` });
@@ -47,6 +48,33 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+//****************************auth api services ***************************
+export const signUp = async (
+  name: string,
+  email: string,
+  password: string,
+  phoneNo: number
+) => {
+  try {
+    console.log("hello");
+
+    const response = await api.post(userSignUp, {
+      name: name,
+      email: email,
+      password: password,
+      status: "open",
+      gender: "M",
+      phoneNo: phoneNo,
+      address: "afnfsnn",
+    });
+    console.log(response);
+    return response.data;
+  } catch (error: any) {
+    console.log("inside catch");
+
+    throw new Error(`Error: ${error.message}`);
+  }
+};
 
 //****************************idea api services ***************************
 export const createGroup = async (
