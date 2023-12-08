@@ -1,8 +1,6 @@
-import { useEffect } from "react";
-import { updatejoinRequest } from "../../services/homepageServices";
+import { updatejoinRequest } from "../../services/api.services";
 import { CustomButton } from "../Button/customButton";
 import { SkillCard } from "./skills_card";
-import { io } from "socket.io-client";
 
 export interface IProjectCard {
   title: string;
@@ -12,18 +10,14 @@ export interface IProjectCard {
   skills: string[];
 }
 export function ProjectCard(props: IProjectCard) {
-  const socket = io("http://localhost:3000");
   const handleClick = async () => {
     {
       updatejoinRequest(props._id).then(async (data) => {
-        await socket.emit("join_room", props.ownerId);
-        await socket.emit("send_request", data["data"]);
+        console.log(data);
       });
     }
   };
-  useEffect(() => {
-    socket.on("receive_request", (data) => {});
-  }, [socket]);
+
   const skilllist = props.skills.map((skill) => {
     return (
       <li>

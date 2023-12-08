@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 import validation from "../../../utils/signUpValidation";
-import { signUp } from "../../../services/signUpPageServices";
+
 import isErrorEmpty from "../../../utils/errorsEmpty";
+import { signUp } from "../../../services/api.services";
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
 
-  const registeredPattern =/600/;
+  const registeredPattern = /600/;
 
   const [isRegistered, setIsRegistered] = useState(false);
 
@@ -20,8 +21,7 @@ const SignUpForm: React.FC = () => {
     phoneNo: "",
   });
 
-
-//validation errors of input fields
+  //validation errors of input fields
   const [errors, setErrors] = useState({
     userName: "",
     email: "",
@@ -37,42 +37,40 @@ const SignUpForm: React.FC = () => {
   ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-   
   };
 
   //invoked when form is submitted
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
- 
-    let isSignedUp = true;//to check if the user signUp is successful
-   
+
+    let isSignedUp = true; //to check if the user signUp is successful
+
     try {
-    const response = await signUp(userName, email, password, Number(phoneNo));
+      const response = await signUp(userName, email, password, Number(phoneNo));
       console.log(response.Data);
-      
     } catch (error: any) {
       console.error(error);
-   //checks if user is already registered 
+      //checks if user is already registered
       if (registeredPattern.test(error)) {
         console.log("error 600");
         setIsRegistered(true);
       }
-//if any error in signing up isSignedUp becomes false
+      //if any error in signing up isSignedUp becomes false
       isSignedUp = false;
     }
 
-    isSignedUp ? navigate("/home") : console.log("signUp failed");
+    isSignedUp ? navigate("/login") : console.log("signUp failed");
   };
 
   //validation check of form input fields
   const handleValidation = (e: React.FormEvent) => {
     e.preventDefault();
-   
+
     const tempErrors = validation(formData);
     setErrors(tempErrors);
 
     //if no validation errors submit the form
-    if (isErrorEmpty(tempErrors)) { 
+    if (isErrorEmpty(tempErrors)) {
       handleSubmit(e);
     }
   };
@@ -117,7 +115,6 @@ const SignUpForm: React.FC = () => {
 
         <input
           className="w-full mt-4 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 shadow-md"
-          
           placeholder="phoneNo"
           name="phoneNo"
           required
@@ -157,7 +154,9 @@ const SignUpForm: React.FC = () => {
         )}
 
         {isRegistered && (
-          <p className=" mt-4 text-[red] text-[0.75rem]">{"email id or phone number is already registered"}</p>
+          <p className=" mt-4 text-[red] text-[0.75rem]">
+            {"email id or phone number is already registered"}
+          </p>
         )}
 
         <button

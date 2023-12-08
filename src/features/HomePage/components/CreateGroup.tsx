@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { NavBar } from "../../../Components/NavBar/navbar";
-import { createGroup } from "../../../services/homepageServices";
-import {useNavigate} from 'react-router-dom';
+
+import { useNavigate } from "react-router-dom";
+import { createGroup } from "../../../services/api.services";
 const CreateGroup: React.FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -29,8 +30,8 @@ const CreateGroup: React.FC = () => {
         projectDescription,
         skillsRequired
       );
-      console.log(response);
-      navigate('/Home');
+
+      navigate("/Home");
     } catch (error: any) {
       console.error("Error:", error.message);
     }
@@ -107,7 +108,6 @@ const CreateGroup: React.FC = () => {
 
           <div className="flex justify-end">
             <button
-            
               type="submit"
               className="bg-purple-500 text-white py-2 px-4 rounded-lg transition-all duration-200  hover:shadow-lg hover:transform hover:scale-105"
             >
