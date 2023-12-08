@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { useEffect, useState } from "react";
 import { ChatCard, IChatCard } from "../../../Components/Cards/chat_card";
 import { TextField } from "../../../Components/TextField/texfield";
-import { io } from "socket.io-client";
-import { getmessages } from "../../../services/homepageServices";
-import { saveChat } from "../../../services/chat.services";
-const socket = io("http://localhost:3000");
+import { socket } from "../../../services/socket.services";
+import { getmessages, saveChat } from "../../../services/api.services";
+
 interface IChat {
   message?: string;
   projectId: string;
@@ -24,9 +21,7 @@ export function ChatSection(props: IChat) {
     setCurrentUser(JSON.parse(localStorage.getItem("user")!).data.userId);
   }, [messagelist]);
 
-  const handlesendmessage = async (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handlesendmessage = async () => {
     if (currentMessage != " ") {
       await socket.emit("join_room", props.projectId);
       saveChat(currentMessage, props.projectId).then(async (data) => {
@@ -38,6 +33,7 @@ export function ChatSection(props: IChat) {
   };
   useEffect(() => {
     socket.on("receive_message", (data) => {
+      console.log("heelo");
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);

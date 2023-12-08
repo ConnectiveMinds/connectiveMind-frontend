@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { NavBar } from "../../../Components/NavBar/navbar";
-import { createGroup } from "../../../services/homepageServices";
+
 import { useNavigate } from "react-router-dom";
+import { createGroup } from "../../../services/api.services";
 const CreateGroup: React.FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ const CreateGroup: React.FC = () => {
         projectDescription,
         skillsRequired
       );
-      console.log(response);
+
       navigate("/Home");
     } catch (error: any) {
       console.error("Error:", error.message);

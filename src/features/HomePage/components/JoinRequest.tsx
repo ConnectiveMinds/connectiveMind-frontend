@@ -1,15 +1,13 @@
-// src/pages/JoinRequestPage.tsx
 import React, { useEffect, useState } from "react";
 import JoinRequestSection from "./JoinRequestSection";
 import { NavBar } from "../../../Components/NavBar/navbar";
+import { IProjectCard } from "../../../Components/Cards/projects_card";
 import {
-  acceptRequest,
   declineRequest,
+  acceptRequest,
   getIncomingRequest,
   getSentRequset,
-} from "../../../services/request.services";
-import { IProjectCard } from "../../../Components/Cards/projects_card";
-import { socket } from "../../../services/socket.services";
+} from "../../../services/api.services";
 export interface IRequest extends IProjectCard {
   joinRequest: IJoinRequest[];
 }
@@ -70,11 +68,6 @@ const JoinRequestPage: React.FC = () => {
   useEffect(() => {
     getIncomingRequest().then((data) => {
       setReceivedRequest(data.data);
-    });
-  }, [receivedRequests]);
-  useEffect(() => {
-    socket.on("receive_request", (data) => {
-      console.log(data);
     });
   }, [receivedRequests]);
 
