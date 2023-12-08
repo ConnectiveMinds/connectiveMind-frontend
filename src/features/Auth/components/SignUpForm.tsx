@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-import validation from "../../../services/signUpValidation";
+import validation from "../../../utils/signUpValidation";
 import { signUp } from "../../../services/signUpPageServices";
-import isErrorEmpty from "../../../services/errorsEmpty";
+import isErrorEmpty from "../../../utils/errorsEmpty";
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <div className=" w-[100%] max-w-lg mx-auto mt-8 p-8 bg-white rounded-3xl shadow-lg border-2 border-[purple] ">
+    <div className=" w-[100%] max-w-lg mx-auto mt-4 md:mt-8 p-8 bg-white rounded-3xl shadow-lg border-2 border-[purple] ">
       <h1 className="font-bold text-[2rem]">Sign Up</h1>
 
       <p>
@@ -163,7 +163,7 @@ const SignUpForm: React.FC = () => {
         <button
           type="submit"
           onClick={handleValidation}
-          className="block p-1 mt-8 rounded-md drop-shadow-lg colored"
+          className="block p-1 mt-8 rounded-md drop-shadow-lg colored m-4"
         >
           Sign Up
         </button>

@@ -21,7 +21,7 @@ export function ProjectCard(props: IProjectCard) {
     }
   };
   useEffect(() => {
-    socket.on("receive_request", (data) => {
+    socket.on("receive_request", () => {
       console.log("hello");
     });
   }, []);

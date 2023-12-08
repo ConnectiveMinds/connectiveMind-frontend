@@ -60,17 +60,17 @@ const Login = () => {
   }, [isLoginError]);
   return (
     <div className="max-w-screen-xl mx-auto max-h-screen my-4 ">
-      <div className="flex justify-center md:justify-start">
+      <div className="flex justify-center md:justify-start ">
         <img src="src\Data\Connective_logo.png" alt="Logo" />
       </div>
-      <div className="flex justify-around  ">
+      <div className="flex justify-around ">
         <div>
-          <div className="my-16">
+          <div className="md:my-16 my-10">
             <div className="font-poppins mb-12 ">
-              <p className="font-bold text-gray-900 text-4xl tracking-normal">
+              <p className="font-bold text-gray-900 sm:text-4xl tracking-normal text-2xl">
                 Welcome Back,
               </p>
-              <p className="font-bold text-purple-700 text-4xl tracking-normal">
+              <p className="font-bold text-purple-700 sm:text-4xl tracking-normal text-2xl">
                 Login
               </p>
             </div>
@@ -97,7 +97,7 @@ const Login = () => {
 
             <button
               type="button"
-              className="my-4 w-auto text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-xl text-xl px-12 py-2 text-center mr-2 mb-2 "
+              className="my-4 w-auto text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 md:font-medium rounded-xl md:text-xl md:px-12 md:py-2 text-center mr-2 mb-2 px-5 py-1 font-normal"
               onClick={handlelogin}
             >
               Login

@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import { NavBar } from "../../../Components/NavBar/navbar";
 import { createGroup } from "../../../services/homepageServices";
-
+import { useNavigate } from "react-router-dom";
 const CreateGroup: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     teamName: "",
     projectDescription: "",
@@ -29,6 +30,7 @@ const CreateGroup: React.FC = () => {
         skillsRequired
       );
       console.log(response);
+      navigate("/Home");
     } catch (error: any) {
       console.error("Error:", error.message);
     }
