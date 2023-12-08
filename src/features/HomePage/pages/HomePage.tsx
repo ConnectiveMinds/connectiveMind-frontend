@@ -15,6 +15,7 @@ import {
 import { RecommendedProjects } from "../components/recommendsection";
 import { IProjectCard } from "../../../Components/Cards/projects_card";
 import { ChatSection } from "../components/chatsection";
+import TeamMembersPage from "../../GroupPages/TeamMembers";
 export interface IHomePage {
   title: string;
   _id: string;
@@ -48,8 +49,8 @@ export function HomePage() {
       <div className="flex flex-row">
         <SideBar groups={mygrouplist}></SideBar>
         <VerticalDivider />
-        <ChatSection projectId="656f1f4e68d8461d93396425" />
-
+        {/* <ChatSection projectId="656f1f4e68d8461d93396425" /> */}
+        <TeamMembersPage groupID={"1"} ownerID={"1"}/>
         {/* <RecommendedProjects projects={allideaslist} /> */}
         <Events></Events>
       </div>

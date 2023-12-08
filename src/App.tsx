@@ -10,6 +10,7 @@ import { LandingPage } from "./features/LandingPage/pages/LandingPage";
 import { SignUp } from "./features/Auth/pages/SignUp";
 
 import PrivateRoute from "./utils/privateRoute";
+import TeamMembersPage from "./features/GroupPages/TeamMembers";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/CreateGroup" element={<CreateGroup />} />
           <Route path="/join-requests" element={<JoinRequest />} />
+          <Route path = "Home/team-members" element={<TeamMembersPage groupID={"1"} ownerID={"1"}/>}/>
         </Routes>
       </BrowserRouter>
     </div>
