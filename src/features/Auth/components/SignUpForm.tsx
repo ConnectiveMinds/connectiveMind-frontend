@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-import validation from "../../../services/signUpValidation";
+import validation from "../../../utils/signUpValidation";
 import { signUp } from "../../../services/signUpPageServices";
-import isErrorEmpty from "../../../services/errorsEmpty";
+import isErrorEmpty from "../../../utils/errorsEmpty";
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();

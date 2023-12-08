@@ -4,6 +4,8 @@ import { SideBar } from "../../../Components/NavBar/sidebar";
 import { HorizontalDivider } from "../../../Components/Divider/horizontalDivider";
 import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
 
+import Review from "../components/review";
+
 import { Events } from "../components/eventssection";
 import { ChangeEvent, useEffect, useState } from "react";
 import {
@@ -48,8 +50,10 @@ export function HomePage() {
         {/* <ChatSection /> */}
 
         <RecommendedProjects projects={allideaslist} />
+        
         <Events></Events>
       </div>
+      <Review/>
     </div>
   );
 }
