@@ -78,7 +78,7 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <div className=" w-[100%] max-w-lg mx-auto mt-8 p-8 bg-white rounded-3xl shadow-lg border-2 border-[purple] ">
+    <div className=" w-[100%] max-w-lg mx-auto mt-4 md:mt-8 p-8 bg-white rounded-3xl shadow-lg border-2 border-[purple] ">
       <h1 className="font-bold text-[2rem]">Sign Up</h1>
 
       <p>
@@ -163,7 +163,7 @@ const SignUpForm: React.FC = () => {
         <button
           type="submit"
           onClick={handleValidation}
-          className="block p-1 mt-8 rounded-md drop-shadow-lg colored"
+          className="block p-1 mt-8 rounded-md drop-shadow-lg colored m-4"
         >
           Sign Up
         </button>
