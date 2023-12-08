@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NavBar } from "../../../Components/NavBar/navbar";
 import { SideBar } from "../../../Components/NavBar/sidebar";
 import { HorizontalDivider } from "../../../Components/Divider/horizontalDivider";
@@ -8,13 +7,14 @@ import Review from "../components/review";
 
 import { Events } from "../components/eventssection";
 import { ChangeEvent, useEffect, useState } from "react";
-import {
-  getAllProjects,
-  getIdeaByUserId,
-} from "../../../services/homepageServices";
+
 import { RecommendedProjects } from "../components/recommendsection";
 import { IProjectCard } from "../../../Components/Cards/projects_card";
-import { ChatSection } from "../components/chatsection";
+
+import {
+  getIdeaByUserId,
+  getAllProjects,
+} from "../../../services/api.services";
 export interface IHomePage {
   title: string;
   _id: string;
@@ -48,12 +48,12 @@ export function HomePage() {
       <div className="flex flex-row">
         <SideBar groups={mygrouplist}></SideBar>
         <VerticalDivider />
-        <ChatSection projectId="656f1f4e68d8461d93396425" />
+        {/* <ChatSection projectId="6572c91c56e402e37e42c632" /> */}
 
-        {/* <RecommendedProjects projects={allideaslist} /> */}
+        <RecommendedProjects projects={allideaslist} />
         <Events></Events>
       </div>
-      <Review/>
+      <Review />
     </div>
   );
 }

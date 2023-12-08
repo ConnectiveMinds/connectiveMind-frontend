@@ -1,19 +1,14 @@
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { getAllProjects } from "../../../services/homepageServices";
+
 import { useEffect, useState } from "react";
-
-
-
-
+import { getAllProjects } from "../../../services/api.services";
 
 const Carousel = () => {
   const [allGroups, setAllGroups] = useState([]);
 
   useEffect(() => {
-   
     getAllProjects().then((data) => {
       setAllGroups(data["data"]);
     });
@@ -42,8 +37,6 @@ const Carousel = () => {
             </div>
           ))}
         </Slider>
-        
-        
       </div>
     </div>
   );

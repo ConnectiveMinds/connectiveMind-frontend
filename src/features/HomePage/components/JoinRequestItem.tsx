@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// src/components/JoinRequestItem.tsx
 import React from "react";
-import { IJoinRequest, IRequest } from "./JoinRequest";
+import { IRequest } from "./JoinRequest";
 
 interface JoinRequestItemProps {
   request: IRequest;
