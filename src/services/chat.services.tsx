@@ -1,5 +1,5 @@
 import { crudchat } from "../utils/apiroutes";
-import { api } from "./apiServices";
+import { api } from "./api.services";
 
 export const saveChat = async (message: string, projectId: string) => {
   try {

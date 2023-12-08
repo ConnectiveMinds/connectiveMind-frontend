@@ -1,4 +1,4 @@
-import { api } from "./apiServices";
+import { api } from "./api.services";
 import {
   group,
   ownerId,

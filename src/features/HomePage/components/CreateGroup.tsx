@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { NavBar } from "../../../Components/NavBar/navbar";
 import { createGroup } from "../../../services/homepageServices";
+
 const CreateGroup: React.FC = () => {
   const [formData, setFormData] = useState({
     teamName: "",

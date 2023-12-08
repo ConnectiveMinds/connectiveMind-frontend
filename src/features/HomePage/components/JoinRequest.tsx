@@ -3,15 +3,15 @@ import React, { useEffect, useState } from "react";
 import JoinRequestSection from "./JoinRequestSection";
 import { NavBar } from "../../../Components/NavBar/navbar";
 import {
+  acceptRequest,
+  declineRequest,
   getIncomingRequest,
   getSentRequset,
 } from "../../../services/request.services";
-export interface IRequest {
-  ownerId: string;
-  title: string;
+import { IProjectCard } from "../../../Components/Cards/projects_card";
+import { socket } from "../../../services/socket.services";
+export interface IRequest extends IProjectCard {
   joinRequest: IJoinRequest[];
-  _id: string;
-  name: string;
 }
 export interface IJoinRequest {
   _id: string;
@@ -24,15 +24,65 @@ const JoinRequestPage: React.FC = () => {
   );
   const [sentRequest, setSentRequest] = useState<Array<IRequest>>([]);
   const [receivedRequests, setReceivedRequest] = useState<Array<IRequest>>([]);
+  const handledeclinerequest = async (
+    idea: IRequest,
+    joinRequest: IJoinRequest
+  ) => {
+    declineRequest(idea._id, joinRequest._id).then(() => {
+      const updatedRequest = receivedRequests.filter((prevrequest) => {
+        return prevrequest.joinRequest.filter(
+          (prevjoinrequest) => prevjoinrequest._id === joinRequest._id
+        );
+      });
+
+      setReceivedRequest(updatedRequest);
+    });
+  };
+  const handlesacceptrequest = async (
+    idea: IRequest,
+    joinRequest: IJoinRequest
+  ) => {
+    acceptRequest(idea._id, joinRequest._id).then(() => {
+      const updatedRequest = receivedRequests.filter((prevrequest) => {
+        return prevrequest.joinRequest.filter(
+          (prevjoinrequest) => prevjoinrequest._id === joinRequest._id
+        );
+      });
+
+      setReceivedRequest(updatedRequest);
+    });
+  };
+  const handlescancelrequest = async (
+    idea: IRequest,
+    joinRequest: IJoinRequest
+  ) => {
+    declineRequest(idea._id, joinRequest._id).then(() => {
+      const updatedRequest = sentRequest.filter((prevrequest) => {
+        return prevrequest.joinRequest.filter(
+          (prevjoinrequest) => prevjoinrequest._id === joinRequest._id
+        );
+      });
+
+      setSentRequest(updatedRequest);
+    });
+  };
+
   useEffect(() => {
     getIncomingRequest().then((data) => {
       setReceivedRequest(data.data);
     });
+  }, [receivedRequests]);
+  useEffect(() => {
+    socket.on("receive_request", (data) => {
+      console.log(data);
+    });
+  }, [receivedRequests]);
 
+  useEffect(() => {
     getSentRequset().then((data) => {
       setSentRequest(data.data);
     });
-  }, []);
+  }, [sentRequest]);
   return (
     <>
       <NavBar
@@ -74,11 +124,8 @@ const JoinRequestPage: React.FC = () => {
             isSentRequest={true}
             title="Sent Requests"
             requests={sentRequest}
-            onAccept={(request) =>
-              console.log(`Accepted request for ${request}`)
-            }
-            onDecline={(request) =>
-              console.log(`Declined request for ${request}`)
+            onDecline={(idea, joinRequest) =>
+              handlescancelrequest(idea, joinRequest)
             }
           />
         )}
@@ -86,12 +133,12 @@ const JoinRequestPage: React.FC = () => {
           <JoinRequestSection
             title="Received Requests"
             requests={receivedRequests}
-            onAccept={(request) =>
-              console.log(`Accepted request from ${request}`)
+            onAccept={(idea, joinRequest) =>
+              handlesacceptrequest(idea, joinRequest)
             }
-            onDecline={(request) =>
-              console.log(`Declined request from ${request}`)
-            }
+            onDecline={(idea, joinRequest) => {
+              handledeclinerequest(idea, joinRequest);
+            }}
             isSentRequest={false}
           />
         )}

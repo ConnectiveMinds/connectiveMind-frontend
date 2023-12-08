@@ -22,7 +22,7 @@ export function ChatSection(props: IChat) {
       setMessageList(data["data"]);
     });
     setCurrentUser(JSON.parse(localStorage.getItem("user")!).data.userId);
-  }, []);
+  }, [messagelist]);
 
   const handlesendmessage = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -30,7 +30,6 @@ export function ChatSection(props: IChat) {
     if (currentMessage != " ") {
       await socket.emit("join_room", props.projectId);
       saveChat(currentMessage, props.projectId).then(async (data) => {
-        console.log(data);
         setMessageList((list) => [...list, data["data"]]);
         await socket.emit("send_message", data["data"]);
         setMessage(" ");
@@ -39,11 +38,9 @@ export function ChatSection(props: IChat) {
   };
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      if (data.success) {
-        setMessageList((list) => [...list, data]);
-      }
+      setMessageList((list) => [...list, data]);
     });
-  }, []);
+  }, [socket]);
 
   return (
     <div className="ml-8 mr-8">
