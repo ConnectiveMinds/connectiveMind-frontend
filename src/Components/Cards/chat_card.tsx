@@ -1,5 +1,6 @@
 export interface IChatCard {
-  username: string;
+  _id: string;
+  name: string;
   message: string;
   avatar: string;
   issender: boolean;
@@ -19,7 +20,7 @@ export function ChatCard(props: IChatCard) {
       </div>
       <div className="mt-2 ml-6 mr-6 flex-1 ">
         <p className=" text-white text-sm">
-          {props.issender ? "" : props.username}
+          {props.issender ? "" : props.name}
         </p>
         <div
           className={
