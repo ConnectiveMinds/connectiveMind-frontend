@@ -15,7 +15,7 @@ const TeamMembersPage: React.FC<TeamMembersPage> = ({groupID, ownerID}) => {
   ]);
 
  
-  const loggedInUserId = "2";
+  const loggedInUserId = "1";
 
 
   const handleRemoveClick = (memberId: string) => {

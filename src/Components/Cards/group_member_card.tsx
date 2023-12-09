@@ -74,7 +74,7 @@ const TeamMemberTile: React.FC<TeamMemberTileProps> = ({
 
           </>
         )}
-        {(loggedInUserId === id)&& (
+        {(loggedInUserId === id && ownerId !== loggedInUserId)&& (
           <>
             <button
               onClick={handleRemoveClick}

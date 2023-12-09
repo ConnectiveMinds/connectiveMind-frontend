@@ -52,8 +52,8 @@ export function HomePage() {
         <SideBar groups={mygrouplist}></SideBar>
         <VerticalDivider />
         {/* <ChatSection projectId="656f1f4e68d8461d93396425" /> */}
-        <TeamMembersPage groupID={"1"} ownerID={"1"}/>
-        {/* <RecommendedProjects projects={allideaslist} /> */}
+        {/* <TeamMembersPage groupID={"1"} ownerID={"1"}/> */}
+        <RecommendedProjects projects={allideaslist} />
         <Events></Events>
       </div>
       <Review />
