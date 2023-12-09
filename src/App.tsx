@@ -1,16 +1,17 @@
-import { Routes, Route } from "react-router";
-import { HomePage } from "./features/HomePage/pages/HomePage";
-
-import { Login } from "./features/Auth/pages/SignIn";
-
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Login} from "./Pages/SignIn";
+import { MyCalendar } from "./Components/calendar";
+import { EventForm } from "./Components/eventform";
+import Upload from "./Components/upload";
+import { FilePage } from "./Pages/FilePage";
 import CreateGroup from "./features/HomePage/components/CreateGroup";
 import JoinRequest from "./features/Request/pages/JoinRequest";
-import { LandingPage } from "./features/LandingPage/pages/LandingPage";
-import { SignUp } from "./features/Auth/pages/SignUp";
-
 import PrivateRoute from "./utils/privateRoute";
 import TeamMembersPage from "./features/HomePage/components/teamSection";
+import { LandingPage } from "./features/LandingPage/pages/LandingPage";
+import { HomePage } from "./features/HomePage/pages/HomePage";
+import { SignUp } from "./features/Auth/pages/SignUp";
+
 
 const App = () => {
   return (
@@ -29,8 +30,13 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
+
           <Route path="/CreateGroup" element={<CreateGroup />} />
           <Route path="/join-requests" element={<JoinRequest />} />
+          <Route path='/calendar' element={<MyCalendar/>} />
+                <Route path="/eventform" element={<EventForm/>}/>
+                <Route path="/upload" element={<Upload/>}/>
+                <Route path="/file" element={<FilePage/>}/>
           <Route
             path="Home/team-members"
             element={<TeamMembersPage  _id={"1"} />}
@@ -40,5 +46,6 @@ const App = () => {
     </div>
   );
 };
+  
 
 export default App;
