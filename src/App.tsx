@@ -33,7 +33,7 @@ const App = () => {
           <Route path="/join-requests" element={<JoinRequest />} />
           <Route
             path="Home/team-members"
-            element={<TeamMembersPage groupID={"1"} ownerID={"1"} />}
+            element={<TeamMembersPage  _id={"1"} />}
           />
         </Routes>
       </BrowserRouter>

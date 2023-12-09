@@ -14,6 +14,8 @@ import {
   removeMemberById,
   sentRequest,
   userSignUp,
+  postReview,
+  getReview,
 } from "../utils/apiroutes";
 
 export const api = axios.create({ baseURL: `${host}/api` });
@@ -220,5 +222,28 @@ export const getmessages = async (projectId: string) => {
     return response.data;
   } catch (error: any) {
     throw new Error(`Error: ${error.message}`);
+  }
+};
+//*****************************************review api services****************************************
+export const createReview = async (review: string) => {
+  try {
+    const response = await api.post(postReview, {
+      review: review,
+      status: open,
+    });
+    return response.data;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
+
+export const getReviews = async () => {
+  try {
+    const response = await api.get(getReview);
+    console.log(response.data);
+
+    return response.data;
+  } catch (e: any) {
+    throw new Error(e);
   }
 };
