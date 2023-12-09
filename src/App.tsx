@@ -5,12 +5,12 @@ import { Login } from "./features/Auth/pages/SignIn";
 
 import { BrowserRouter } from "react-router-dom";
 import CreateGroup from "./features/HomePage/components/CreateGroup";
-import JoinRequest from "./features/HomePage/components/JoinRequest";
+import JoinRequest from "./features/Request/pages/JoinRequest";
 import { LandingPage } from "./features/LandingPage/pages/LandingPage";
 import { SignUp } from "./features/Auth/pages/SignUp";
 
 import PrivateRoute from "./utils/privateRoute";
-import TeamMembersPage from "./features/GroupPages/TeamMembers";
+import TeamMembersPage from "./features/HomePage/components/teamSection";
 
 const App = () => {
   return (
@@ -31,7 +31,10 @@ const App = () => {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/CreateGroup" element={<CreateGroup />} />
           <Route path="/join-requests" element={<JoinRequest />} />
-          <Route path = "Home/team-members" element={<TeamMembersPage groupID={"1"} ownerID={"1"}/>}/>
+          <Route
+            path="Home/team-members"
+            element={<TeamMembersPage groupID={"1"} ownerID={"1"} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

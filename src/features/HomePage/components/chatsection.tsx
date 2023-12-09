@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
-import { ChatCard, IChatCard } from "../../../Components/Cards/chat_card";
 import { TextField } from "../../../Components/TextField/texfield";
 import { socket } from "../../../services/socket.services";
 import { getmessages, saveChat } from "../../../services/api.services";
-
-interface IChat {
-  message?: string;
-  projectId: string;
-  senderId?: IChatCard;
-}
+import { IChat } from "../Interface";
+import { ChatCard } from "../../../Components/Cards/chat_card";
 
 export function ChatSection(props: IChat) {
   const [currentMessage, setMessage] = useState("");
@@ -19,7 +14,7 @@ export function ChatSection(props: IChat) {
       setMessageList(data["data"]);
     });
     setCurrentUser(JSON.parse(localStorage.getItem("user")!).data.userId);
-  }, [messagelist]);
+  }, [messagelist, props.projectId]);
 
   const handlesendmessage = async () => {
     if (currentMessage != " ") {

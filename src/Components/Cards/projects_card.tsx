@@ -12,9 +12,7 @@ export interface IProjectCard {
 export function ProjectCard(props: IProjectCard) {
   const handleClick = async () => {
     {
-      updatejoinRequest(props._id).then(async (data) => {
-        console.log(data);
-      });
+      updatejoinRequest(props._id).then(async () => {});
     }
   };
 
