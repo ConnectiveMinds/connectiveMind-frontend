@@ -9,7 +9,7 @@ export const getallgroups = `/v1/idea/get/all`;
 export const incomingRequest = `/v1/idea/get/joinrequest`;
 export const sentRequest = `/v1/idea/get/sentrequest`;
 export const getprojectbyid = `/v1/idea/get/`;
-
+export const removeMemberById = "/v1/idea/crud/remove/";
 export const getchat = `/v1/chat/get/`;
 export const crudchat = `/v1/chat/crud/`;
 export const userSignUp = `/v1/user/auth/signup`;

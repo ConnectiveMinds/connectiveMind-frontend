@@ -12,7 +12,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { RecommendedProjects } from "../components/recommendsection";
 import { IProjectCard } from "../../../Components/Cards/projects_card";
 import { ChatSection } from "../components/chatsection";
-import TeamMembersPage from "../../GroupPages/TeamMembers";
+import TeamMembersPage from "../components/teamSection";
 
 import {
   getIdeaByUserId,

@@ -1,3 +1,5 @@
+import { IChatCard } from "../../../Components/Cards/chat_card";
+
 export interface IProject {
   _id: string;
   title?: string;
@@ -15,4 +17,10 @@ export interface IMember extends IProject {
 
 export interface IRequest extends IProject {
   joinRequest: [IUser];
+}
+
+export interface IChat {
+  message?: string;
+  projectId: string;
+  senderId?: IChatCard;
 }

@@ -5,12 +5,12 @@ import { Login } from "./features/Auth/pages/SignIn";
 
 import { BrowserRouter } from "react-router-dom";
 import CreateGroup from "./features/HomePage/components/CreateGroup";
-import JoinRequest from "./features/HomePage/pages/JoinRequest";
+import JoinRequest from "./features/Request/pages/JoinRequest";
 import { LandingPage } from "./features/LandingPage/pages/LandingPage";
 import { SignUp } from "./features/Auth/pages/SignUp";
 
 import PrivateRoute from "./utils/privateRoute";
-import TeamMembersPage from "./features/GroupPages/TeamMembers";
+import TeamMembersPage from "./features/HomePage/components/teamSection";
 
 const App = () => {
   return (
