@@ -37,10 +37,12 @@ const TeamMemberTile: React.FC<TeamMemberTileProps> = ({
     <div className="bg-white shadow-md p-4 mb-4 md:mx-10 mx-4 sm:mx-2 flex justify-between items-center transition-all duration-200 hover:shadow-lg hover:transform hover:scale-105">
       <div>
         <p className="text-lg">{memberName}</p>
-        {(ownerId === loggedInUserId && id === loggedInUserId) && <p className="text-gray-500">Owner</p>}
+        {ownerId === loggedInUserId && id === loggedInUserId && (
+          <p className="text-gray-500">Owner</p>
+        )}
       </div>
       <div>
-        {(ownerId === loggedInUserId && loggedInUserId !== id)&& (
+        {ownerId === loggedInUserId && loggedInUserId !== id && (
           <>
             <button
               onClick={handleRemoveClick}

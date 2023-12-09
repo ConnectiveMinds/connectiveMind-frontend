@@ -8,6 +8,7 @@ export const getGroupsByUserId = "/v1/idea/get/";
 export const getallgroups = `/v1/idea/get/all`;
 export const incomingRequest = `/v1/idea/get/joinrequest`;
 export const sentRequest = `/v1/idea/get/sentrequest`;
+export const getprojectbyid = `/v1/idea/get/`;
 
 export const getchat = `/v1/chat/get/`;
 export const crudchat = `/v1/chat/crud/`;
