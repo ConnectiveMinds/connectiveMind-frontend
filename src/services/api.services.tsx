@@ -80,13 +80,13 @@ export const signUp = async (
 export const createGroup = async (
   teamName: string,
   projectDescription: string,
-  skillsRequired: string
+  skillsRequired: string[]
 ) => {
   try {
     const response = await api.post(group, {
       title: teamName,
       description: projectDescription,
-      skills: [skillsRequired],
+      skills: skillsRequired,
       status: "open",
     });
 
