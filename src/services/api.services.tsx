@@ -7,9 +7,11 @@ import {
   getGroupsByUserId,
   getallgroups,
   getchat,
+  getprojectbyid,
   group,
   host,
   incomingRequest,
+  removeMemberById,
   sentRequest,
   userSignUp,
 } from "../utils/apiroutes";
@@ -116,6 +118,30 @@ export const getIdeaByUserId = async () => {
     /* empty */
   }
 };
+export const getIdeaByProjectId = async (projectId: string) => {
+  try {
+    const response = await api.get(getprojectbyid + projectId);
+    return response.data;
+  } catch (e: any) {
+    throw new Error(`Error: ${e.message}`);
+    /* empty */
+  }
+};
+export const removeMemberByUserId = async (
+  projectId: string,
+  memberId: string
+) => {
+  try {
+    const response = await api.patch(removeMemberById + projectId, {
+      memberId: memberId,
+    });
+    return response.data;
+  } catch (e: any) {
+    throw new Error(`Error: ${e.message}`);
+    /* empty */
+  }
+};
+
 //*****************************************request api services****************************************
 export const updatejoinRequest = async (projectId: string) => {
   try {

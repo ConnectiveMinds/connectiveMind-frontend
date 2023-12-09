@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import JoinRequestSection from "./JoinRequestSection";
+import JoinRequestSection from "../components/JoinRequestSection";
 import { NavBar } from "../../../Components/NavBar/navbar";
 import { IProjectCard } from "../../../Components/Cards/projects_card";
 import {

@@ -1,5 +1,5 @@
 import React from "react";
-import { IRequest } from "./JoinRequest";
+import { IRequest } from "../pages/JoinRequest";
 
 interface JoinRequestItemProps {
   request: IRequest;

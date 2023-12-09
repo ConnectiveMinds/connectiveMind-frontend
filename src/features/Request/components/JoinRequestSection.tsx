@@ -1,7 +1,7 @@
 // src/components/JoinRequestSection.tsx
 import React from "react";
 import JoinRequestItem from "./JoinRequestItem";
-import { IJoinRequest, IRequest } from "./JoinRequest";
+import { IJoinRequest, IRequest } from "../pages/JoinRequest";
 
 interface JoinRequestSectionProps {
   isSentRequest: boolean;

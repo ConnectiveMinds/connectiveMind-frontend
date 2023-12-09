@@ -12,7 +12,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { RecommendedProjects } from "../components/recommendsection";
 import { IProjectCard } from "../../../Components/Cards/projects_card";
 import { ChatSection } from "../components/chatsection";
-import TeamMembersPage from "../../GroupPages/TeamMembers";
+import TeamMembersPage from "../components/teamSection";
 
 import {
   getIdeaByUserId,
@@ -52,7 +52,7 @@ export function HomePage() {
         <SideBar groups={mygrouplist}></SideBar>
         <VerticalDivider />
         {/* <ChatSection projectId="656f1f4e68d8461d93396425" /> */}
-        <TeamMembersPage groupID={"1"} ownerID={"1"}/>
+        <TeamMembersPage _id="6573dd0a8eeab0c9d8459f48" />
         {/* <RecommendedProjects projects={allideaslist} /> */}
         <Events></Events>
       </div>
