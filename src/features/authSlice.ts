@@ -14,12 +14,14 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<{ token: string }>) => {
+      console.log(action.payload.token);
       localStorage.setItem(
         "user",
         JSON.stringify({
           token: action.payload.token,
         })
       );
+      
       state.token = action.payload.token;
     },
   },

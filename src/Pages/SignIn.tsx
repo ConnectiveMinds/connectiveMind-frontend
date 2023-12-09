@@ -57,7 +57,7 @@ const Login= () => {
     if(isLoginSuccess)
     {
       toast.success("User Login successfully");
-      dispatch(setUser({token:loginData.token}))
+      dispatch(setUser({token:loginData.data}))
       navigate("/home");
     }
   },[isLoginSuccess])
@@ -110,7 +110,7 @@ const Login= () => {
           <img src="src\Data\login_teams.png" alt="Team" />
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer/>
     </div>
   );
 };
