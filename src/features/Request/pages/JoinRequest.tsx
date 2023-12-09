@@ -73,6 +73,8 @@ const JoinRequestPage: React.FC = () => {
 
   useEffect(() => {
     getSentRequset().then((data) => {
+      
+      
       setSentRequest(data.data);
     });
   }, [sentRequest]);
