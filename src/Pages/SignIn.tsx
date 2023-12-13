@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer,toast } from "react-toastify";
 import { useAppDispatch } from "../app/hook";
 import { useLoginUserMutation } from "../services/authApi";
-import { setUser } from "../features/authSlice";
+import { setUser } from "../features/Auth/components/authSlice";
 import { TextField } from "../Components/textfield";
 
 
@@ -57,7 +57,7 @@ const Login= () => {
     if(isLoginSuccess)
     {
       toast.success("User Login successfully");
-      dispatch(setUser({token:loginData.data}))
+      dispatch(setUser({user:loginData.data}))
       navigate("/home");
     }
   },[isLoginSuccess])
