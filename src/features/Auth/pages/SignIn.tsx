@@ -7,6 +7,9 @@ import { useAppDispatch } from "../../../app/hook";
 import { useLoginUserMutation } from "../../../services/authApi";
 import { setUser } from "../components/authSlice";
 import { TextField } from "../../../Components/textfield";
+import OTPDialog from "../../../Components/TextField/OTPfield";
+
+
 
 const Login = () => {
   const initialState: {
@@ -19,6 +22,7 @@ const Login = () => {
 
   const [FormValue, setFormValue] = useState(initialState);
   const { email, password } = FormValue;
+  const [isForgetPasswordOpen, setForgetPasswordOpen] = useState(false); // State to track the OTP dialog
 
   const [
     loginUser,
@@ -58,6 +62,12 @@ const Login = () => {
       toast.error((loginerror as any).data.message);
     }
   }, [isLoginError]);
+
+  const handleForgetPasswordClick = () => {
+    console.log("Forget password clicked");
+    setForgetPasswordOpen(true);
+  };
+
   return (
     <div className="max-w-screen-xl mx-auto max-h-screen my-4 ">
       <div className="flex justify-center md:justify-start ">
@@ -91,9 +101,13 @@ const Login = () => {
               handle={handleChange}
             />
 
-            <p className="my-2 text-xs text-purple-700 font-semibold">
+            <button
+              className="my-2 text-xs text-purple-700 font-semibold bg-transparent border-none cursor-pointer"
+              onClick={handleForgetPasswordClick}
+            >
               Forget password?
-            </p>
+            </button>
+            {isForgetPasswordOpen && <OTPDialog onClose={() => setForgetPasswordOpen(false)} />}
 
             <button
               type="button"

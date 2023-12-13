@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {useState,useEffect, SyntheticEvent} from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -6,8 +7,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer,toast } from "react-toastify";
 import { useAppDispatch } from "../app/hook";
 import { useLoginUserMutation } from "../services/authApi";
-import { setUser } from "../features/authSlice";
+import { setUser } from '../features/Auth/components/authSlice';
 import { TextField } from "../Components/textfield";
+import OTPDialog from '../Components/TextField/OTPfield';
+
 
 
 
@@ -25,7 +28,8 @@ const Login= () => {
   
   const [FormValue,setFormValue] = useState(initialState);
   const {email,password} = FormValue;
-  
+  const [isForgetPasswordOpen, setForgetPasswordOpen] = useState(false); // State to track the OTP dialog
+
   const [loginUser,{data: loginData,isSuccess:isLoginSuccess,isError:isLoginError,error:loginerror}] = useLoginUserMutation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -69,6 +73,14 @@ const Login= () => {
       toast.error((loginerror as any).data.message)
     }
   },[isLoginError])
+
+  const handleForgetPasswordClick = () => {
+    console.log("Forget password clicked");
+    setForgetPasswordOpen(true);
+  };
+  const handleForgetPasswordClose = () => {
+    setForgetPasswordOpen(false);
+  };
   return (
     <div className="max-w-screen-xl mx-auto max-h-screen my-4 ">
       <div className="flex justify-center md:justify-start">
@@ -84,7 +96,20 @@ const Login= () => {
               <TextField param={email} type="email" name="email"placeholder="Email" aria_label="Email" handle={handleChange}/>
               <TextField param={password} type="password" name="password" placeholder="Password" aria-label="Password" handle={handleChange}/>
 
-              <p className="my-2 text-xs text-purple-700 font-semibold">Forget password?</p>
+              <p
+        className="my-2 text-xs text-purple-700 font-semibold bg-transparent border-none cursor-pointer"
+        onClick={handleForgetPasswordClick}
+      >
+        Forget password?
+      </p>
+
+      {isForgetPasswordOpen && (
+        <div className="overlay">
+          <OTPDialog onClose={handleForgetPasswordClose} onSubmit={function (otp: string): void {
+                  throw new Error('Function not implemented.');
+                } } />
+        </div>
+      )}
              
               <button
               type="button" 
