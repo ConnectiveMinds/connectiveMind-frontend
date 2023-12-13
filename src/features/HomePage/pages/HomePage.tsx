@@ -25,16 +25,31 @@ export interface IHomePage {
 
 export function HomePage() {
   const [mygrouplist, setmygroupList] = useState<Array<IHomePage>>([]);
-  const [allideaslist, setallgrouplist] = useState<Array<IProjectCard>>([]);
+
   useEffect(() => {
     getIdeaByUserId().then((data) => {
       setmygroupList(data["data"]);
     });
-    getAllProjects().then((data) => {
-      setallgrouplist(data["data"]);
-    });
   }, []);
-
+  const [currentSection, setcurrentsection] = useState(<RecommendedProjects />);
+  const handledeitemClick = (section: string, id: string) => {
+    switch (section) {
+      case "Chat":
+        setcurrentsection(<ChatSection projectId={id} />);
+        break;
+      case "Project Timeline":
+        break;
+      case "Team":
+        setcurrentsection(<TeamMembersPage _id={id} />);
+        break;
+      case "Resources":
+        //Resources section here
+        break;
+      default:
+        setcurrentsection(<RecommendedProjects />);
+        break;
+    }
+  };
   return (
     <div>
       <NavBar
@@ -49,11 +64,14 @@ export function HomePage() {
       ></NavBar>
       <HorizontalDivider />
       <div className="flex flex-row">
-        <SideBar groups={mygrouplist}></SideBar>
+        <SideBar
+          groups={mygrouplist}
+          onClick={(section, id) => {
+            handledeitemClick(section, id);
+          }}
+        ></SideBar>
         <VerticalDivider />
-        {/* <ChatSection projectId="656f1f4e68d8461d93396425" /> */}
-        <TeamMembersPage _id="6573dd0a8eeab0c9d8459f48" />
-        {/* <RecommendedProjects projects={allideaslist} /> */}
+        {currentSection}
         <Events></Events>
       </div>
       <Review />

@@ -1,18 +1,17 @@
-import React, { useState } from 'react'
-import { CustomButton } from '../../../Components/Button/customButton';
+import React, { useState } from "react";
+import { CustomButton } from "../../../Components/Button/customButton";
 
 const Review = () => {
-    const [textareaVisibility, setTextareaVisibility] = useState(false);
-    const [review, setReview] = useState("");
+  const [textareaVisibility, setTextareaVisibility] = useState(false);
+  const [review, setReview] = useState("");
 
+  function toggleTextAreaVisibility() {
+    setTextareaVisibility(!textareaVisibility);
+  }
 
-    function toggleTextAreaVisibility() {
-        setTextareaVisibility(!textareaVisibility);
-    }
-
-    function handleReviewChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-        setReview(e.target.value);
-    }
+  function handleReviewChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setReview(e.target.value);
+  }
 
   return (
     <div className=" fixed bottom-8 left-8">
@@ -33,6 +32,6 @@ const Review = () => {
       )}
     </div>
   );
-}
+};
 
-export default Review
+export default Review;

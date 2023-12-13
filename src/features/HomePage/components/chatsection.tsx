@@ -31,7 +31,7 @@ export function ChatSection(props: IChat) {
       console.log("heelo");
       setMessageList((list) => [...list, data]);
     });
-  }, [socket]);
+  }, []);
 
   return (
     <div className="ml-8 mr-8">
