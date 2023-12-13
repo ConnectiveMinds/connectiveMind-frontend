@@ -14,6 +14,8 @@ import {
   removeMemberById,
   sentRequest,
   userSignUp,
+  postReview,
+  getReview,
 } from "../utils/apiroutes";
 
 export const api = axios.create({ baseURL: `${host}/api` });
@@ -82,13 +84,13 @@ export const signUp = async (
 export const createGroup = async (
   teamName: string,
   projectDescription: string,
-  skillsRequired: string
+  skillsRequired: string[]
 ) => {
   try {
     const response = await api.post(group, {
       title: teamName,
       description: projectDescription,
-      skills: [skillsRequired],
+      skills: skillsRequired,
       status: "open",
     });
 
@@ -146,7 +148,6 @@ export const removeMemberByUserId = async (
 export const updatejoinRequest = async (projectId: string) => {
   try {
     const response = await api.patch(group + projectId, {}, {});
-
     return response.data;
   } catch (e: any) {
     throw new Error(`Error: ${e.message}`);
@@ -220,5 +221,28 @@ export const getmessages = async (projectId: string) => {
     return response.data;
   } catch (error: any) {
     throw new Error(`Error: ${error.message}`);
+  }
+};
+//*****************************************review api services****************************************
+export const createReview = async (review: string) => {
+  try {
+    const response = await api.post(postReview, {
+      review: review,
+      status: open,
+    });
+    return response.data;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
+
+export const getReviews = async () => {
+  try {
+    const response = await api.get(getReview);
+    console.log(response.data);
+
+    return response.data;
+  } catch (e: any) {
+    throw new Error(e);
   }
 };

@@ -1,6 +1,6 @@
 
 
-import Carousel from "./carousel";
+// import Carousel from "./carousel";
 
 // type ExploreProps = {
 //   topic: string;
@@ -10,8 +10,8 @@ import Carousel from "./carousel";
 export function Explore() {
   return (
     <div className="m-4">
-     
-      <Carousel />
+     this is explore <section></section>
+      {/* <Carousel /> */}
     </div>
   );
 }

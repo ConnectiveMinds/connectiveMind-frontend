@@ -11,9 +11,17 @@ export interface IProjectCard {
 }
 export function ProjectCard(props: IProjectCard) {
   const handleClick = async () => {
-    {
-      updatejoinRequest(props._id).then(async () => {});
+    try {
+      await updatejoinRequest(props._id).then(async () => { });
+      alert("Request sent")
     }
+    catch (e: any) {
+      console.error(e);
+      alert("Request Already Sent or already a member");
+      
+    }
+      
+    
   };
 
   const skilllist = props.skills.map((skill) => {
