@@ -17,6 +17,7 @@ export function RecommendedProjects() {
     return (
       <li className="mt-4">
         <ProjectCard
+          key={project._id}
           ownerId={project.ownerId}
           _id={project._id}
           title={project.title}
@@ -27,8 +28,8 @@ export function RecommendedProjects() {
     );
   });
   return (
-    <div className="ml-8 mr-8">
-      <h1 className=" h-[17px] pb-10 text-black text-[22px] font-bold font-['Inter']">
+    <div className="ml-8 mr-8 overflow-y-auto max-h-screen">
+      <h1 className=" h-[17px] pb-10 text-black text-[22px] font-bold font-['Inter'] ">
         Recommended Projects
       </h1>
       <ul>{projectlist}</ul>

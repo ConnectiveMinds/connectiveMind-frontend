@@ -28,16 +28,16 @@ export function ProjectCard(props: IProjectCard) {
   });
 
   return (
-    <div className="max-w-full max-h-fit bg-white rounded-[10px] border-2 border-zinc-300">
+    <div className=" max-h-fit bg-white rounded-[10px] border-2 border-zinc-300">
       <div className="p-4">
-        <div className="flex flex-row justify-between items-center">
-          <div className=" h-7 text-black text-2xl font-normal font-['Inria Serif'] tracking-tight">
-            {props.title}
+        <div className="flex basis-1flex-row justify-between items-center basis-1">
+          <div className="h-7 text-black text-2xl font-normal font-['Inria Serif'] ">
+            <p>{props.title}</p>
           </div>
           <CustomButton
             text="Join"
             height={8}
-            width={32}
+            width={16}
             onClick={handleClick}
           ></CustomButton>
         </div>
