@@ -1,18 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, ReactEventHandler } from "react";
 
 interface OTPDialogProps {
-  onClose: () => void;
   onSubmit: (otp: string) => void;
+  resendOTP: () => void;
+  onClose: () => void;
 }
 
-const OTPDialog: React.FC<OTPDialogProps> = ({ onClose, onSubmit }) => {
+const OTPDialog: React.FC<OTPDialogProps> = ({
+  onSubmit,
+  resendOTP,
+  onClose,
+}) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(60);
   const otpInputs = useRef<Array<HTMLInputElement | null>>([]);
-  const correctOTP = "1234";
-  const [resendDisabled, setResendDisabled] = useState(false);
-
   useEffect(() => {
     otpInputs.current[0]?.focus();
     startTimer();
@@ -47,19 +49,16 @@ const OTPDialog: React.FC<OTPDialogProps> = ({ onClose, onSubmit }) => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     const enteredOTP = otp.join("");
-    if (enteredOTP === correctOTP) {
-      console.log("OTP is correct!");
-    } else {
-      console.log("Incorrect OTP. Please try again.");
+    if (enteredOTP.length == 4) {
+      onSubmit(enteredOTP);
     }
-    console.log("Entered OTP:", enteredOTP);
-    onSubmit(enteredOTP);
-    onClose();
   };
 
   const handleResend = () => {
+    resendOTP();
     setOtp(["", "", "", ""]);
     setTimer(60);
     startTimer();

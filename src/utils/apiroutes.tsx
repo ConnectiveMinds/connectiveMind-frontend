@@ -1,5 +1,6 @@
 export const host = "http://localhost:3000";
-
+export const sendotp = "/v1/otp/send";
+export const verifyotp = "/v1/otp/verify";
 export const group = `/v1/idea/crud/`;
 export const acceptrequest = `${group}accept/`;
 export const declinerequest = `${group}decline/`;
