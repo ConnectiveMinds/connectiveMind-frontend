@@ -5,13 +5,6 @@ interface ProfilePageProps {
 }
 
 const ProfilePage: React.FC<ProfilePageProps> = () => {
- 
-  const fakePhotos = [
-    "https://placekitten.com/200/200",
-    "https://placekitten.com/201/200",
-    "https://placekitten.com/200/201",
-    // Add more photo URLs as needed
-  ];
 
   // Initial profile information
   const [profile, setProfile] = useState({
@@ -19,7 +12,7 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
     email: "john.doe@example.com",
     address: "123 Main St, Cityville",
     skills: ["React", "JavaScript", "HTML", "CSS"],
-    profilePicture: fakePhotos[0],
+    profilePicture: "https://placekitten.com/200/200",
   });
 
   // State for form inputs
@@ -91,7 +84,7 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
           className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 mt-4 mx-auto block"
           onClick={() => console.log("Update Skills", formValues.skills)}
         >
-          Update Skills
+          Update
         </button>
       </div>
     </div>
