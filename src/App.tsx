@@ -11,6 +11,7 @@ import TeamMembersPage from "./features/HomePage/components/teamSection";
 import { LandingPage } from "./features/LandingPage/pages/LandingPage";
 import { HomePage } from "./features/HomePage/pages/HomePage";
 import { SignUp } from "./features/Auth/pages/SignUp";
+import ProfilePage from "./features/Profile";
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/Profile" element={<ProfilePage />} />
 
           <Route path="/CreateGroup" element={<CreateGroup />} />
           <Route path="/join-requests" element={<JoinRequest />} />

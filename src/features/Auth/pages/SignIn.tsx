@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect, SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -107,7 +108,9 @@ const Login = () => {
             >
               Forget password?
             </button>
-            {isForgetPasswordOpen && <OTPDialog onClose={() => setForgetPasswordOpen(false)} />}
+            {isForgetPasswordOpen && <OTPDialog onClose={() => setForgetPasswordOpen(false)} onSubmit={function (otp: string): void {
+              throw new Error("Function not implemented.");
+            } } />}
 
             <button
               type="button"
