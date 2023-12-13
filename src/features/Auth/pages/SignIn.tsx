@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect, SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +8,8 @@ import { useAppDispatch } from "../../../app/hook";
 import { useLoginUserMutation } from "../../../services/authApi";
 import { setUser } from "../components/authSlice";
 import { TextField } from "../../../Components/textfield";
+import OTPDialog from "../components/OTPfield";
+import { sendOTP } from "../../../services/api.services";
 
 const Login = () => {
   const initialState: {
@@ -19,6 +22,7 @@ const Login = () => {
 
   const [FormValue, setFormValue] = useState(initialState);
   const { email, password } = FormValue;
+  const [isForgetPasswordOpen, setForgetPasswordOpen] = useState(false); // State to track the OTP dialog
 
   const [
     loginUser,
@@ -34,6 +38,21 @@ const Login = () => {
 
   const handleChange = (e: any) => {
     setFormValue({ ...FormValue, [e.target.name]: e.target.value });
+  };
+  const handleForgetPasswordClick = async () => {
+    try {
+      await sendOTP(email)
+        .then((data) => {
+          if (data) {
+            setForgetPasswordOpen(true);
+          }
+        })
+        .catch(() => {
+          toast.error("Failed to send OTP");
+        });
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   const handlelogin = async (e: SyntheticEvent) => {
@@ -58,19 +77,20 @@ const Login = () => {
       toast.error((loginerror as any).data.message);
     }
   }, [isLoginError]);
+
   return (
     <div className="max-w-screen-xl mx-auto max-h-screen my-4 ">
-      <div className="flex justify-center md:justify-start ">
+      <div className="flex justify-center md:justify-start">
         <img src="src\Data\Connective_logo.png" alt="Logo" />
       </div>
-      <div className="flex justify-around ">
+      <div className="flex justify-around  ">
         <div>
-          <div className="md:my-16 my-10">
+          <div className="my-16">
             <div className="font-poppins mb-12 ">
-              <p className="font-bold text-gray-900 sm:text-4xl tracking-normal text-2xl">
+              <p className="font-bold text-gray-900 text-4xl tracking-normal">
                 Welcome Back,
               </p>
-              <p className="font-bold text-purple-700 sm:text-4xl tracking-normal text-2xl">
+              <p className="font-bold text-purple-700 text-4xl tracking-normal">
                 Login
               </p>
             </div>
@@ -91,13 +111,32 @@ const Login = () => {
               handle={handleChange}
             />
 
-            <p className="my-2 text-xs text-purple-700 font-semibold">
+            <p
+              className="my-2 text-xs text-purple-700 font-semibold bg-transparent border-none cursor-pointer"
+              onClick={handleForgetPasswordClick}
+            >
               Forget password?
             </p>
 
+            {isForgetPasswordOpen && (
+              <div className="overlay">
+                <OTPDialog
+                  onClose={() => {
+                    setForgetPasswordOpen(false);
+                  }}
+                  onSubmit={function (otp: string): void {
+                    throw new Error("Function not implemented.");
+                  }}
+                  resendOTP={function (): void {
+                    throw new Error("Function not implemented.");
+                  }}
+                />
+              </div>
+            )}
+
             <button
               type="button"
-              className="my-4 w-auto text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 md:font-medium rounded-xl md:text-xl md:px-12 md:py-2 text-center mr-2 mb-2 px-5 py-1 font-normal"
+              className="my-4 w-auto text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-xl text-xl px-12 py-2 text-center mr-2 mb-2 "
               onClick={handlelogin}
             >
               Login

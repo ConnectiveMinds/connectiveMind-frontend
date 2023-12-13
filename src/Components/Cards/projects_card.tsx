@@ -11,8 +11,11 @@ export interface IProjectCard {
 }
 export function ProjectCard(props: IProjectCard) {
   const handleClick = async () => {
-    {
-      updatejoinRequest(props._id).then(async () => {});
+    try {
+      await updatejoinRequest(props._id).then(async () => {});
+      alert("Request sent");
+    } catch (e: any) {
+      alert("Request Already Sent or already a member");
     }
   };
 
@@ -25,10 +28,10 @@ export function ProjectCard(props: IProjectCard) {
   });
 
   return (
-    <div className="max-w-fit max-h-fit bg-white rounded-[10px] border-2 border-zinc-300">
+    <div className="max-w-full max-h-fit bg-white rounded-[10px] border-2 border-zinc-300">
       <div className="p-4">
         <div className="flex flex-row justify-between items-center">
-          <div className="w-32 h-7 text-black text-2xl font-normal font-['Inria Serif'] tracking-tight">
+          <div className=" h-7 text-black text-2xl font-normal font-['Inria Serif'] tracking-tight">
             {props.title}
           </div>
           <CustomButton
@@ -38,7 +41,7 @@ export function ProjectCard(props: IProjectCard) {
             onClick={handleClick}
           ></CustomButton>
         </div>
-        <div className="max-w-full max-h-fit bg-gray-200 rounded-lg relative mt-4 p-4 text-black text-base font-normal font-['Inria Serif'] tracking-tight">
+        <div className="max-w-full max-h-fit bg-gray-50 rounded-lg relative mt-4 p-4 text-black text-base font-normal font-['Inria Serif'] tracking-tight">
           <p>{props.description}</p>
           <div className=" mt-4 flex flex-row items-center">
             <p>Skills Required: </p>

@@ -4,14 +4,14 @@ import { useNavigate } from "react-router";
 import validation from "../../../utils/signUpValidation";
 
 import isErrorEmpty from "../../../utils/errorsEmpty";
-import { signUp } from "../../../services/api.services";
+import { sendOTP, signUp, verifyOTP } from "../../../services/api.services";
+import { ToastContainer, toast } from "react-toastify";
+import OTPDialog from "./OTPfield";
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
 
-  const registeredPattern = /600/;
-
-  const [isRegistered, setIsRegistered] = useState(false);
+  const [showFrogotpassword, setShowFrogotpassword] = useState(false); // State to track the OTP dialog
 
   const [formData, setFormData] = useState({
     userName: "",
@@ -40,26 +40,52 @@ const SignUpForm: React.FC = () => {
   };
 
   //invoked when form is submitted
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    let isSignedUp = true; //to check if the user signUp is successful
-
+  const handleSignUpButton = async () => {
     try {
-      const response = await signUp(userName, email, password, Number(phoneNo));
-      console.log(response.Data);
+      await sendOTP(email)
+        .then((data) => {
+          if (data) {
+            setShowFrogotpassword(true);
+          }
+        })
+        .catch(() => {
+          toast.error("Failed to send OTP");
+        });
     } catch (error: any) {
-      console.error(error);
-      //checks if user is already registered
-      if (registeredPattern.test(error)) {
-        console.log("error 600");
-        setIsRegistered(true);
-      }
-      //if any error in signing up isSignedUp becomes false
-      isSignedUp = false;
+      console.log(error);
     }
-
-    isSignedUp ? navigate("/login") : console.log("signUp failed");
+  };
+  const handleVerifyOTP = async (otp: string) => {
+    try {
+      await verifyOTP(email, Number(otp))
+        .then((data) => {
+          if (data) {
+            setShowFrogotpassword(false);
+            handleSubmit();
+          }
+        })
+        .catch(() => {
+          toast.error("Invalid OTP");
+        });
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+  const handleSubmit = async () => {
+    try {
+      await signUp(userName, email, password, Number(phoneNo))
+        .then((data) => {
+          if (data) {
+            navigate("/login");
+          }
+        })
+        .catch(() => {
+          toast.error("Email/Phone Already registered");
+        });
+    } catch (error: any) {
+      //checks if user is already registered
+      //if any error in signing up isSignedUp becomes false
+    }
   };
 
   //validation check of form input fields
@@ -71,7 +97,7 @@ const SignUpForm: React.FC = () => {
 
     //if no validation errors submit the form
     if (isErrorEmpty(tempErrors)) {
-      handleSubmit(e);
+      handleSignUpButton();
     }
   };
 
@@ -91,7 +117,7 @@ const SignUpForm: React.FC = () => {
           className="w-full mt-4 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 shadow-md"
           type="email"
           name="email"
-          placeholder="email"
+          placeholder="Email"
           required
           value={formData.email}
           onChange={handleChange}
@@ -103,7 +129,7 @@ const SignUpForm: React.FC = () => {
         <input
           className="w-full mt-4 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 shadow-md"
           type="text"
-          placeholder="username"
+          placeholder="Username"
           name="userName"
           required
           value={formData.userName}
@@ -115,7 +141,7 @@ const SignUpForm: React.FC = () => {
 
         <input
           className="w-full mt-4 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 shadow-md"
-          placeholder="phoneNo"
+          placeholder="Phone"
           name="phoneNo"
           required
           value={formData.phoneNo}
@@ -153,12 +179,6 @@ const SignUpForm: React.FC = () => {
           <p className="text-[red] text-[0.75rem]">{errors.confirmPassword}</p>
         )}
 
-        {isRegistered && (
-          <p className=" mt-4 text-[red] text-[0.75rem]">
-            {"email id or phone number is already registered"}
-          </p>
-        )}
-
         <button
           type="submit"
           onClick={handleValidation}
@@ -167,6 +187,16 @@ const SignUpForm: React.FC = () => {
           Sign Up
         </button>
       </form>
+      {showFrogotpassword && (
+        <div className="overlay">
+          <OTPDialog
+            onSubmit={(otp) => handleVerifyOTP(otp)}
+            resendOTP={() => handleSignUpButton()}
+            onClose={() => setShowFrogotpassword(false)}
+          />
+        </div>
+      )}
+      <ToastContainer />
     </div>
   );
 };

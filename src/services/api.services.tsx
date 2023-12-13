@@ -16,6 +16,8 @@ import {
   userSignUp,
   postReview,
   getReview,
+  sendotp,
+  verifyotp,
 } from "../utils/apiroutes";
 
 export const api = axios.create({ baseURL: `${host}/api` });
@@ -23,13 +25,19 @@ export const api = axios.create({ baseURL: `${host}/api` });
 // Add a request interceptor
 api.interceptors.request.use(
   (config) => {
-    const user = JSON.parse(localStorage.getItem("user")!);
+    const url: string = config.url!;
+
+    if (url.includes("auth") || url.includes("user") || url.includes("otp")) {
+      return config;
+    } else {
+      const user = JSON.parse(localStorage.getItem("user")!);
+      if (user != null) {
+        config.headers.Authorization = `Bearer ${user.data.token}`;
+      }
+      return config;
+    }
 
     // const token = localStorage.getItem("token");
-    if (user != null) {
-      config.headers.Authorization = `Bearer ${user.data.token}`;
-    }
-    return config;
   },
   (error) => Promise.reject(error)
 );
@@ -60,18 +68,18 @@ export const signUp = async (
   phoneNo: number
 ) => {
   try {
-    console.log("hello");
-
     const response = await api.post(userSignUp, {
-      name: name,
-      email: email,
-      password: password,
-      status: "open",
-      gender: "M",
-      phoneNo: phoneNo,
-      address: "afnfsnn",
+      body: {
+        name: name,
+        email: email,
+        password: password,
+        status: "open",
+        gender: "M",
+        phoneNo: phoneNo,
+        address: "afnfsnn",
+      },
     });
-    console.log(response);
+
     return response.data;
   } catch (error: any) {
     console.log("inside catch");
@@ -79,7 +87,30 @@ export const signUp = async (
     throw new Error(`Error: ${error.message}`);
   }
 };
+export const sendOTP = async (email: string) => {
+  try {
+    const response = await api.post(sendotp, {
+      email: email,
+    });
 
+    return response.data;
+  } catch (error: any) {
+    throw new Error(`Error: ${error.message}`);
+  }
+};
+
+export const verifyOTP = async (email: string, otp: number) => {
+  try {
+    const response = await api.post(verifyotp, {
+      email: email,
+      otp: otp,
+    });
+
+    return response.data;
+  } catch (error: any) {
+    throw new Error(`Error: ${error.message}`);
+  }
+};
 //****************************idea api services ***************************
 export const createGroup = async (
   teamName: string,
@@ -148,7 +179,6 @@ export const removeMemberByUserId = async (
 export const updatejoinRequest = async (projectId: string) => {
   try {
     const response = await api.patch(group + projectId, {}, {});
-
     return response.data;
   } catch (e: any) {
     throw new Error(`Error: ${e.message}`);
