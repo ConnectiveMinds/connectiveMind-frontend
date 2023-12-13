@@ -39,9 +39,9 @@ const OTPDialog: React.FC<OTPDialogProps> = ({ onClose, onSubmit }) => {
   };
 
   const handleBackspace = (index: number) => {
-    if (index > 0) {
+    if (index >= 0) {
       const newOtp = [...otp];
-      newOtp[index - 1] = "";
+      newOtp[index] = "";
       setOtp(newOtp);
       otpInputs.current[index - 1]?.focus();
     }

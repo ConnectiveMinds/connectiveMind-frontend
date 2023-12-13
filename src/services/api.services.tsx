@@ -147,9 +147,8 @@ export const removeMemberByUserId = async (
 //*****************************************request api services****************************************
 export const updatejoinRequest = async (projectId: string) => {
   try {
-    const response = await api.patch(group + projectId, {}, {});  
+    const response = await api.patch(group + projectId, {}, {});
     return response.data;
-    
   } catch (e: any) {
     throw new Error(`Error: ${e.message}`);
     /* empty */

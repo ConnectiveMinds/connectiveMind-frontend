@@ -1,12 +1,19 @@
+import { useState, useEffect } from "react";
 import {
   IProjectCard,
   ProjectCard,
 } from "../../../Components/Cards/projects_card";
-export interface IRecommendedProjects {
-  projects: IProjectCard[];
-}
-export function RecommendedProjects(props: IRecommendedProjects) {
-  const projectlist = props.projects.map((project) => {
+import { getAllProjects } from "../../../services/api.services";
+
+export function RecommendedProjects() {
+  const [allideaslist, setallgrouplist] = useState<Array<IProjectCard>>([]);
+  useEffect(() => {
+    getAllProjects().then((data) => {
+      setallgrouplist(data["data"]);
+    });
+  }, []);
+
+  const projectlist = allideaslist.map((project) => {
     return (
       <li className="mt-4">
         <ProjectCard

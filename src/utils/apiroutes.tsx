@@ -1,5 +1,4 @@
 export const host = "http://localhost:3000";
-export const ownerId = "64eb17f7fd2129889d14983d";
 
 export const group = `/v1/idea/crud/`;
 export const acceptrequest = `${group}accept/`;

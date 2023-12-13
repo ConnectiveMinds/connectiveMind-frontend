@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { CustomButton } from "../../../Components/Button/customButton";
 import { createReview } from "../../../services/api.services";
 
-
 const Review = () => {
   const [textareaVisibility, setTextareaVisibility] = useState(false);
   const [review, setReview] = useState("");
