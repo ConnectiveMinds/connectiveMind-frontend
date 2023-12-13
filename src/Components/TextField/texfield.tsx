@@ -23,13 +23,13 @@ export function TextField(props: InputProps) {
 
   return (
     <div>
-      <div className="relative overflow-x-clip overflow-y-scroll">
+      <div className="relative shadow rounded-xl  shadow-gray-400 overflow-x-clip overflow-y-scroll">
         <input
           value={props.value}
           onChange={props.onChange}
           size={props.width}
           type={props.type}
-          className="pl-10 pr-4 py-2 shadow rounded-xl bg-white shadow-gray-400 focus:outline-none  break-normal w-full"
+          className="pl-10 pr-4 py-2  bg-white focus:outline-none  break-normal w-full"
           placeholder={props.placeholder}
           style={{ paddingRight }}
         />

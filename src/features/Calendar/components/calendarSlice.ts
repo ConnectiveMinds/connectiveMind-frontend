@@ -1,16 +1,13 @@
-// import { createSlice } from "@reduxjs/toolkit";
-// import { RootState } from "../app/store";
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../app/store";
+import { RootState } from "../../../app/store";
 
 type Event = {
-    userid:string,
-    title:string,
-    allDay: boolean,
-    start: Date,
-    end: Date
-}
+  userid: string;
+  title: string;
+  allDay: boolean;
+  start: Date;
+  end: Date;
+};
 
 interface EventState {
   dates: Array<Event>;
@@ -34,15 +31,24 @@ export const fetchdates = createAsyncThunk("date/fetch", async (id: string) => {
 
 export const saveDates = createAsyncThunk(
   "date/save",
-  async (body: { userid: string; title: string; start: Date; allDay: boolean; end: Date }) => {
+  async (body: {
+    userid: string;
+    title: string;
+    start: Date;
+    allDay: boolean;
+    end: Date;
+  }) => {
     try {
-      const response = await fetch("http://localhost:3000/api/calendar/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        "http://localhost:3000/api/calendar/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
 
       if (!response.ok) {
         // Handle non-successful response (e.g., 4xx or 5xx status codes)
@@ -58,7 +64,6 @@ export const saveDates = createAsyncThunk(
   }
 );
 
-
 export const EventSlice = createSlice({
   name: "date",
   initialState,
@@ -70,38 +75,34 @@ export const EventSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-        .addCase(fetchdates.fulfilled, (state, action) => {
-            state.status = "succeeded";
-            state.dates = action.payload;
-        })
-        .addCase(fetchdates.pending, (state) => {
-            state.status = "loading";
-        })
-        .addCase(fetchdates.rejected, (state, action) => {
-            state.status = "failed";
-            state.error = action.error.message || "An error occurred";
-        })
-        .addCase(saveDates.fulfilled, (state, action) => {
-          state.status = "succeeded";
-          state.dates = [...state.dates, action.payload];
-          
-        })
-        .addCase(saveDates.pending, (state) => {
-          state.status = "loading";
-        })
-        .addCase(saveDates.rejected, (state, action) => {
-          state.status = "failed";
-          state.error = action.error.message || "An error occurred";
-        });
-        
-}
+      .addCase(fetchdates.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.dates = action.payload;
+      })
+      .addCase(fetchdates.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchdates.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message || "An error occurred";
+      })
+      .addCase(saveDates.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.dates = [...state.dates, action.payload];
+      })
+      .addCase(saveDates.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(saveDates.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message || "An error occurred";
+      });
+  },
 });
 
 // export const { addEvent } = EventSlice.actions;
 export const selectEvents = (state: RootState) => state.dates;
-export const getEventsError =  (state: RootState) => state.dates.error;
+export const getEventsError = (state: RootState) => state.dates.error;
 export const getEventStatus = (state: RootState) => state.dates.status;
-
-
 
 export default EventSlice.reducer;

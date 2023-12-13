@@ -13,7 +13,7 @@ export function SignUp() {
             <span className="text-[rgba(119,65,170,1)]"> ConnectiveMinds</span>
           </header>
           <div className="hidden md:block">
-          <Carousel2 />
+            <Carousel2 />
           </div>
         </div>
         <div className="flex flex-col mt-8 md:mt-0">
@@ -21,7 +21,7 @@ export function SignUp() {
         </div>
         <div className="md:hidden">
           <Carousel2 />
-          </div>
+        </div>
       </div>
     </div>
   );

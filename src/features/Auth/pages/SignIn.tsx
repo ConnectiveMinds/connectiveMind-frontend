@@ -8,7 +8,8 @@ import { useAppDispatch } from "../../../app/hook";
 import { useLoginUserMutation } from "../../../services/authApi";
 import { setUser } from "../components/authSlice";
 import { TextField } from "../../../Components/textfield";
-import OTPDialog from "../../../Components/TextField/OTPfield";
+import OTPDialog from "../components/OTPfield";
+import { sendOTP } from "../../../services/api.services";
 
 const Login = () => {
   const initialState: {
@@ -38,6 +39,21 @@ const Login = () => {
   const handleChange = (e: any) => {
     setFormValue({ ...FormValue, [e.target.name]: e.target.value });
   };
+  const handleForgetPasswordClick = async () => {
+    try {
+      await sendOTP(email)
+        .then((data) => {
+          if (data) {
+            setForgetPasswordOpen(true);
+          }
+        })
+        .catch(() => {
+          toast.error("Failed to send OTP");
+        });
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
 
   const handlelogin = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -62,13 +78,6 @@ const Login = () => {
     }
   }, [isLoginError]);
 
-  const handleForgetPasswordClick = () => {
-    console.log("Forget password clicked");
-    setForgetPasswordOpen(true);
-  };
-  const handleForgetPasswordClose = () => {
-    setForgetPasswordOpen(false);
-  };
   return (
     <div className="max-w-screen-xl mx-auto max-h-screen my-4 ">
       <div className="flex justify-center md:justify-start">
@@ -112,8 +121,13 @@ const Login = () => {
             {isForgetPasswordOpen && (
               <div className="overlay">
                 <OTPDialog
-                  onClose={handleForgetPasswordClose}
+                  onClose={() => {
+                    setForgetPasswordOpen(false);
+                  }}
                   onSubmit={function (otp: string): void {
+                    throw new Error("Function not implemented.");
+                  }}
+                  resendOTP={function (): void {
                     throw new Error("Function not implemented.");
                   }}
                 />
