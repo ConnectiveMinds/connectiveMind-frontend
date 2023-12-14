@@ -1,26 +1,21 @@
-
-
-
-export function Navbar(){
-    return (
-      <ul className="text-center overflow-hidden items-center box-border sticky">
-        <li className="nav-elements">
-          <img
-            className="float-left m-5 p-0 h-24"
-            src="src\Data\Connective 1.png"
-            alt="logo"
-          />
-        </li>
+export function Navbar() {
+  return (
+    <nav className="flex items-center justify-between p-4 ">
+      <div className="flex items-center">
+        <img
+          className="h-16"
+          src="src/Data/Connective 1.png"
+          alt="logo"
+        />
+      </div>
+      <div className="flex items-center space-x-4">
         <a href="/login">
-          <li className="nav-elements float-right">
-            <button className="not-colored">Sign In</button>
-          </li>
+          <button className="text-purple-500">Sign In</button>
         </a>
-        <a href="/SignUp">
-          <li className="nav-elements float-right">
-            <button className="colored">Sign Up</button>
-          </li>
+        <a href="/signup">
+          <button className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600">Sign Up</button>
         </a>
-      </ul>
-    );
+      </div>
+    </nav>
+  );
 }
