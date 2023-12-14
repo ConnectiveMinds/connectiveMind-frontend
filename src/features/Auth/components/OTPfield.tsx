@@ -12,7 +12,7 @@ const OTPDialog: React.FC<OTPDialogProps> = ({
   resendOTP,
   onClose,
 }) => {
-  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [timer, setTimer] = useState(60);
   const otpInputs = useRef<Array<HTMLInputElement | null>>([]);
   useEffect(() => {
@@ -29,12 +29,12 @@ const OTPDialog: React.FC<OTPDialogProps> = ({
   };
 
   const handleOtpChange = (index: number, value: string) => {
-    if (value.match(/^\d+$/) && index < 4) {
+    if (value.match(/^\d+$/) && index < 6) {
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
 
-      if (value && index < 3) {
+      if (value && index < 5) {
         otpInputs.current[index + 1]?.focus();
       }
     }
@@ -51,8 +51,10 @@ const OTPDialog: React.FC<OTPDialogProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
     const enteredOTP = otp.join("");
-    if (enteredOTP.length == 4) {
+    console.log("Entered OTP:", enteredOTP);
+    if (enteredOTP.length == 6) {
       onSubmit(enteredOTP);
     }
   };
