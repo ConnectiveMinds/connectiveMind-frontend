@@ -1,4 +1,5 @@
 import { IChatCard } from "../../../Components/Cards/chat_card";
+import { IEventCard } from "../../../Components/Cards/events_card";
 
 export interface IProject {
   _id: string;
@@ -12,15 +13,19 @@ export interface IUser {
 }
 
 export interface IMember extends IProject {
-  members?: [IUser];
+  members?: IUser[];
 }
 
 export interface IRequest extends IProject {
-  joinRequest: [IUser];
+  joinRequest: IUser[];
 }
 
 export interface IChat {
   message?: string;
   projectId: string;
   senderId?: IChatCard;
+}
+
+export interface IUpcomingEvent {
+  events: IEventCard[];
 }

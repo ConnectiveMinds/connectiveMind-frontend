@@ -9,7 +9,7 @@ function validation(values: any) {
   const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   const passwordPattern =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-  const phoneNoPattern = /^\d{12,}$/;
+  const phoneNoPattern = /^\d{10,}$/;
 
   if (values.userName === "") {
     error.userName = "Name should not be empty";
@@ -36,7 +36,7 @@ function validation(values: any) {
   }
 
   if (!phoneNoPattern.test(values.phoneNo)) {
-    error.phoneNo = "Please add country code";
+    error.phoneNo = "Invalid Phone ";
   }
 
   return error;

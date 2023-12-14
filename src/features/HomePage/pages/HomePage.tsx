@@ -28,7 +28,6 @@ export function HomePage() {
       setmygroupList(data["data"]);
     });
   }, []);
-  console.log(mygrouplist);
   const [currentSection, setcurrentsection] = useState(<RecommendedProjects />);
   const handledeitemClick = (section: string, id: string) => {
     switch (section) {
@@ -61,7 +60,7 @@ export function HomePage() {
         }}
       ></NavBar>
       <HorizontalDivider />
-      <div className="flex flex-row">
+      <div className="flex flex-rowå">
         <SideBar
           groups={mygrouplist}
           onClick={(section, id) => {
@@ -69,8 +68,7 @@ export function HomePage() {
           }}
         ></SideBar>
         <VerticalDivider />
-        <div>{currentSection}</div>
-
+        {currentSection}
         <Events></Events>
       </div>
       <Review />
