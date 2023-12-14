@@ -85,13 +85,13 @@ const OTPDialog: React.FC<OTPDialogProps> = ({
                 }
               }}
               maxLength={1}
-              className="w-10 h-10 mx-2 border text-center rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className="w-10 h-10 sm:mx-3 mx-1 border text-center rounded-md focus:outline-none focus:ring focus:border-blue-300"
               ref={(ref) => (otpInputs.current[index] = ref)}
             />
           ))}
         </div>
         <div className="mt-4 flex flex-col items-center">
-          <div className="mb-2 space-x-20">
+          <div className="mb-2 sm:space-x-60 space-x-40">
             <button
               className="text-purple-500 hover:underline cursor-pointer"
               onClick={onClose}

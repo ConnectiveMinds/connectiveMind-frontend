@@ -13,16 +13,16 @@ export function Description() {
   return (
     
     <>
-      <div className="description">
-        <div className="intro">
-          <header className="inline-block font-bold text-[2rem] drop-shadow-2xl">
+      <div className="description flex flex-col md:flex-row">
+        <div className="intro md:mr-8">
+          <header className="font-bold text-2xl sm:text-4xl mb-4 sm:mb-8 text-center sm:text-left">
             Meet
-            <span className="text-[rgba(119,65,170,1)]">
+            <span className="text-purple-700">
               {" "}
               ConnectiveMinds
             </span>{" "}
           </header>
-          <div className="about">
+          <div className="about text-center md:text-left">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
             reprehenderit sit beatae ducimus, consectetur dignissimos nisi.
             Ipsum culpa delectus magni in quisquam quia ut sed vel blanditiis
@@ -30,20 +30,23 @@ export function Description() {
           </div>
           <button onClick={()=>exploreToSection(explore)} className="colored">Explore</button>
         </div>
-        <div className="inline-block  flex justify-content">
+        <div className="flex justify-content">
           <img
-            className="inline-block absolute z-[2] opacity-80  h-[70vh] w-[40vw] "
+            className="md:inline-block absolute z-[2] opacity-80  md:h-[70vh] md:w-[40vw] hidden "
             src="src\Data\Ellipse 1.png"
             alt=""
           />
           <img
-            className="inline-block absolute"
+            className="md:inline-block hidden absolute z-[2] opacity-80  md:h-[110vh] md:w-[40vw]"
             src="src\Data\Connective Minds (3) 1.png"
             alt=""
           />
         </div>
       </div>
-      <h1 ref={explore} className="m-4 inline-block font-bold text-[2rem] text-[rgba(119,65,170,1)]">
+      <h1
+        ref={explore}
+        className="m-4 font-bold text-2xl text-purple-700 text-center"
+      >
         Explore
       </h1>
     </>
