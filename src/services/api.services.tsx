@@ -74,17 +74,15 @@ export const signUp = async (
 ) => {
   try {
     const response = await api.post(userSignUp, {
-      body: {
-        name: name,
-        email: email,
-        password: password,
-        status: "open",
-        gender: "M",
-        phoneNo: phoneNo,
-        address: "afnfsnn",
-      },
+      name: name,
+      email: email,
+      password: password,
+      status: "open",
+      gender: "M",
+      phoneNo: phoneNo,
+      address: "afnfsnn",
     });
-
+    console.log(response.data);
     return response.data;
   } catch (error: any) {
     console.log("inside catch");
@@ -275,7 +273,6 @@ export const createReview = async (review: string) => {
 export const getReviews = async () => {
   try {
     const response = await api.get(getReview);
-    console.log(response.data);
 
     return response.data;
   } catch (e: any) {

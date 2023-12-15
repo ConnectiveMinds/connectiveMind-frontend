@@ -12,7 +12,7 @@ const OTPDialog: React.FC<OTPDialogProps> = ({
   resendOTP,
   onClose,
 }) => {
-  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [timer, setTimer] = useState(60);
   const otpInputs = useRef<Array<HTMLInputElement | null>>([]);
   useEffect(() => {
@@ -29,12 +29,12 @@ const OTPDialog: React.FC<OTPDialogProps> = ({
   };
 
   const handleOtpChange = (index: number, value: string) => {
-    if (value.match(/^\d+$/) && index < 4) {
+    if (value.match(/^\d+$/) && index < 6) {
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
 
-      if (value && index < 3) {
+      if (value && index < 5) {
         otpInputs.current[index + 1]?.focus();
       }
     }
@@ -51,15 +51,17 @@ const OTPDialog: React.FC<OTPDialogProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
     const enteredOTP = otp.join("");
-    if (enteredOTP.length == 4) {
+    console.log("Entered OTP:", enteredOTP);
+    if (enteredOTP.length == 6) {
       onSubmit(enteredOTP);
     }
   };
 
   const handleResend = () => {
     resendOTP();
-    setOtp(["", "", "", ""]);
+    setOtp(["", "", "", "", "", ""]);
     setTimer(60);
     startTimer();
     otpInputs.current[0]?.focus();
@@ -83,13 +85,13 @@ const OTPDialog: React.FC<OTPDialogProps> = ({
                 }
               }}
               maxLength={1}
-              className="w-10 h-10 mx-2 border text-center rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className="w-10 h-10 sm:mx-3 mx-1 border text-center rounded-md focus:outline-none focus:ring focus:border-blue-300"
               ref={(ref) => (otpInputs.current[index] = ref)}
             />
           ))}
         </div>
         <div className="mt-4 flex flex-col items-center">
-          <div className="mb-2 space-x-20">
+          <div className="mb-2 sm:space-x-60 space-x-40">
             <button
               className="text-purple-500 hover:underline cursor-pointer"
               onClick={onClose}

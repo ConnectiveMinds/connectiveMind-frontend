@@ -30,14 +30,14 @@ export function ProjectCard(props: IProjectCard) {
   return (
     <div className=" max-h-fit bg-white rounded-[10px] border-2 border-zinc-300">
       <div className="p-4">
-        <div className="flex basis-1flex-row justify-between items-center basis-1">
+        <div className="flex flex-row justify-between items-center">
           <div className="h-7 text-black text-2xl font-normal font-['Inria Serif'] ">
             <p>{props.title}</p>
           </div>
           <CustomButton
             text="Join"
-            height={8}
-            width={16}
+            height={7}
+            width={12}
             onClick={handleClick}
           ></CustomButton>
         </div>

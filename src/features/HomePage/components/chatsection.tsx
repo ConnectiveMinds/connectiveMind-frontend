@@ -34,12 +34,12 @@ export function ChatSection(props: IChat) {
   }, []);
 
   return (
-    <div className="ml-4 mr-4">
+    <div className="ml-4 mr-4 ">
       <h1 className=" h-[17px] pb-10 text-black text-[22px] font-bold font-['Inter']">
         Chat
       </h1>
-      <div className="relative">
-        <div className="p-3 box-content mt-auto h-[60vh] w-[120vh] rounded-lg bg-gray-400 overflow-y-scroll">
+      <div className="relative w-[85vh]">
+        <div className="p-3 mt-auto h-[83vh] rounded-lg bg-gray-400 overflow-y-scroll ">
           {messagelist.map((message) => {
             let issender = false;
             message.senderId?._id === currentUser

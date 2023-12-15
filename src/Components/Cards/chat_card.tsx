@@ -12,8 +12,7 @@ export function ChatCard(props: IChatCard) {
     <div className={sender}>
       <div
         className={
-          "mt-4 md:w-10 lg:w-14 h-4 md:h-10 lg:h-14 rounded-full  text-center" +
-          bgcolor
+          "mt-4  h-4 md:h-10 lg:h-14 rounded-full  text-center" + bgcolor
         }
       >
         <img src={`data:image/svg+xml;base64,${props.avatar}`} alt="Image" />
