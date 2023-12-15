@@ -15,5 +15,9 @@ export const crudchat = `/v1/chat/crud/`;
 export const userSignUp = `/v1/user/auth/signup`;
 export const postReview = `/v1/review/crud/`;
 export const getReview = `/v1/review/get/getreviews`;
+export const getFiles = `/file/files/`;
+export const postFiles = `/file/upload/`;
+export const getdates = `/calendar/`;
+export const postdates = `/calendar/create/`
 export const AuthToken =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGViNDg5YTBiOTVkZDg4Y2UwMTI2Y2YiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3OTJAZ21haWwuY29tIiwiaWF0IjoxNzAyMDU3NjY5LCJleHAiOjE3MDIxNDQwNjl9.NDTsmFFXcSNaO69IZAremzLlnxyqUwrKR83K_DQ_NxQ";

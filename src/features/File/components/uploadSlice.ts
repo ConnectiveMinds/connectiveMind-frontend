@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { RootState } from "../app/store";
+import { getFilesById, saveFile } from "../../../services/api.services";
+
+
 type File = {
   _id: string;
   filename: string;
@@ -19,41 +21,6 @@ const initialState: FileState = {
   loading: false,
   error: "",
 };
-
-export const getFiles = createAsyncThunk("file/fetch", async (id:string) => {
-  try {
-    
-    const response = await fetch(`http://localhost:3000/api/file/files/${id}`, {
-      method: "GET",
-    });
-    const data = response.json();
-    return data;
-    // console.log(data)
-  } catch (error: any) {
-    throw new Error(`An error occurred: ${error.message}`);
-  }
-});
-
-export const saveDatesWithFile = createAsyncThunk(
-  "file/saveWithFile",
-  async ({ body, projectId }: { body: FormData; projectId: string }, thunkAPI) => {
-    try {
-      const response = await fetch(`http://localhost:3000/api/file/upload/${projectId}`, {
-        method: "POST",
-        body,
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-     
-      const data = await response.json();
-      return data;
-    } catch (error:any) {
-      return thunkAPI.rejectWithValue(`An error occurred: ${error.message}`);
-    }
-  }
-);
 
 export const deleteFile = createAsyncThunk<void, string>(
   'file/deleteFile',
@@ -86,27 +53,27 @@ export const FileSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getFiles.pending, (state) => {
+      .addCase(getFilesById.pending, (state) => {
         state.loading = true;
         state.error = "";
       })
-      .addCase(getFiles.fulfilled, (state, action) => {
+      .addCase(getFilesById.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(getFiles.rejected, (state, action) => {
+      .addCase(getFilesById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "An error occurred";
       })
-      .addCase(saveDatesWithFile.pending, (state) => {
+      .addCase(saveFile.pending, (state) => {
         state.loading = true;
         state.error = "";
       })
-      .addCase(saveDatesWithFile.fulfilled, (state, action) => {
+      .addCase(saveFile.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload; // Assuming the payload is an array, update as needed
       })
-      .addCase(saveDatesWithFile.rejected, (state, action) => {
+      .addCase(saveFile.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "An error occurred";
       })

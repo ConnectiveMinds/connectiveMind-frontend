@@ -3,7 +3,7 @@ import { authApi } from "../services/authApi";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
 
 import dateReducer from "../features/Calendar/components/calendarSlice";
-import fileReducer from "../features/uploadSlice";
+import fileReducer from "../features/File/components/uploadSlice";
 import authReducer from "../features/Auth/components/authSlice";
 // import { dateApi } from "../services/calendarApi";
 export const store = configureStore({

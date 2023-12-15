@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {  createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../../app/store";
+import {  fetchdates, saveDates } from "../../../services/api.services";
 
 type Event = {
   userid: string;
@@ -21,48 +22,48 @@ const initialState: EventState = {
   error: "",
 };
 
-export const fetchdates = createAsyncThunk("date/fetch", async (id: string) => {
-  const response = await fetch(`http://localhost:3000/api/calendar/${id}`, {
-    method: "GET",
-  });
-  const data = response.json();
-  return data;
-});
+// export const fetchdates = createAsyncThunk("date/fetch", async (id: string) => {
+//   const response = await fetch(`http://localhost:3000/api/calendar/${id}`, {
+//     method: "GET",
+//   });
+//   const data = response.json();
+//   return data;
+// });
 
-export const saveDates = createAsyncThunk(
-  "date/save",
-  async (body: {
-    userid: string;
-    title: string;
-    start: Date;
-    allDay: boolean;
-    end: Date;
-  }) => {
-    try {
-      const response = await fetch(
-        "http://localhost:3000/api/calendar/create",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }
-      );
+// export const saveDates = createAsyncThunk(
+//   "date/save",
+//   async (body: {
+//     userid: string;
+//     title: string;
+//     start: Date;
+//     allDay: boolean;
+//     end: Date;
+//   }) => {
+//     try {
+//       const response = await fetch(
+//         "http://localhost:3000/api/calendar/create",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify(body),
+//         }
+//       );
 
-      if (!response.ok) {
-        // Handle non-successful response (e.g., 4xx or 5xx status codes)
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+//       if (!response.ok) {
+//         // Handle non-successful response (e.g., 4xx or 5xx status codes)
+//         throw new Error(`HTTP error! Status: ${response.status}`);
+//       }
 
-      const data = await response.json();
-      return data;
-    } catch (error: any) {
-      // Handle any network or other errors that might occur during the fetch.
-      throw new Error(`An error occurred: ${error.message}`);
-    }
-  }
-);
+//       const data = await response.json();
+//       return data;
+//     } catch (error: any) {
+//       // Handle any network or other errors that might occur during the fetch.
+//       throw new Error(`An error occurred: ${error.message}`);
+//     }
+//   }
+// );
 
 export const EventSlice = createSlice({
   name: "date",

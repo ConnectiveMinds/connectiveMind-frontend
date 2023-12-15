@@ -15,6 +15,10 @@ import { ChatSection } from "../components/chatsection";
 import TeamMembersPage from "../components/teamSection";
 
 import { getIdeaByUserId } from "../../../services/api.services";
+import { FilePage } from "../../../Pages/FilePage";
+// import Upload from "../../../Components/upload";
+import { MyCalendar } from "../../../Components/calendar";
+import { EventForm } from "../../../Components/eventform";
 export interface IHomePage {
   title: string;
   _id: string;
@@ -35,12 +39,15 @@ export function HomePage() {
         setcurrentsection(<ChatSection projectId={id} />);
         break;
       case "Project Timeline":
+        setcurrentsection(<EventForm _id={id}/>)
+        // setcurrentsection(<MyCalendar _id={id}/>)
+        // setcurrentsection(<Upload _id={id}/>);
         break;
       case "Team":
         setcurrentsection(<TeamMembersPage _id={id} />);
         break;
       case "Resources":
-        //Resources section here
+        setcurrentsection(<FilePage _id={id}/>)
         break;
       default:
         setcurrentsection(<RecommendedProjects />);

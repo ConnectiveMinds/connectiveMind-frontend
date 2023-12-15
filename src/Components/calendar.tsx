@@ -5,16 +5,17 @@ import moment from "moment";
 // import events from "./events";
 import "../style.css";
 import {
-  fetchdates,
+  
   getEventsError,
   selectEvents,
 } from "../features/Calendar/components/calendarSlice";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../app/hook";
+import { fetchdates } from "../services/api.services";
 
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
-export const MyCalendar = () => {
+export const MyCalendar = ({_id}) => {
   const dispatch = useAppDispatch();
   const { dates } = useSelector(selectEvents);
   const eventsError = useSelector(getEventsError);
@@ -22,7 +23,7 @@ export const MyCalendar = () => {
 
   useEffect(() => {
     // Fetch events when the component mounts
-    dispatch(fetchdates("653a44795328fe2e14ee76bf"));
+    dispatch(fetchdates(_id));
   }, [dispatch]);
   useEffect(() => {
     // Check if there is an error and log it
