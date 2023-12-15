@@ -2,9 +2,10 @@
   import { useState } from "react";
   import { RenderFile } from "./RenderFile";
 import { useAppDispatch } from "../app/hook";
-import { saveDatesWithFile } from "../features/uploadSlice";
 
-  export default function Upload() {
+import { saveFile } from "../services/api.services";
+
+  export default function Upload({_id}) {
     const [file, setFile] = useState<File | null>(null);
     console.log({file});
     const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ import { saveDatesWithFile } from "../features/uploadSlice";
         formData.append("myFile", file);
   
         // Dispatch the action to initiate file upload
-        await dispatch(saveDatesWithFile({body:formData,projectId:'64ec09ac1b7653f6a1d436f2'}));
+        await dispatch(saveFile({body:formData,projectId:_id}));
   
         // Reset the file state after successful upload (if needed)
         setFile(null);

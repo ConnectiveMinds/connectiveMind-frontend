@@ -36,7 +36,7 @@ export function ProjectCard(props: IProjectCard) {
           </div>
           <CustomButton
             text="Join"
-            height={8}
+            height={7}
             width={12}
             onClick={handleClick}
           ></CustomButton>

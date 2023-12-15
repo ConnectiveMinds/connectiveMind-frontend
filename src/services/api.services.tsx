@@ -19,7 +19,12 @@ import {
   getReview,
   sendotp,
   verifyotp,
+  getFiles,
+  postFiles,
+  getdates,
+  postdates,
 } from "../utils/apiroutes";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const api = axios.create({
   baseURL: `${host}/api`,
@@ -299,3 +304,108 @@ const apiService = {
 };
 
 export default apiService;
+//files//
+export const getFilesById = createAsyncThunk(
+  "file/fetch",
+  async (id: string) => {
+    try {
+      console.log("using");
+      // Use the axios instance to make the GET request
+      const url = getFiles + id;
+      const response = await api.get(url);
+
+      // Check if the response is ok
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Parse and return the response data
+      return response.data;
+    } catch (error: any) {
+      // Handle errors
+      throw new Error(`An error occurred: ${error.message}`);
+    }
+  }
+);
+
+export const saveFile = createAsyncThunk(
+  "file/saveFile",
+  async (
+    { body, projectId }: { body: FormData; projectId: string },
+    thunkAPI
+  ) => {
+    try {
+      const url = postFiles + projectId;
+      const response = await api.post(url, body);
+
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Assuming the response.data is already a JSON object
+      // If not, you might need to parse it based on your server response
+      return response.data;
+    } catch (error: any) {
+      // Here you can access the error message directly
+      return thunkAPI.rejectWithValue(`An error occurred: ${error.message}`);
+    }
+  }
+);
+
+//calendar//
+
+export const fetchdates = createAsyncThunk("date/fetch", async (id: string) => {
+  try {
+    // Use the axios instance to make the GET request
+    const url = getdates + id;
+    const response = await api.get(url);
+
+    // Check if the response is ok
+    if (response.status !== 200) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // Parse and return the response data
+    return response.data;
+  } catch (error: any) {
+    // Handle errors
+    throw new Error(`An error occurred: ${error.message}`);
+  }
+});
+
+export const saveDates = createAsyncThunk(
+  "date/saveDates",
+  async (
+    {
+      body,
+      projectId,
+    }: {
+      body: {
+        title: string;
+        start: Date;
+        end: Date;
+        assigned_id: string[];
+        isOwner: boolean;
+      };
+      projectId: string;
+    },
+    thunkAPI
+  ) => {
+    try {
+      const url = postdates + projectId;
+      console.log(url);
+      const response = await api.post(url, body);
+
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Assuming the response.data is already a JSON object
+      // If not, you might need to parse it based on your server response
+      return response.data;
+    } catch (error: any) {
+      // Here you can access the error message directly
+      return thunkAPI.rejectWithValue(`An error occurred: ${error.message}`);
+    }
+  }
+);

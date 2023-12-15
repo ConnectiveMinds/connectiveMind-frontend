@@ -1,30 +1,41 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 // import { useAddDateMutation } from "../services/calendarApi";
 import { ToastContainer, toast } from "react-toastify";
-import { saveDates } from "../features/Calendar/components/calendarSlice";
+
 import { useAppDispatch } from "../app/hook";
+import { IMember } from "../features/HomePage/Interface";
+import { getIdeaByProjectId, saveDates } from "../services/api.services";
+
 // import { useSelector } from "react-redux";
 // import { useNavigate } from "react-router";
 // import { useAppDispatch } from "../app/hook";
 
-export const EventForm = () => {
+export const EventForm = ({ _id }) => {
   const dispatch = useAppDispatch();
   // const { dates } = useSelector(selectEvents);
   // const eventsError = useSelector(getEventsError);
   // const eventStatus = useSelector(getEventStatus);
   const initialState: {
     title: string;
-    allDay: boolean;
     start: Date;
     end: Date;
+    assigned: string[];
   } = {
     title: "",
-    allDay: false,
     start: new Date(),
     end: new Date(),
+    assigned: [],
   };
+  const [idea, setIdea] = useState<IMember>();
   const [FormValue, setFormValue] = useState(initialState);
-  const { title, start, end } = FormValue;
+  const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
+  const { title, start, end,assigned } = FormValue;
+  useEffect(() => {
+    getIdeaByProjectId(_id).then((data) => {
+      setIdea(data.data);
+    });
+    // setCurrentUser(JSON.parse(localStorage.getItem("user")!).data.userId);
+  }, []);
   // const [addDate,{data:dateDate,isSuccess:isAddSuccess,isError:isAddError}] = useAddDateMutation();
   //   const navigate = useNavigate();
   // const dispatch = useAppDispatch();
@@ -37,28 +48,35 @@ export const EventForm = () => {
 
     setFormValue({ ...FormValue, [e.target.name]: value });
   };
+  const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOptions = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
+    setSelectedMembers(selectedOptions);
+    console.log(selectedMembers);
+    setFormValue({ ...FormValue, assigned: selectedMembers });
+  };
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    // Format the date values appropriately before passing them
     dispatch(
       saveDates({
-        userid: "653a44795328fe2e14ee76bf",
-        title,
-        start,
-        allDay: false,
-        end,
+        body: { title: title, start: start, end: end,assigned_id:assigned,isOwner:true },
+        projectId: _id,
       })
     )
       .then((resultAction) => {
         if (saveDates.fulfilled.match(resultAction)) {
           // Handle success (if needed)
           console.log("Event saved successfully");
-          toast.success("Event added Successfully");
           setFormValue(initialState);
+          toast.success("Event added Successfully");
+         
         } else if (saveDates.rejected.match(resultAction)) {
           // Handle rejection (if needed)
+          console.log(resultAction.error.message);
           console.error("Error saving event:", resultAction.error.message);
           toast.error(resultAction.error.message);
         }
@@ -68,13 +86,6 @@ export const EventForm = () => {
         console.error("Unexpected error:", error);
       });
   };
-
-  //  useEffect(() => {
-  //   if (eventStatus === "succeeded") {
-
-  //     toast.success("Event added Successfully");
-  //   }
-  // }, [eventStatus]);
 
   return (
     <div className="max-w-sm mx-auto ">
@@ -104,7 +115,7 @@ export const EventForm = () => {
       </div>
       <div className="mb-5">
         <p className="block mb-2 text-lg font-medium text-gray-900">End</p>
-        <input
+        <input  
           type="datetime-local"
           name="end"
           // value={end.toISOString().slice(0, 16)}
@@ -112,6 +123,22 @@ export const EventForm = () => {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 input input-bordered w-full max-w-xs"
           onChange={handleChange}
         />
+      </div>
+      <div>
+        <p className="block mb-2 text-lg font-medium text-gray-900">
+          Assigned To:
+        </p>
+        <select
+          id="multiselection"
+          name="assigned"
+          data-te-select-init
+          multiple
+          onChange={handleChangeSelect}
+        >
+          {idea?.members?.map((member) => (
+            <option value={member._id}>{member.name}</option>
+          ))}
+        </select>
       </div>
       <div className="mb-5">
         <button

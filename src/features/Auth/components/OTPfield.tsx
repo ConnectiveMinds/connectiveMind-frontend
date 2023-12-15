@@ -61,7 +61,7 @@ const OTPDialog: React.FC<OTPDialogProps> = ({
 
   const handleResend = () => {
     resendOTP();
-    setOtp(["", "", "", ""]);
+    setOtp(["", "", "", "", "", ""]);
     setTimer(60);
     startTimer();
     otpInputs.current[0]?.focus();

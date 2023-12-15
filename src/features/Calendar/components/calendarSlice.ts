@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {  createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../../app/store";
-import apiService from "../../../services/api.services";
+import apiService, {  fetchdates, saveDates } from "../../../services/api.services";
 import { IEventCard } from "../../../Components/Cards/events_card";
 
 // type Event = {
@@ -23,13 +23,13 @@ const initialState: EventState = {
   error: "",
 };
 
-export const fetchdates = createAsyncThunk("date/fetch", async (id: string) => {
-  const response = await fetch(`http://localhost:3000/api/calendar/${id}`, {
-    method: "GET",
-  });
-  const data = response.json();
-  return data;
-});
+// export const fetchdates = createAsyncThunk("date/fetch", async (id: string) => {
+//   const response = await fetch(`http://localhost:3000/api/calendar/${id}`, {
+//     method: "GET",
+//   });
+//   const data = response.json();
+//   return data;
+// });
 
 export const fetchEventByUserId = createAsyncThunk(
   "event/fetchbyid",
@@ -60,19 +60,19 @@ export const saveDates = createAsyncThunk(
         }
       );
 
-      if (!response.ok) {
-        // Handle non-successful response (e.g., 4xx or 5xx status codes)
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+//       if (!response.ok) {
+//         // Handle non-successful response (e.g., 4xx or 5xx status codes)
+//         throw new Error(`HTTP error! Status: ${response.status}`);
+//       }
 
-      const data = await response.json();
-      return data;
-    } catch (error: any) {
-      // Handle any network or other errors that might occur during the fetch.
-      throw new Error(`An error occurred: ${error.message}`);
-    }
-  }
-);
+//       const data = await response.json();
+//       return data;
+//     } catch (error: any) {
+//       // Handle any network or other errors that might occur during the fetch.
+//       throw new Error(`An error occurred: ${error.message}`);
+//     }
+//   }
+// );
 
 export const EventSlice = createSlice({
   name: "date",

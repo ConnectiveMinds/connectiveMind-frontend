@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { RootState } from "../app/store";
+import { getFilesById, saveFile } from "../../../services/api.services";
+
+
 type File = {
   _id: string;
   filename: string;
@@ -20,56 +22,13 @@ const initialState: FileState = {
   error: "",
 };
 
-export const getFiles = createAsyncThunk("file/fetch", async (id: string) => {
-  try {
-    const response = await fetch(`http://localhost:3000/api/file/files/${id}`, {
-      method: "GET",
-    });
-    const data = response.json();
-    return data;
-    // console.log(data)
-  } catch (error: any) {
-    throw new Error(`An error occurred: ${error.message}`);
-  }
-});
-
-export const saveDatesWithFile = createAsyncThunk(
-  "file/saveWithFile",
-  async (
-    { body, projectId }: { body: FormData; projectId: string },
-    thunkAPI
-  ) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/file/upload/${projectId}`,
-        {
-          method: "POST",
-          body,
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(`An error occurred: ${error.message}`);
-    }
-  }
-);
-
 export const deleteFile = createAsyncThunk<void, string>(
-  "file/deleteFile",
+  'file/deleteFile',
   async (id: string) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/file/delete/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`http://localhost:3000/api/file/delete/${id}`, {
+        method: 'DELETE',
+      });
 
       if (!response.ok) {
         // Handle non-ok response (e.g., server error)
@@ -80,9 +39,9 @@ export const deleteFile = createAsyncThunk<void, string>(
       // File deletion was successful
       const data = await response.text(); // Read as text
       console.log(data); // Log the response data if needed
-    } catch (error: any) {
+    } catch (error:any) {
       // Handle fetch errors or other errors
-      console.error("Error during file deletion:", error.message);
+      console.error('Error during file deletion:', error.message);
       throw new Error(`File deletion failed: ${error.message}`);
     }
   }
@@ -94,33 +53,33 @@ export const FileSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getFiles.pending, (state) => {
+      .addCase(getFilesById.pending, (state) => {
         state.loading = true;
         state.error = "";
       })
-      .addCase(getFiles.fulfilled, (state, action) => {
+      .addCase(getFilesById.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(getFiles.rejected, (state, action) => {
+      .addCase(getFilesById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "An error occurred";
       })
-      .addCase(saveDatesWithFile.pending, (state) => {
+      .addCase(saveFile.pending, (state) => {
         state.loading = true;
         state.error = "";
       })
-      .addCase(saveDatesWithFile.fulfilled, (state, action) => {
+      .addCase(saveFile.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload; // Assuming the payload is an array, update as needed
       })
-      .addCase(saveDatesWithFile.rejected, (state, action) => {
+      .addCase(saveFile.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "An error occurred";
       })
       .addCase(deleteFile.pending, (state) => {
         state.loading = true;
-        state.error = "";
+        state.error = '';
       })
       .addCase(deleteFile.fulfilled, (state) => {
         state.loading = false;
@@ -128,8 +87,7 @@ export const FileSlice = createSlice({
       })
       .addCase(deleteFile.rejected, (state, action) => {
         state.loading = false;
-        state.error =
-          action.error.message || "An error occurred during file deletion";
+        state.error = action.error.message || 'An error occurred during file deletion';
       });
   },
 });
