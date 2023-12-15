@@ -5,29 +5,41 @@ import { HorizontalDivider } from "../../../Components/Divider/horizontalDivider
 import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
 
 import Review from "../components/review";
-
-import { Events } from "../components/eventssection";
 import { ChangeEvent, useEffect, useState } from "react";
-
 import { RecommendedProjects } from "../components/recommendsection";
-
 import { ChatSection } from "../components/chatsection";
 import TeamMembersPage from "../components/teamSection";
-
-import { getIdeaByUserId } from "../../../services/api.services";
+import { EventSection } from "../components/eventSection";
+import { useSelector } from "react-redux";
+import {
+  fetchProjectByUserId,
+  getHomePageStatus,
+  selectHomePage,
+} from "../homepageSlice";
+import { useAppDispatch } from "../../../app/hook";
 export interface IHomePage {
   title: string;
   _id: string;
 }
 
 export function HomePage() {
+  const dispatch = useAppDispatch();
   const [mygrouplist, setmygroupList] = useState<Array<IHomePage>>([]);
-
+  const homePageStatus = useSelector(getHomePageStatus);
+  const data = useSelector(selectHomePage);
+  const [currentstatus, setCurrentStatus] = useState<string>();
   useEffect(() => {
-    getIdeaByUserId().then((data) => {
-      setmygroupList(data["data"]);
-    });
-  }, []);
+    if (homePageStatus === "idle") {
+      dispatch(fetchProjectByUserId());
+    } else if (homePageStatus == "loading") {
+      setCurrentStatus("Loading");
+    } else if (homePageStatus == "succeeded") {
+      setmygroupList(data);
+      setCurrentStatus("No Data");
+    } else if (homePageStatus == "failed") {
+      setCurrentStatus("Error Fetching");
+    }
+  }, [homePageStatus, dispatch]);
 
   const [currentSection, setcurrentsection] = useState(<RecommendedProjects />);
   const handledeitemClick = (section: string, id: string) => {
@@ -70,7 +82,7 @@ export function HomePage() {
         ></SideBar>
         <VerticalDivider />
         {currentSection}
-        <Events></Events>
+        <EventSection />
       </div>
       <Review />
     </div>

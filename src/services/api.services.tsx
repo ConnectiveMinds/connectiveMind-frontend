@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import {
+  geteventsbyuserid,
   acceptrequest,
   crudchat,
   declinerequest,
@@ -20,7 +21,12 @@ import {
   verifyotp,
 } from "../utils/apiroutes";
 
-export const api = axios.create({ baseURL: `${host}/api` });
+export const api = axios.create({
+  baseURL: `${host}/api`,
+  headers: {
+    "Content-type": "application/json",
+  },
+});
 
 // Add a request interceptor
 api.interceptors.request.use(
@@ -274,3 +280,22 @@ export const getReviews = async () => {
     throw new Error(e);
   }
 };
+
+//*************************************************calendar Service************************************************************ */
+const getEventsByUserId = async () => {
+  try {
+    const response = await api.get(geteventsbyuserid);
+    return response.data;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
+const apiService = {
+  getEventsByUserId,
+
+  getIdeaByUserId,
+  getIdeaByProjectId,
+  getIncomingRequest,
+};
+
+export default apiService;
