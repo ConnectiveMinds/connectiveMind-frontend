@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import {
+  geteventsbyuserid,
   acceptrequest,
   crudchat,
   declinerequest,
@@ -25,7 +26,12 @@ import {
 } from "../utils/apiroutes";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const api = axios.create({ baseURL: `${host}/api` });
+export const api = axios.create({
+  baseURL: `${host}/api`,
+  headers: {
+    "Content-type": "application/json",
+  },
+});
 
 // Add a request interceptor
 api.interceptors.request.use(
@@ -280,6 +286,24 @@ export const getReviews = async () => {
   }
 };
 
+//*************************************************calendar Service************************************************************ */
+const getEventsByUserId = async () => {
+  try {
+    const response = await api.get(geteventsbyuserid);
+    return response.data;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
+const apiService = {
+  getEventsByUserId,
+
+  getIdeaByUserId,
+  getIdeaByProjectId,
+  getIncomingRequest,
+};
+
+export default apiService;
 //files//
 export const getFilesById = createAsyncThunk(
   "file/fetch",
@@ -330,27 +354,24 @@ export const saveFile = createAsyncThunk(
 
 //calendar//
 
-export const fetchdates = createAsyncThunk(
-  "date/fetch",
-  async (id: string) => {
-    try {
-      // Use the axios instance to make the GET request
-      const url = getdates + id;
-      const response = await api.get(url);
+export const fetchdates = createAsyncThunk("date/fetch", async (id: string) => {
+  try {
+    // Use the axios instance to make the GET request
+    const url = getdates + id;
+    const response = await api.get(url);
 
-      // Check if the response is ok
-      if (response.status !== 200) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse and return the response data
-      return response.data;
-    } catch (error: any) {
-      // Handle errors
-      throw new Error(`An error occurred: ${error.message}`);
+    // Check if the response is ok
+    if (response.status !== 200) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
+
+    // Parse and return the response data
+    return response.data;
+  } catch (error: any) {
+    // Handle errors
+    throw new Error(`An error occurred: ${error.message}`);
   }
-);
+});
 
 export const saveDates = createAsyncThunk(
   "date/saveDates",
@@ -364,8 +385,7 @@ export const saveDates = createAsyncThunk(
         start: Date;
         end: Date;
         assigned_id: string[];
-        isOwner: boolean
-        
+        isOwner: boolean;
       };
       projectId: string;
     },

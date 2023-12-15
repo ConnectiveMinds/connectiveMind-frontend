@@ -5,6 +5,7 @@ import { setupListeners } from "@reduxjs/toolkit/query/react";
 import dateReducer from "../features/Calendar/components/calendarSlice";
 import fileReducer from "../features/File/components/uploadSlice";
 import authReducer from "../features/Auth/components/authSlice";
+import homepageReducer from "../features/HomePage/homepageSlice";
 // import { dateApi } from "../services/calendarApi";
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     dates: dateReducer,
     files: fileReducer,
+    homepage: homepageReducer,
     // [dateApi.reducerPath]:dateApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
