@@ -1,6 +1,9 @@
-import {  createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../../app/store";
-import apiService, {  fetchdates, saveDates } from "../../../services/api.services";
+import apiService, {
+  fetchdates,
+  saveDates,
+} from "../../../services/api.services";
 import { IEventCard } from "../../../Components/Cards/events_card";
 
 // type Event = {
@@ -13,7 +16,7 @@ import { IEventCard } from "../../../Components/Cards/events_card";
 
 interface EventState {
   dates: Array<IEventCard>;
-  status: "idle" | "loading" | "succeeded" | "failed"; // Change "fulfilled" to "succeeded"
+  status: "idle" | "loading" | "succeeded" | "failed" | "eventfetchedbyid"; // Change "fulfilled" to "succeeded"
   error: string;
 }
 
@@ -35,30 +38,31 @@ export const fetchEventByUserId = createAsyncThunk(
   "event/fetchbyid",
   async () => {
     const response = await apiService.getEventsByUserId();
+
     return response.data;
   }
 );
 
-export const saveDates = createAsyncThunk(
-  "date/save",
-  async (body: {
-    userid: string;
-    title: string;
-    start: Date;
-    allDay: boolean;
-    end: Date;
-  }) => {
-    try {
-      const response = await fetch(
-        "http://localhost:3000/api/calendar/create",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }
-      );
+// export const saveDates = createAsyncThunk(
+//   "date/save",
+//   async (body: {
+//     userid: string;
+//     title: string;
+//     start: Date;
+//     allDay: boolean;
+//     end: Date;
+//   }) => {
+//     try {
+//       const response = await fetch(
+//         "http://localhost:3000/api/calendar/create",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify(body),
+//         }
+//       );
 
 //       if (!response.ok) {
 //         // Handle non-successful response (e.g., 4xx or 5xx status codes)
@@ -98,7 +102,7 @@ export const EventSlice = createSlice({
         state.error = action.error.message || "An error occurred";
       })
       .addCase(fetchEventByUserId.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = "eventfetchedbyid";
         state.dates = action.payload;
       })
       .addCase(fetchEventByUserId.pending, (state) => {

@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import { IHomePage } from "../../features/HomePage/pages/HomePage";
+import { IProject } from "../../features/HomePage/Interface";
 interface ISideBarItems {
   text: string;
   icons?: ReactNode;
@@ -146,6 +146,7 @@ export function SideBarButtons(props: ISideBarButtons) {
           {buttons.map((button) => {
             return (
               <SideBarItems
+                key={button.text}
                 icons={button.icons}
                 text={button.text}
                 onClick={(section) => props.onClick(section, props.id)}
@@ -160,7 +161,7 @@ export function SideBarButtons(props: ISideBarButtons) {
   );
 }
 interface ISideBar {
-  groups: IHomePage[];
+  groups: IProject[];
   onClick?: (section: string, projectId: string) => void;
 }
 export function SideBar(props: ISideBar) {
@@ -169,7 +170,7 @@ export function SideBar(props: ISideBar) {
       <li>
         <SideBarButtons
           key={item._id}
-          text={item.title}
+          text={item.title!}
           id={item._id}
           onClick={(section, projectid) => {
             props.onClick!(section, projectid);

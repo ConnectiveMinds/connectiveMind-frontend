@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useAppDispatch } from "../app/hook";
 import { IMember } from "../features/HomePage/Interface";
 import { getIdeaByProjectId, saveDates } from "../services/api.services";
+import { fetchEventByUserId } from "../features/Calendar/components/calendarSlice";
 
 // import { useSelector } from "react-redux";
 // import { useNavigate } from "react-router";
@@ -28,8 +29,8 @@ export const EventForm = ({ _id }) => {
   };
   const [idea, setIdea] = useState<IMember>();
   const [FormValue, setFormValue] = useState(initialState);
-  const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
-  const { title, start, end,assigned } = FormValue;
+  const [selectedMembers, setSelectedMembers] = useState<Array<string>>([]);
+  const { title, start, end, assigned } = FormValue;
   useEffect(() => {
     getIdeaByProjectId(_id).then((data) => {
       setIdea(data.data);
@@ -54,8 +55,7 @@ export const EventForm = ({ _id }) => {
       (option) => option.value
     );
     setSelectedMembers(selectedOptions);
-    console.log(selectedMembers);
-    setFormValue({ ...FormValue, assigned: selectedMembers });
+    setFormValue({ ...FormValue, assigned: selectedOptions });
   };
 
   const handleSubmit = (e: SyntheticEvent) => {
@@ -63,17 +63,23 @@ export const EventForm = ({ _id }) => {
 
     dispatch(
       saveDates({
-        body: { title: title, start: start, end: end,assigned_id:assigned,isOwner:true },
+        body: {
+          title: title,
+          start: start,
+          end: end,
+          assigned_id: assigned,
+          isOwner: true,
+        },
         projectId: _id,
       })
     )
       .then((resultAction) => {
         if (saveDates.fulfilled.match(resultAction)) {
           // Handle success (if needed)
-          console.log("Event saved successfully");
+
           setFormValue(initialState);
           toast.success("Event added Successfully");
-         
+          dispatch(fetchEventByUserId());
         } else if (saveDates.rejected.match(resultAction)) {
           // Handle rejection (if needed)
           console.log(resultAction.error.message);
@@ -115,7 +121,7 @@ export const EventForm = ({ _id }) => {
       </div>
       <div className="mb-5">
         <p className="block mb-2 text-lg font-medium text-gray-900">End</p>
-        <input  
+        <input
           type="datetime-local"
           name="end"
           // value={end.toISOString().slice(0, 16)}

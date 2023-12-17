@@ -22,7 +22,7 @@ export function UpcomingEvents() {
       dispatch(fetchEventByUserId());
     } else if (eventStatus == "loading") {
       setCurrentStatus("Loading");
-    } else if (eventStatus == "succeeded") {
+    } else if (eventStatus == "eventfetchedbyid") {
       setUpcomningEventList(events);
       setCurrentStatus("No Upcoming Request");
     } else if (eventStatus == "failed") {
@@ -46,7 +46,7 @@ export function UpcomingEvents() {
                   key={event._id}
                   _id={event._id}
                   title={event.title}
-                  start={""}
+                  start={event.start}
                   projectid={event.projectid}
                   end={""}
                 />
