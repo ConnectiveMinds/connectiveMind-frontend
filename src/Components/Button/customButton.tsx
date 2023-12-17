@@ -15,7 +15,7 @@ export function CustomButton(props: IButton) {
     <div>
       <button
         style={buttonStyle}
-        className={`text-purple-800  hover:bg-purple-800 hover:text-white text-xs bg-white rounded-[10px] border-2 border-purple-800`}
+        className={`text-purple-800   hover:bg-purple-800 hover:text-white text-xs bg-white rounded-[10px] border-2 border-purple-800`}
         onClick={props.onClick}
       >
         {props.text}

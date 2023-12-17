@@ -68,6 +68,7 @@ const Login = () => {
     if (isLoginSuccess) {
       toast.success("User Login successfully");
       dispatch(setUser({ user: loginData.data }));
+
       navigate("/home");
     }
   }, [isLoginSuccess]);
