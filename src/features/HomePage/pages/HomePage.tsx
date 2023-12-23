@@ -5,33 +5,46 @@ import { HorizontalDivider } from "../../../Components/Divider/horizontalDivider
 import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
 
 import Review from "../components/review";
-
-import { Events } from "../components/eventssection";
 import { ChangeEvent, useEffect, useState } from "react";
-
 import { RecommendedProjects } from "../components/recommendsection";
-
 import { ChatSection } from "../components/chatsection";
 import TeamMembersPage from "../components/teamSection";
-
-import { getIdeaByUserId } from "../../../services/api.services";
+import { EventSection } from "../components/eventSection";
+import { useSelector } from "react-redux";
+import {
+  fetchProjectByProjectId,
+  fetchProjectByUserId,
+  getIdeaStatus,
+  selectIdea,
+} from "../ideaSlice";
+import { useAppDispatch } from "../../../app/hook";
 import { FilePage } from "../../../Pages/FilePage";
-// import Upload from "../../../Components/upload";
-import { MyCalendar } from "../../../Components/calendar";
+
 import { EventForm } from "../../../Components/eventform";
+import { IProject } from "../Interface";
 export interface IHomePage {
   title: string;
   _id: string;
 }
 
 export function HomePage() {
-  const [mygrouplist, setmygroupList] = useState<Array<IHomePage>>([]);
-
+  const dispatch = useAppDispatch();
+  const [mygrouplist, setmygroupList] = useState<Array<IProject>>([]);
+  const homePageStatus = useSelector(getIdeaStatus);
+  const data = useSelector(selectIdea);
+  const [currentstatus, setCurrentStatus] = useState<string>();
   useEffect(() => {
-    getIdeaByUserId().then((data) => {
-      setmygroupList(data["data"]);
-    });
-  }, []);
+    if (homePageStatus === "idle") {
+      dispatch(fetchProjectByUserId());
+    } else if (homePageStatus == "loading") {
+      setCurrentStatus("Loading");
+    } else if (homePageStatus == "mygroupfetched") {
+      setmygroupList(data);
+      setCurrentStatus("No Data");
+    } else if (homePageStatus == "failed") {
+      setCurrentStatus("Error Fetching");
+    }
+  }, [homePageStatus, dispatch]);
 
   const [currentSection, setcurrentsection] = useState(<RecommendedProjects />);
   const handledeitemClick = (section: string, id: string) => {
@@ -40,15 +53,13 @@ export function HomePage() {
         setcurrentsection(<ChatSection projectId={id} />);
         break;
       case "Project Timeline":
-        setcurrentsection(<EventForm _id={id}/>)
-        // setcurrentsection(<MyCalendar _id={id}/>)
-        // setcurrentsection(<Upload _id={id}/>);
+        setcurrentsection(<EventForm _id={id} />);
         break;
       case "Team":
         setcurrentsection(<TeamMembersPage _id={id} />);
         break;
       case "Resources":
-        setcurrentsection(<FilePage _id={id}/>)
+        setcurrentsection(<FilePage _id={id} />);
         break;
       default:
         setcurrentsection(<RecommendedProjects />);
@@ -77,7 +88,7 @@ export function HomePage() {
         ></SideBar>
         <VerticalDivider />
         {currentSection}
-        <Events></Events>
+        <EventSection />
       </div>
       <Review />
     </div>
