@@ -42,6 +42,7 @@ api.interceptors.request.use(
       return config;
     } else {
       const user = JSON.parse(localStorage.getItem("user")!);
+
       if (user != null) {
         config.headers.Authorization = `Bearer ${user.data.token}`;
       }
@@ -296,8 +297,9 @@ const getEventsByUserId = async () => {
   }
 };
 const apiService = {
+  createGroup,
   getEventsByUserId,
-
+  getAllProjects,
   getIdeaByUserId,
   getIdeaByProjectId,
   getIncomingRequest,
@@ -393,15 +395,13 @@ export const saveDates = createAsyncThunk(
   ) => {
     try {
       const url = postdates + projectId;
-      console.log(url);
+      console.log(body);
       const response = await api.post(url, body);
 
       if (response.status !== 200) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      // Assuming the response.data is already a JSON object
-      // If not, you might need to parse it based on your server response
       return response.data;
     } catch (error: any) {
       // Here you can access the error message directly

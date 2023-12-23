@@ -5,6 +5,10 @@ export interface IProject {
   _id: string;
   title?: string;
   ownerId?: string;
+  description?: string;
+  members?: IUser[];
+  joinRequest?: IUser[];
+  skills?: string[];
 }
 export interface IUser {
   _id: string;

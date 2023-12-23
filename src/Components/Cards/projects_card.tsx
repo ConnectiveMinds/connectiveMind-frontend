@@ -12,6 +12,7 @@ export interface IProjectCard {
 export function ProjectCard(props: IProjectCard) {
   const handleClick = async () => {
     try {
+      console.log("actual", props._id);
       await updatejoinRequest(props._id).then(async () => {});
       alert("Request sent");
     } catch (e: any) {
@@ -28,15 +29,15 @@ export function ProjectCard(props: IProjectCard) {
   });
 
   return (
-    <div className=" max-h-fit bg-white rounded-[10px] border-2 border-zinc-300">
+    <div className="max-h-fit bg-white rounded-[10px] border-2 border-zinc-300">
       <div className="p-4">
         <div className="flex flex-row justify-between items-center">
-          <div className="h-7 text-black text-2xl font-normal font-['Inria Serif'] ">
+          <div className=" text-black text-2xl font-normal font-['Inria Serif'] ">
             <p>{props.title}</p>
           </div>
           <CustomButton
             text="Join"
-            height={7}
+            height={3}
             width={12}
             onClick={handleClick}
           ></CustomButton>

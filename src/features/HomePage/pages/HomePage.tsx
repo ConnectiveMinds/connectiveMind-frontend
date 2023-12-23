@@ -12,17 +12,16 @@ import TeamMembersPage from "../components/teamSection";
 import { EventSection } from "../components/eventSection";
 import { useSelector } from "react-redux";
 import {
+  fetchProjectByProjectId,
   fetchProjectByUserId,
-  getHomePageStatus,
-  selectHomePage,
-} from "../homepageSlice";
+  getIdeaStatus,
+  selectIdea,
+} from "../ideaSlice";
 import { useAppDispatch } from "../../../app/hook";
-
-import { getIdeaByUserId } from "../../../services/api.services";
 import { FilePage } from "../../../Pages/FilePage";
-// import Upload from "../../../Components/upload";
-import { MyCalendar } from "../../../Components/calendar";
+
 import { EventForm } from "../../../Components/eventform";
+import { IProject } from "../Interface";
 export interface IHomePage {
   title: string;
   _id: string;
@@ -30,16 +29,16 @@ export interface IHomePage {
 
 export function HomePage() {
   const dispatch = useAppDispatch();
-  const [mygrouplist, setmygroupList] = useState<Array<IHomePage>>([]);
-  const homePageStatus = useSelector(getHomePageStatus);
-  const data = useSelector(selectHomePage);
+  const [mygrouplist, setmygroupList] = useState<Array<IProject>>([]);
+  const homePageStatus = useSelector(getIdeaStatus);
+  const data = useSelector(selectIdea);
   const [currentstatus, setCurrentStatus] = useState<string>();
   useEffect(() => {
     if (homePageStatus === "idle") {
       dispatch(fetchProjectByUserId());
     } else if (homePageStatus == "loading") {
       setCurrentStatus("Loading");
-    } else if (homePageStatus == "succeeded") {
+    } else if (homePageStatus == "mygroupfetched") {
       setmygroupList(data);
       setCurrentStatus("No Data");
     } else if (homePageStatus == "failed") {
@@ -55,8 +54,6 @@ export function HomePage() {
         break;
       case "Project Timeline":
         setcurrentsection(<EventForm _id={id} />);
-        // setcurrentsection(<MyCalendar _id={id}/>)
-        // setcurrentsection(<Upload _id={id}/>);
         break;
       case "Team":
         setcurrentsection(<TeamMembersPage _id={id} />);

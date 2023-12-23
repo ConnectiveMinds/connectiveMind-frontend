@@ -1,28 +1,37 @@
 import { useState, useEffect } from "react";
-import {
-  IProjectCard,
-  ProjectCard,
-} from "../../../Components/Cards/projects_card";
-import { getAllProjects } from "../../../services/api.services";
+import { ProjectCard } from "../../../Components/Cards/projects_card";
+import { fetchallproject, getIdeaStatus, selectIdea } from "../ideaSlice";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../../app/hook";
+import { IProject } from "../Interface";
 
 export function RecommendedProjects() {
-  const [allideaslist, setallgrouplist] = useState<Array<IProjectCard>>([]);
+  const dispatch = useAppDispatch();
+  const [allideaslist, setallgrouplist] = useState<Array<IProject>>([]);
+  const currentdata = useSelector(selectIdea);
+  const ideaStatus = useSelector(getIdeaStatus);
   useEffect(() => {
-    getAllProjects().then((data) => {
-      setallgrouplist(data["data"]);
-    });
-  }, []);
+    if (ideaStatus === "idle") {
+      dispatch(fetchallproject());
+    } else if (ideaStatus == "loading") {
+      console.log("Error");
+    } else if (ideaStatus == "allgroupfetched") {
+      setallgrouplist(currentdata);
+    } else if (ideaStatus == "failed") {
+      console.log("Error");
+    }
+  }, [dispatch, currentdata]);
 
   const projectlist = allideaslist.map((project) => {
     return (
       <li className="mt-4">
         <ProjectCard
           key={project._id}
-          ownerId={project.ownerId}
+          ownerId={project.ownerId!}
           _id={project._id}
-          title={project.title}
-          description={project.description}
-          skills={project.skills}
+          title={project.title!}
+          description={project.description!}
+          skills={project.skills!}
         ></ProjectCard>
       </li>
     );

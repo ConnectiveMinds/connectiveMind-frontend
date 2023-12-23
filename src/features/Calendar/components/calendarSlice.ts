@@ -10,7 +10,7 @@ import { IEventCard } from "../../../Components/Cards/events_card";
 
 interface EventState {
   dates: Array<IEventCard>;
-  status: "idle" | "loading" | "succeeded" | "failed"; // Change "fulfilled" to "succeeded"
+  status: "idle" | "loading" | "succeeded" | "failed" | "eventfetchedbyid"; // Change "fulfilled" to "succeeded"
   error: string;
 }
 
@@ -26,6 +26,7 @@ export const fetchEventByUserId = createAsyncThunk(
   "event/fetchbyid",
   async () => {
     const response = await apiService.getEventsByUserId();
+
     return response.data;
   }
 );
@@ -56,7 +57,7 @@ export const EventSlice = createSlice({
         state.error = action.error.message || "An error occurred";
       })
       .addCase(fetchEventByUserId.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = "eventfetchedbyid";
         state.dates = action.payload;
       })
       .addCase(fetchEventByUserId.pending, (state) => {
