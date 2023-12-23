@@ -8,8 +8,9 @@ export interface IEventCard {
   start: string;
   end: string;
 }
+
 export function EventCard(props: IEventCard) {
-  const [starttimeRemaining, setstartTimeRemaining] = useState(
+  const [starttimeRemaining, setStartTimeRemaining] = useState(
     calculateTimeRemaining()
   );
 
@@ -32,6 +33,7 @@ export function EventCard(props: IEventCard) {
         seconds: 0,
         isStarted: false,
         isPassed: true,
+        timerColor: "blue",
       };
     }
 
@@ -42,32 +44,49 @@ export function EventCard(props: IEventCard) {
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    return { days, hours, minutes, seconds, isStarted: false, isPassed: false };
+    const getTimerColor = (): string => {
+      if (seconds <= 0 && minutes <= 0 && hours <= 0) {
+        return "red";
+      } else if (minutes <= 30) {
+        return "green";
+      } else {
+        return "blue";
+      }
+    };
+    const timerColor = getTimerColor();
+
+    return { days, hours, minutes, seconds, isStarted: false, isPassed: false, timerColor };
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setstartTimeRemaining(calculateTimeRemaining());
+      setStartTimeRemaining(calculateTimeRemaining());
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
-  const { days, hours, minutes, seconds, isStarted, isPassed } =
-    starttimeRemaining;
+
+  const { days, hours, minutes, seconds, isStarted, isPassed, timerColor } = starttimeRemaining;
 
   return (
-    <div className="  relative h-18 bg-zinc-300 rounded-lg mr-4 mt-4 flex flex-col justify-between text-black text-xl font-normal font-['Inter']">
-      <p className="ml-2 mt-2 overflow-x-clip overflow-y-clip">{props.title}</p>
-      <p>Project:{props.projectid.title}</p>
-      <p className="ml-4 mt-2 mr-4 overflow-x-clip overflow-y-clip">
+    <div
+      className={`relative h-18 bg-white rounded-lg mr-4 mt-4 flex flex-col justify-between text-black text-xl font-normal font-['Inter'] 
+                  shadow-md transition-transform duration-300 transform hover:translate-y-[-4px]`}
+    >
+      <div
+        className={`absolute top-2 right-2 h-4 w-4 rounded-full bg-${timerColor}-500`}
+      ></div>
+      <p className="ml-3 mt-2 mb-4 overflow-x-clip overflow-y-clip">{props.title}</p>
+      <p className="ml-3 mt-2 overflow-x-clip overflow-y-clip">Project: {props.projectid.title}</p>
+      <p className="ml-4 mt-2 mr-4 mb-2 overflow-x-clip overflow-y-clip">
         {isStarted && !isPassed ? "Ends In: " : isPassed ? null : "In: "}
-        {days != 0
-          ? `${days}Days`
-          : hours != 0
+        {days !== 0
+          ? `${days} Days`
+          : hours !== 0
           ? `${hours} hrs`
-          : minutes != 0
+          : minutes !== 0
           ? ` ${minutes} min`
-          : seconds != 0
+          : seconds !== 0
           ? ` ${seconds} secs`
           : null}
       </p>
