@@ -25,7 +25,7 @@ const Carousel = () => {
   };
   return (
     <div className="flex justify-center mt-20">
-      <div className=" max-h-32 overflow-hidden inline-block border-t-2 border-b-2 w-[40ch] p-2">
+      <div className=" max-h-32 overflow-hidden inline-block border-t-2 border-b-2 w-[80ch] p-2">
         <Slider {...settings} className="overflow-hidden">
           {allGroups.map((d: any) => (
             <div className="bg-white">
@@ -33,7 +33,7 @@ const Carousel = () => {
                 {d.title}
               </h2>
               <p>{d.description}</p>
-              <button className="top-8">...read more</button>
+              
             </div>
           ))}
         </Slider>
