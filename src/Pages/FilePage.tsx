@@ -1,12 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hook";
-import { deleteFile,  } from "../features/File/components/uploadSlice";
+import { deleteFile } from "../features/File/components/uploadSlice";
 import { IoMdDownload } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { getFilesById } from "../services/api.services";
+import Upload from "../Components/upload";
+import { HiOutlineUpload } from "react-icons/hi";
 // import { Link } from "react-router-dom";
 
 export function FilePage({ _id }) {
+  const [showUpload, SetShowUpload] = useState(false);
   const { data, loading, error } = useAppSelector((state) => state.files);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -50,12 +53,34 @@ export function FilePage({ _id }) {
     }
   };
   return (
-    <div>
-      <div className="relative overflow-x-auto">
+    <div className="w-full ">
+      <div className="flex justify-end mx-4 my-4">
+      <button
+        type="button"
+        className="text-white bg-purple-500 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-md px-4 py-2.5 text-center flex flex-row justify-center  items-center me-2 gap-2"
+
+        onClick={() => {
+          SetShowUpload(true);
+        }}
+      >
+        <HiOutlineUpload />
+        <p>Upload</p>
+      </button>
+      </div>
+      {/* {showUpload && (
+        <Upload
+          _id={_id}
+          onClose={() => {
+            SetShowUpload(false);
+          }}
+        />
+      )} */}
+
+      <div className={`overflow-x-auto w-full ${showUpload ? "" : "relative"}`}>
         {loading && <p>Loading...</p>}
 
         {!loading && data.length > 0 && (
-          <table className="w-full text-lg text-left rtl:text-right text-gray-500 ">
+          <table className="w-full text-lg text-left rtl:text-right text-gray-500  ">
             <thead className=" text-gray-700 uppercase bg-gray-50 ">
               <tr>
                 <th scope="col" className="px-6 py-3">

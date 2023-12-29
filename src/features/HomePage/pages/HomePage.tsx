@@ -22,6 +22,11 @@ import { FilePage } from "../../../Pages/FilePage";
 
 import { EventForm } from "../../../Components/eventform";
 import { IProject } from "../Interface";
+import { MyCalendar } from "../../../Components/calendar";
+import Upload from "../../../Components/upload";
+import { SmallCalendar } from "../../../Components/smallCalendar";
+import Calendar from "react-calendar";
+
 export interface IHomePage {
   title: string;
   _id: string;
@@ -53,13 +58,15 @@ export function HomePage() {
         setcurrentsection(<ChatSection projectId={id} />);
         break;
       case "Project Timeline":
-        setcurrentsection(<EventForm _id={id} />);
+        // setcurrentsection(<MyCalendar _id={id}/>);
+        setcurrentsection(<Calendar/>)
         break;
       case "Team":
         setcurrentsection(<TeamMembersPage _id={id} />);
         break;
       case "Resources":
-        setcurrentsection(<FilePage _id={id} />);
+        // setcurrentsection(<FilePage _id={id} />);
+        setcurrentsection(<Upload _id={id}  />);
         break;
       default:
         setcurrentsection(<RecommendedProjects />);

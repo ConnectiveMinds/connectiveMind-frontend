@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { NavBar } from "../Components/NavBar/navbar";
 
 interface ProfilePageProps {
-  // You can add more specific props if needed
 }
 
 const ProfilePage: React.FC<ProfilePageProps> = () => {
@@ -15,12 +15,11 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
     profilePicture: "https://placekitten.com/200/200",
   });
 
-  // State for form inputs
   const [formValues, setFormValues] = useState({
     skills: profile.skills.join(", "),
   });
 
-  // Handle skills input changes
+
   const handleSkillsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setFormValues({
       ...formValues,
@@ -28,7 +27,7 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
     });
   };
 
-  // Handle profile picture update
+
   const handleUpdatePicture = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
@@ -45,13 +44,23 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="bg-white p-6 rounded-lg shadow-md md:w-96 md:h-96">
+    <div>
+    <NavBar
+      isHomePage={false}
+      isLandingpage={false}
+      name={""}
+      error={false}
+      onChange={function (): void {
+        throw new Error("Function not implemented.");
+      }}
+    />
+    <div className="flex items-center justify-center h-full bg-white">
+      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
         <label htmlFor="profilePicture" className="block cursor-pointer">
           <img
             src={profile.profilePicture}
             alt="Profile"
-            className="w-20 h-20 rounded-full mx-auto"
+            className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-white"
           />
           <input
             id="profilePicture"
@@ -61,9 +70,9 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
             onChange={handleUpdatePicture}
           />
         </label>
-        <div className="text-center mt-4">
-          <h1 className="text-2xl font-bold">{profile.name}</h1>
-          <p className="text-gray-500">{profile.email}</p>
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-2">{profile.name}</h1>
+          <p className="text-gray-500 mb-2">{profile.email}</p>
           <p className="text-gray-500">{profile.address}</p>
         </div>
 
@@ -88,6 +97,7 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
         </button>
       </div>
     </div>
+  </div>
   );
 };
 
