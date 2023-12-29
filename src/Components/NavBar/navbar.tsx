@@ -20,7 +20,7 @@ export function NavBar(props: INavBarProps) {
   return (
     <nav className="flex justify-between items-center p-2">
       <div className="flex items-center">
-        <Link to="Home">
+        <Link to="../Home">
           <img
             className="w-8 md:w-16 lg:w-32 ml-4 md:ml-8 lg:ml-12 h-8 md:h-16 lg:h-28"
             src="src/Data/Connective 1.png"
@@ -103,9 +103,9 @@ export function NavBar(props: INavBarProps) {
         )}
 
         {!props.isLandingpage && (
-          <div className="hidden md:block w-4 md:w-12 lg:w-20 ml-4 md:ml-8 lg:ml-12 h-4 md:h-12 lg:h-20 mt-3 rounded-full bg-gray-400 item-center text-ellipsis text-center">
-            <div>Me</div>
-          </div>
+          <Link to="../Profile">
+          <img src="public\avatar.png" className="h-4 md:h-8 lg:h-12 rounded-full"/>
+          </Link>
         )}
       </div>
     </nav>

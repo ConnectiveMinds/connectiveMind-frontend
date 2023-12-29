@@ -33,7 +33,7 @@ export function EventCard(props: IEventCard) {
         seconds: 0,
         isStarted: false,
         isPassed: true,
-        timerColor: "blue",
+        timerColor: "red",
       };
     }
 
@@ -70,7 +70,7 @@ export function EventCard(props: IEventCard) {
 
   return (
     <div
-      className={`relative h-18 bg-white rounded-lg mr-4 mt-4 flex flex-col justify-between text-black text-xl font-normal font-['Inter'] 
+      className={`relative h-15 bg-white rounded-lg mr-4 mt-4 flex flex-col justify-between text-black text-xl font-normal font-['Inter'] 
                   shadow-md transition-transform duration-300 transform hover:translate-y-[-4px]`}
     >
       <div

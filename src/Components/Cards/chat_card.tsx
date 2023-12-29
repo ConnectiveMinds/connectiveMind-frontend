@@ -12,18 +12,19 @@ export function ChatCard(props: IChatCard) {
     <div className={sender}>
       <div
         className={
-          "mt-4  h-4 md:h-10 lg:h-14 rounded-full  text-center" + bgcolor
+          "mt-3  h-4 md:h-8 lg:h-12 rounded-full  text-center" + bgcolor
         }
       >
-        <img src={`data:image/svg+xml;base64,${props.avatar}`} alt="Image" />
+        <img src="public\avatar.png" className="h-4 md:h-8 lg:h-12 rounded-full"/>
+        {/* <img src={`data:image/svg+xml;base64,${props.avatar}`} alt="img"   /> */}
       </div>
-      <div className="mt-2 ml-6 mr-6 flex-1 ">
-        <p className=" text-white text-sm">
+      <div className="mt-1 ml-6 mr-6 flex-1 ">
+        <p className=" text-black text-sm">
           {props.issender ? "" : props.name}
         </p>
         <div
           className={
-            "p-2 break-normal rounded-lg max-h-fit font-normal w-[75%]" +
+            " mt-1 p-2 break-normal rounded-lg max-h-fit font-normal w-[75%]" +
             (props.issender ? " ml-auto text-white" : " mr-auto") +
             bgcolor
           }
