@@ -8,6 +8,7 @@ type File = {
   secure_url: string;
   format: string;
   sizeInByte: string;
+  project_id:string
 };
 
 interface FileState {

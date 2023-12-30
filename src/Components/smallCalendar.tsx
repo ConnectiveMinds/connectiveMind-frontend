@@ -6,12 +6,15 @@ import {
   selectEvents,
 } from "../features/Calendar/components/calendarSlice";
 import { useAppDispatch } from "../app/hook";
-import "react-calendar/dist/Calendar.css";
-import { MyCalendar } from "./calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
-export const SmallCalendar = ({id}) => {
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+
+const localizer = momentLocalizer(moment);
+export const SmallCalendar = () => {
   const dispatch = useAppDispatch();
- 
+
   const dates = useSelector(selectEvents);
   const dateValues = dates.map((event) => new Date(event.start));
 
@@ -20,17 +23,24 @@ export const SmallCalendar = ({id}) => {
     dispatch(fetchEventByUserId());
   }, [dispatch]);
 
-
-
-  const formattedDateValues = dateValues.map((date) => date.toISOString().split('T')[0]);
-  const dateObjects = formattedDateValues.map((dateString) => new Date(dateString));
+  const formattedDateValues = dateValues.map(
+    (date) => date.toISOString().split("T")[0]
+  );
+  const dateObjects = formattedDateValues.map(
+    (dateString) => new Date(dateString)
+  );
   console.log(dateObjects);
 
   return (
     <div className="w-full">
-      <div className="w-1/3 h-1/3">
-      <MyCalendar _id={id}/>
-      </div>
+      <Calendar
+        localizer={localizer}
+        events={dates}
+        defaultView="month"
+        view="month"
+        views={["month"]}
+        style={{ height: 400, width: 300 }}
+      />
     </div>
   );
 };

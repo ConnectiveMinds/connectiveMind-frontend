@@ -5,6 +5,7 @@ export interface IFile {
   sizeInBytes: number;
   format: string;
   id?: string;
+  
 }
 
 export const RenderFile: FunctionComponent<{
