@@ -42,9 +42,9 @@ export function ProjectCard(props: IProjectCard) {
             onClick={handleClick}
           ></CustomButton>
         </div>
-        <div className="max-w-full max-h-fit bg-gray-50 rounded-lg relative mt-4 p-4 text-black text-base font-normal font-['Inria Serif'] tracking-tight">
+        <div className="max-h-fit max-w-full bg-gray-50 rounded-lg relative mt-4 p-4 text-black text-base font-normal font-['Inria Serif'] tracking-tight">
           <p>{props.description}</p>
-          <div className=" mt-4 flex flex-row items-center">
+          <div className=" mt-4 max-w-full flex flex-row items-center">
             <p>Skills Required: </p>
             <ul className="flex flex-row">{skilllist}</ul>
           </div>
