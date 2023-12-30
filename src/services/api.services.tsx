@@ -23,6 +23,9 @@ import {
   postFiles,
   getdates,
   postdates,
+  createprofile,
+  getprofile,
+  updateprofile,
 } from "../utils/apiroutes";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -86,9 +89,9 @@ export const signUp = async (
       email: email,
       password: password,
       status: "open",
-      gender: "M",
+      // gender: "M",
       phoneNo: phoneNo,
-      address: "afnfsnn",
+      // address: "afnfsnn",
     });
     console.log(response.data);
     return response.data;
@@ -414,3 +417,47 @@ export const saveDates = createAsyncThunk(
     }
   }
 );
+
+//*************************************************profile Service************************************************************ */
+export const createProfile = async () => {
+  try {
+    const response = await api.post(createprofile, {
+      status: open,
+    });
+    return response.data;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
+
+export const updateProfile = async (
+  name: string,
+  address: string,
+  gender: string,
+  institution: string,
+  about: string
+) => {
+  try {
+    const response = await api.patch(updateprofile, {
+      name: name,
+      address: address,
+      gender: gender,
+      institution: institution,
+      about: about,
+      status: open,
+    });
+    return response.data;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
+
+export const getProfile = async () => {
+  try {
+    const response = await api.get(getprofile);
+
+    return response.data;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
