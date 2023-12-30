@@ -34,12 +34,11 @@ export function ChatSection(props: IChat) {
   }, []);
 
   return (
-    <div className="ml-4 mr-4 ">
-      <h1 className=" h-[17px] pb-10 text-black text-[22px] font-bold font-['Inter']">
-        Chat
+    <div className="ml-4 mr-4 mb-10">
+<h1 className="pb-10 text-black text-2xl font-bold font-inter"> Chat
       </h1>
-      <div className="relative w-[85vh]">
-        <div className="p-3 mt-auto h-[83vh] rounded-lg bg-gray-400 overflow-y-scroll ">
+      <div className="relative w-[95vh] h-[70vh]">
+        <div className="p-3 mt-auto h-[63vh] rounded-lg bg-gray-200 overflow-y-scroll shadow-md">
           {messagelist.map((message) => {
             let issender = false;
             message.senderId?._id === currentUser
@@ -56,7 +55,7 @@ export function ChatSection(props: IChat) {
             );
           })}
         </div>
-        <div className="absolute bottom-4 left-10 right-10">
+        <div className="bottom-4">
           <TextField
             precedingIcons={
               <svg

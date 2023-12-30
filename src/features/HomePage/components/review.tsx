@@ -27,13 +27,13 @@ const Review = () => {
     <div className=" fixed bottom-8 left-8">
       <CustomButton
         text={textareaVisibility ? "Hide review" : "Write review"}
-        height={8}
-        width={32}
+        height={5}
+        width={10}
         onClick={toggleTextAreaVisibility}
       ></CustomButton>
       {textareaVisibility && (
-        <form>
-          <textarea
+        <form >
+          <textarea className="border shadow-md m-2"
             value={review}
             cols={20}
             rows={4}
@@ -41,7 +41,7 @@ const Review = () => {
             onChange={handleReviewChange}
           ></textarea>
           <button
-            className="border-2 p-1 rounded-xl bg-[rgba(100,100,170,1)]"
+            className="border-2 p-1 rounded-xl block bg-indigo-300"
             type="submit"
             onClick={handleSubmit}
           >
