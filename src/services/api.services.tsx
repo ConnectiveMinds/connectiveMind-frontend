@@ -44,7 +44,7 @@ api.interceptors.request.use(
   (config) => {
     const url: string = config.url!;
 
-    if (url.includes("auth") || url.includes("user") || url.includes("otp")) {
+    if (url.includes("auth") || url.includes("user") || url.includes("otp")|| url.includes("reviews")) {
       return config;
     } else {
       const user = JSON.parse(localStorage.getItem("user")!);
@@ -289,6 +289,7 @@ export const createReview = async (review: string) => {
       review: review,
       status: open,
     });
+    
     return response.data;
   } catch (e: any) {
     throw new Error(e);
@@ -298,7 +299,7 @@ export const createReview = async (review: string) => {
 export const getReviews = async () => {
   try {
     const response = await api.get(getReview);
-
+    console.log(response.data)
     return response.data;
   } catch (e: any) {
     throw new Error(e);

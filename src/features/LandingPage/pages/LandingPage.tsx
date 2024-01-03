@@ -6,12 +6,12 @@ export function LandingPage() {
   // console.log(typeof(exploreToSection))
 
   return (
-    <div className="m-4 p-4">
+    <div className="max-w-screen-xl mx-auto my-4">
       <Navbar />
       <Description />
-      <Explore />
+      <Explore/>
     </div>
   );
 }
 
-<h1>xe laborum ex explicabo quod aperiam eaque fugiat vel.</h1>;
+
