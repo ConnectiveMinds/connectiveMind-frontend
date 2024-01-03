@@ -17,7 +17,7 @@ const Carousel = () => {
 
   const settings = {
     arrows: true,
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -25,18 +25,21 @@ const Carousel = () => {
     swipe: true,
   };
   return (
-    <div className="flex justify-center mt-20">
-      <div className=" max-h-32 overflow-hidden inline-block border-t-2 border-b-2 w-[80ch] p-2">
-        <Slider {...settings} className="overflow-hidden">
+    <div className="flex justify-center mt-16">
+      <div className="inline-block border-t-2 border-b-2 w-1/2 p-2">
+        <div className="mx-8 my-4">
+        <Slider {...settings} className="w-full">
           {allGroups.map((d: any) => (
             <div className="bg-white">
-              <h2 className="text-[rgb(151,97,208)] font-semibold text-[1.5rem] mb-2">
+              <h2 className="text-purple-500 font-bold font-poppins text-xl">
                 {d.title}
               </h2>
-              <p>{d.description}</p>
+              
+              <p className="mt-4 mb-8">{d.description}</p>
             </div>
           ))}
         </Slider>
+        </div>
       </div>
     </div>
   );

@@ -39,21 +39,21 @@ const Login = () => {
   const handleChange = (e: any) => {
     setFormValue({ ...FormValue, [e.target.name]: e.target.value });
   };
-  const handleForgetPasswordClick = async () => {
-    try {
-      await sendOTP(email)
-        .then((data) => {
-          if (data) {
-            setForgetPasswordOpen(true);
-          }
-        })
-        .catch(() => {
-          toast.error("Failed to send OTP");
-        });
-    } catch (error: any) {
-      console.log(error);
-    }
-  };
+  // const handleForgetPasswordClick = async () => {
+  //   try {
+  //     await sendOTP(email)
+  //       .then((data) => {
+  //         if (data) {
+  //           setForgetPasswordOpen(true);
+  //         }
+  //       })
+  //       .catch(() => {
+  //         toast.error("Failed to send OTP");
+  //       });
+  //   } catch (error: any) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handlelogin = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -84,7 +84,7 @@ const Login = () => {
       <div className="flex justify-center md:justify-start">
         <img src="src\Data\Connective_logo.png" alt="Logo" />
       </div>
-      <div className="flex justify-around  ">
+      <div className="flex justify-around ">
         <div>
           <div className="my-16">
             <div className="font-poppins mb-12 ">
@@ -112,12 +112,7 @@ const Login = () => {
               handle={handleChange}
             />
 
-            <p
-              className="my-2 text-xs text-purple-700 font-semibold bg-transparent border-none cursor-pointer"
-              onClick={handleForgetPasswordClick}
-            >
-              Forget password?
-            </p>
+            
 
             {isForgetPasswordOpen && (
               <div className="overlay">
@@ -152,7 +147,6 @@ const Login = () => {
         </div>
 
         <div className="hidden  md:inline-block h-[540px] min-h-[1em] w-px self-stretch bg-purple-700 opacity-100 "></div>
-
         <div className="hidden md:flex">
           <img src="src\Data\login_teams.png" alt="Team" />
         </div>
