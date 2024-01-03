@@ -3,7 +3,7 @@ import { NavBar } from "../../../Components/NavBar/navbar";
 import { SideBar } from "../../../Components/NavBar/sidebar";
 import { HorizontalDivider } from "../../../Components/Divider/horizontalDivider";
 import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
-
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import Review from "../components/review";
 import { ChangeEvent, useEffect, useState } from "react";
 import { RecommendedProjects } from "../components/recommendsection";
@@ -11,7 +11,7 @@ import { ChatSection } from "../components/chatsection";
 import TeamMembersPage from "../components/teamSection";
 import { EventSection } from "../components/eventSection";
 import { useSelector } from "react-redux";
-import {
+import ideaSlice, {
   fetchProjectByProjectId,
   fetchProjectByUserId,
   getIdeaStatus,
@@ -49,7 +49,7 @@ export function HomePage() {
     } else if (homePageStatus == "failed") {
       setCurrentStatus("Error Fetching");
     }
-  }, [homePageStatus, dispatch]);
+  }, [homePageStatus]);
 
   const [currentSection, setcurrentsection] = useState(<RecommendedProjects />);
   const handledeitemClick = (section: string, id: string) => {
@@ -59,14 +59,14 @@ export function HomePage() {
         break;
       case "Project Timeline":
         // setcurrentsection(<MyCalendar _id={id}/>);
-        setcurrentsection(<Calendar/>)
+        setcurrentsection(<MyCalendar _id={id}/>)
         break;
       case "Team":
         setcurrentsection(<TeamMembersPage _id={id} />);
         break;
       case "Resources":
         // setcurrentsection(<FilePage _id={id} />);
-        setcurrentsection(<Upload _id={id}  />);
+        setcurrentsection(<Upload id={id}/>);
         break;
       default:
         setcurrentsection(<RecommendedProjects />);
@@ -98,7 +98,10 @@ export function HomePage() {
         ></SideBar>
         <VerticalDivider />
         {currentSection}
+        <div className="flex flex-col">
+        <SmallCalendar/>
         <EventSection />
+        </div>
       </div>
       <Review />
     </div>

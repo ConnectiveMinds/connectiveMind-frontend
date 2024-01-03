@@ -44,6 +44,7 @@ const DropZoneComponent: FunctionComponent<DropZoneComponentProps> = ({
           </div>
         </div>
       </div>
+      
     </div>
   );
 };

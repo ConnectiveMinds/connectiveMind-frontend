@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import {
   geteventsbyuserid,
   acceptrequest,
@@ -28,6 +28,7 @@ import {
   updateprofile,
 } from "../utils/apiroutes";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+
 
 export const api = axios.create({
   baseURL: `${host}/api`,
@@ -335,16 +336,16 @@ export const getFilesById = createAsyncThunk(
   }
 );
 
+
+
+
 export const saveFile = createAsyncThunk(
   "file/saveFile",
-  async (
-    { body, projectId }: { body: FormData; projectId: string },
-    thunkAPI
-  ) => {
+  async ({ body, config }: { body: FormData; config: AxiosRequestConfig }, thunkAPI) => {
     try {
-      const url = postFiles + projectId;
-      const response = await api.post(url, body);
-
+      const url = postFiles;
+      const response = await api.post(url, body, config);
+     
       if (response.status !== 200) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -358,6 +359,10 @@ export const saveFile = createAsyncThunk(
     }
   }
 );
+
+
+
+
 
 //calendar//
 
