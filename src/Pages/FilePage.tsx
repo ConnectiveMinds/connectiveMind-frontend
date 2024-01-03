@@ -16,12 +16,10 @@ export function FilePage({ _id }) {
   const dispatch = useAppDispatch();
   useEffect(() => {
     getFilesById(_id).then((data)=>{
-      console.log(data);
       setData(data);
     })
-  }, []);
+  }, [data]);
   const handleDownload = async (item) => {
-    console.log(item);
     try {
       const response = await fetch(item.secure_url, {
         headers: {
