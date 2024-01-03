@@ -6,6 +6,7 @@ import dateReducer from "../features/Calendar/components/calendarSlice";
 import fileReducer from "../features/File/components/uploadSlice";
 import authReducer from "../features/Auth/components/authSlice";
 import ideaReducer from "../features/HomePage/ideaSlice";
+import profileReducer from "../features/Profile/profileslice";
 // import { dateApi } from "../services/calendarApi";
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     dates: dateReducer,
     files: fileReducer,
     idea: ideaReducer,
+    profile: profileReducer,
     // [dateApi.reducerPath]:dateApi.reducer
   },
   middleware: (getDefaultMiddleware) =>

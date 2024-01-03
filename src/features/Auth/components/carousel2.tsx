@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
 import { getReviews } from "../../../services/api.services";
 
-
 const Carousel2 = () => {
   const [reviews, setReviews] = useState([]);
 

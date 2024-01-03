@@ -27,8 +27,7 @@ import {
   getprofile,
   updateprofile,
   deleteFies,
-  getdatesbyProject
-  
+  getdatesbyProject,
 } from "../utils/apiroutes";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -44,7 +43,11 @@ api.interceptors.request.use(
   (config) => {
     const url: string = config.url!;
 
-    if (url.includes("auth") || url.includes("user") || url.includes("otp")|| url.includes("reviews")) {
+    if (
+      url.includes("auth") ||
+      url.includes("otp") ||
+      url.includes("reviews")
+    ) {
       return config;
     } else {
       const user = JSON.parse(localStorage.getItem("user")!);
@@ -179,6 +182,7 @@ export const getIdeaByUserId = async () => {
     /* empty */
   }
 };
+
 export const getIdeaByProjectId = async (projectId: string) => {
   try {
     const response = await api.get(getprojectbyid + projectId);
@@ -298,8 +302,8 @@ export const createReview = async (review: string) => {
 
 export const getReviews = async () => {
   try {
-    const response = await api.get(getReview);
-    console.log(response.data)
+    const response = await api.get(getReview, {});
+
     return response.data;
   } catch (e: any) {
     throw new Error(e);
@@ -315,38 +319,28 @@ const getEventsByUserId = async () => {
     throw new Error(e);
   }
 };
-const apiService = {
-  createGroup,
-  getEventsByUserId,
-  getAllProjects,
-  getIdeaByUserId,
-  getIdeaByProjectId,
-  getIncomingRequest,
-};
 
-export default apiService;
 //files//
-export const getFilesById = 
-  async (id: string) => {
-    try {
-      console.log("using");
-      // Use the axios instance to make the GET request
-      const url = getFiles + id;
-      const response = await api.get(url);
+export const getFilesById = async (id: string) => {
+  try {
+    console.log("using");
+    // Use the axios instance to make the GET request
+    const url = getFiles + id;
+    const response = await api.get(url);
 
-      // Check if the response is ok
-      if (response.status !== 200) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse and return the response data
-      console.log(response.data);
-      return response.data;
-    } catch (error: any) {
-      // Handle errors
-      throw new Error(`An error occurred: ${error.message}`);
+    // Check if the response is ok
+    if (response.status !== 200) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
+
+    // Parse and return the response data
+    console.log(response.data);
+    return response.data;
+  } catch (error: any) {
+    // Handle errors
+    throw new Error(`An error occurred: ${error.message}`);
   }
+};
 
 export const saveFile = createAsyncThunk(
   "file/saveFile",
@@ -373,26 +367,23 @@ export const saveFile = createAsyncThunk(
 );
 
 export const deleteFile = createAsyncThunk<void, string>(
-  'file/deleteFile',
+  "file/deleteFile",
   async (id: string) => {
     try {
-      const url = deleteFies + id
-      console.log(url)
+      const url = deleteFies + id;
+      console.log(url);
       const response = await api.delete(url);
       if (response.status !== 200) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       // File deletion was successful
       return response.data;
-  } catch (error: any) {
-    // Handle errors
-    throw new Error(`An error occurred: ${error.message}`);
+    } catch (error: any) {
+      // Handle errors
+      throw new Error(`An error occurred: ${error.message}`);
+    }
   }
-});
-
-
-
-
+);
 
 //calendar//
 
@@ -475,40 +466,24 @@ export const getDatesbyProjectId = async (id: string) => {
 };
 
 //*************************************************profile Service************************************************************ */
-export const createProfile = async () => {
+
+const updateProfileImage = async (image: File, config: AxiosRequestConfig) => {
   try {
-    const response = await api.post(createprofile, {
-      status: open,
-    });
+    const response = await api.patch(
+      updateprofile,
+      {
+        myprofile: image,
+      },
+      config
+    );
+
     return response.data;
   } catch (e: any) {
     throw new Error(e);
   }
 };
 
-export const updateProfile = async (
-  name: string,
-  address: string,
-  gender: string,
-  institution: string,
-  about: string
-) => {
-  try {
-    const response = await api.patch(updateprofile, {
-      name: name,
-      address: address,
-      gender: gender,
-      institution: institution,
-      about: about,
-      status: open,
-    });
-    return response.data;
-  } catch (e: any) {
-    throw new Error(e);
-  }
-};
-
-export const getProfile = async () => {
+const getProfile = async () => {
   try {
     const response = await api.get(getprofile);
 
@@ -517,3 +492,14 @@ export const getProfile = async () => {
     throw new Error(e);
   }
 };
+const apiService = {
+  updateProfileImage,
+  getProfile,
+  createGroup,
+  getEventsByUserId,
+  getAllProjects,
+  getIdeaByUserId,
+  getIdeaByProjectId,
+  getIncomingRequest,
+};
+export default apiService;
