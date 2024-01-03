@@ -4,9 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 
 import { useAppDispatch } from "../app/hook";
 import { IMember } from "../features/HomePage/Interface";
-import { getIdeaByProjectId, saveDates } from "../services/api.services";
+import {  getIdeaByProjectId, saveDates } from "../services/api.services";
 import { Choose } from "./search";
 import { fetchEventByUserId } from "../features/Calendar/components/calendarSlice";
+
 
 // import { useSelector } from "react-redux";
 // import { useNavigate } from "react-router";
@@ -56,13 +57,16 @@ export const EventForm = ({ _id,onClose,onLoading }) => {
       e.target.selectedOptions,
       (option) => option.value
     );
+    
     setSelectedMembers(selectedOptions);
-    setFormValue({ ...FormValue, assigned: selectedMembers });
+    
+    setFormValue({ ...FormValue, assigned: selectedOptions });
   };
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    console.log(FormValue);
 
     dispatch(
       saveDates({
@@ -70,7 +74,7 @@ export const EventForm = ({ _id,onClose,onLoading }) => {
           title: title,
           start: start,
           end: end,
-          assigned_id: assigned,
+          assigned_id: selectedMembers,
           isOwner: true,
         },
         projectId: _id,
@@ -84,6 +88,9 @@ export const EventForm = ({ _id,onClose,onLoading }) => {
           setFormValue(initialState);
           toast.success("Event added Successfully");
           dispatch(fetchEventByUserId);
+          
+           
+        
 
           
 

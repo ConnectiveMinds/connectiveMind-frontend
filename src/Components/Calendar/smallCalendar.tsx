@@ -21,7 +21,7 @@ export const SmallCalendar = () => {
   useEffect(() => {
     // Fetch events when the component mounts
     dispatch(fetchEventByUserId());
-  }, [dispatch]);
+  }, [dates]);
 
  
 

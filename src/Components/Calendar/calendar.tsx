@@ -22,10 +22,9 @@ export const MyCalendar = ({ _id }) => {
 
   useEffect(() => {
     getDatesbyProjectId(_id).then((data) => {
-      console.log(data);
       setDates(data);
     });
-  }, []);
+  }, [dates]);
 
   useEffect(() => {
     getIdeaByProjectId(_id).then((data) => {
