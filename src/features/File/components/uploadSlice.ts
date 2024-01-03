@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getFilesById, saveFile } from "../../../services/api.services";
+import {  createSlice } from "@reduxjs/toolkit";
+import { deleteFile, saveFile } from "../../../services/api.services";
 
 
-type File = {
+export type File = {
   _id: string;
   filename: string;
   secure_url: string;
@@ -11,7 +11,7 @@ type File = {
   project_id:string
 };
 
-interface FileState {
+export interface FileState {
   data: File[];
   loading: boolean;
   error: string;
@@ -23,30 +23,30 @@ const initialState: FileState = {
   error: "",
 };
 
-export const deleteFile = createAsyncThunk<void, string>(
-  'file/deleteFile',
-  async (id: string) => {
-    try {
-      const response = await fetch(`http://localhost:3000/api/file/delete/${id}`, {
-        method: 'DELETE',
-      });
+// export const deleteFile = createAsyncThunk<void, string>(
+//   'file/deleteFile',
+//   async (id: string) => {
+//     try {
+//       const response = await fetch(`http://localhost:3000/api/file/delete/${id}`, {
+//         method: 'DELETE',
+//       });
 
-      if (!response.ok) {
-        // Handle non-ok response (e.g., server error)
-        const errorData = await response.text(); // Read as text
-        throw new Error(`File deletion failed: ${errorData}`);
-      }
+//       if (!response.ok) {
+//         // Handle non-ok response (e.g., server error)
+//         const errorData = await response.text(); // Read as text
+//         throw new Error(`File deletion failed: ${errorData}`);
+//       }
 
-      // File deletion was successful
-      const data = await response.text(); // Read as text
-      console.log(data); // Log the response data if needed
-    } catch (error:any) {
-      // Handle fetch errors or other errors
-      console.error('Error during file deletion:', error.message);
-      throw new Error(`File deletion failed: ${error.message}`);
-    }
-  }
-);
+//       // File deletion was successful
+//       const data = await response.text(); // Read as text
+//       console.log(data); // Log the response data if needed
+//     } catch (error:any) {
+//       // Handle fetch errors or other errors
+//       console.error('Error during file deletion:', error.message);
+//       throw new Error(`File deletion failed: ${error.message}`);
+//     }
+//   }
+// );
 
 export const FileSlice = createSlice({
   name: "file",
@@ -54,18 +54,18 @@ export const FileSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getFilesById.pending, (state) => {
-        state.loading = true;
-        state.error = "";
-      })
-      .addCase(getFilesById.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action.payload;
-      })
-      .addCase(getFilesById.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "An error occurred";
-      })
+      // .addCase(getFilesById.pending, (state) => {
+      //   state.loading = true;
+      //   state.error = "";
+      // })
+      // .addCase(getFilesById.fulfilled, (state, action) => {
+      //   state.loading = false;
+      //   state.data = action.payload;
+      // })
+      // .addCase(getFilesById.rejected, (state, action) => {
+      //   state.loading = false;
+      //   state.error = action.error.message || "An error occurred";
+      // })
       .addCase(saveFile.pending, (state) => {
         state.loading = true;
         state.error = "";

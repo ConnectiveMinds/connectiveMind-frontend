@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../app/hook";
-import { deleteFile } from "../features/File/components/uploadSlice";
+import { useAppDispatch } from "../app/hook";
+
 import { IoMdDownload } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
-import { getFilesById } from "../services/api.services";
+import { deleteFile, getFilesById } from "../services/api.services";
 import Upload from "../Components/upload";
 import { HiOutlineUpload } from "react-icons/hi";
+import { File} from "../features/File/components/uploadSlice";
+
 // import { Link } from "react-router-dom";
 
 export function FilePage({ _id }) {
   const [showUpload, SetShowUpload] = useState(false);
-  const { data, loading, error } = useAppSelector((state) => state.files);
+  const [data,setData] = useState<File[]>();
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getFilesById(_id));
-    console.log(data);
-  }, [_id, dispatch]);
+    getFilesById(_id).then((data)=>{
+      console.log(data);
+      setData(data);
+    })
+  }, []);
   const handleDownload = async (item) => {
     console.log(item);
     try {
@@ -46,9 +50,20 @@ export function FilePage({ _id }) {
 
   const handleDelete = async (item) => {
     try {
-      await dispatch(deleteFile(item._id));
-      // dispatch(getFilesById("64ec09ac1b7653f6a1d436f2"));
-    } catch (error: any) {
+      console.log(item._id);
+      const response = await dispatch(deleteFile(item._id));
+  
+      // Check if the deleteFile action was fulfilled successfully
+      if (deleteFile.fulfilled.match(response)) {
+        console.log("File deleted successfully:", response.payload);
+        // You can perform additional actions if needed
+        getFilesById(_id)// Refresh the file list after deletion
+      } else if (deleteFile.rejected.match(response)) {
+        // The file deletion failed
+        console.error("Error during file deletion:", response.payload);
+        // You can perform additional actions if needed
+      }
+    } catch (error:any) {
       console.error("An error occurred:", error.message);
     }
   };
@@ -67,19 +82,19 @@ export function FilePage({ _id }) {
         <p>Upload</p>
       </button>
       </div>
-      {/* {showUpload && (
+      {showUpload && (
         <Upload
-          _id={_id}
+          id={_id}
           onClose={() => {
             SetShowUpload(false);
           }}
         />
-      )} */}
+      )}
 
       <div className={`overflow-x-auto w-full ${showUpload ? "" : "relative"}`}>
-        {loading && <p>Loading...</p>}
+        {/* {loading && <p>Loading...</p>} */}
 
-        {!loading && data.length > 0 && (
+        
           <table className="w-full text-lg text-left rtl:text-right text-gray-500  ">
             <thead className=" text-gray-700 uppercase bg-gray-50 ">
               <tr>
@@ -98,7 +113,7 @@ export function FilePage({ _id }) {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
+              {data?.map((item, index) => (
                 <tr key={index} className="bg-white border-b">
                   <th
                     scope="row"
@@ -124,10 +139,7 @@ export function FilePage({ _id }) {
               ))}
             </tbody>
           </table>
-        )}
-        {!loading && data.length === 0 && <p>No files found.</p>}
-
-        {error && <p>Error: {error}</p>}
+        
       </div>
     </div>
   );
