@@ -3,13 +3,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { useEffect, useState } from "react";
-import { getAllProjects } from "../../../services/api.services";
+import { getprojectForlanding } from "../../../services/api.services";
 
 const Carousel = () => {
   const [allGroups, setAllGroups] = useState([]);
 
   useEffect(() => {
-    getAllProjects().then((data) => {
+    getprojectForlanding().then((data) => {
+      console.log(data);
       setAllGroups(data["data"]);
     });
   }, []);
@@ -33,7 +34,6 @@ const Carousel = () => {
                 {d.title}
               </h2>
               <p>{d.description}</p>
-              
             </div>
           ))}
         </Slider>

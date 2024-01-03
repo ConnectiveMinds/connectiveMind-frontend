@@ -11,8 +11,10 @@ export function ChatSection(props: IChat) {
   const [currentUser, setCurrentUser] = useState("");
   useEffect(() => {
     getmessages(props.projectId).then((data) => {
+      console.log(data["data"], "data", messagelist.length);
       setMessageList(data["data"]);
     });
+    console.log("Messgaelength", messagelist.length);
     setCurrentUser(JSON.parse(localStorage.getItem("user")!).data.userId);
   }, [messagelist, props.projectId]);
 
@@ -35,8 +37,7 @@ export function ChatSection(props: IChat) {
 
   return (
     <div className="ml-4 mr-4 mb-10">
-<h1 className="pb-10 text-black text-2xl font-bold font-inter"> Chat
-      </h1>
+      <h1 className="pb-10 text-black text-2xl font-bold font-inter"> Chat</h1>
       <div className="relative w-[95vh] h-[70vh]">
         <div className="p-3 mt-auto h-[63vh] rounded-lg bg-gray-200 overflow-y-scroll shadow-md">
           {messagelist.map((message) => {

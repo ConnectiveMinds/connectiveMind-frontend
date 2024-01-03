@@ -5,7 +5,10 @@ function validation(values: any) {
     password: "",
     confirmPassword: "",
     phoneNo: "",
+    skills:""
   };
+ 
+  
   const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   const passwordPattern =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
@@ -15,11 +18,18 @@ function validation(values: any) {
     error.userName = "Name should not be empty";
   }
 
+  if (values.skills.length === 0) {
+    error.skills = "Skills should not be empty";
+  }
+
+
   if (values.email === "") {
     error.email = "Email should not be empty";
   } else if (!emailPattern.test(values.email)) {
     error.email = "Email should include @ and .";
   }
+
+  
 
   if (values.password === "") {
     error.password = "Password should not be empty";
@@ -38,7 +48,8 @@ function validation(values: any) {
   if (!phoneNoPattern.test(values.phoneNo)) {
     error.phoneNo = "Invalid Phone ";
   }
-
+  
+  
   return error;
 }
 
