@@ -59,14 +59,14 @@ export function HomePage() {
         break;
       case "Project Timeline":
         // setcurrentsection(<MyCalendar _id={id}/>);
-        setcurrentsection(<Calendar/>)
+        setcurrentsection(<Calendar />);
         break;
       case "Team":
         setcurrentsection(<TeamMembersPage _id={id} />);
         break;
       case "Resources":
         // setcurrentsection(<FilePage _id={id} />);
-        setcurrentsection(<Upload _id={id}  />);
+        setcurrentsection(<Upload _id={id} />);
         break;
       default:
         setcurrentsection(<RecommendedProjects />);

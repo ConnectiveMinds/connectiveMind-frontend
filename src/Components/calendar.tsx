@@ -5,7 +5,6 @@ import moment from "moment";
 // import events from "./events";
 import "../style.css";
 import {
-  
   fetchEventByUserId,
   getEventsError,
   selectEvents,
@@ -16,22 +15,20 @@ import { getIdeaByProjectId } from "../services/api.services";
 import { IMember } from "../features/HomePage/Interface";
 import { EventForm } from "./eventform";
 
-
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
-export const MyCalendar = ({_id}) => {
+export const MyCalendar = ({ _id }) => {
   const dispatch = useAppDispatch();
-  const  dates = useSelector(selectEvents);
+  const dates = useSelector(selectEvents);
   const eventsError = useSelector(getEventsError);
   // const eventStatus = useSelector(getEventStatus);
 
   useEffect(() => {
     // Fetch events when the component mounts
     dispatch(fetchEventByUserId);
-
   }, [dispatch]);
   const [idea, setIdea] = useState<IMember>();
-  const [show,setShow]= useState(false);
+  const [show, setShow] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
   useEffect(() => {
     getIdeaByProjectId(_id).then((data) => {
@@ -40,7 +37,7 @@ export const MyCalendar = ({_id}) => {
     setCurrentUser(JSON.parse(localStorage.getItem("user")!).data.userId);
   }, [idea]);
   useEffect(() => {
-     console.log(dates);
+    console.log(dates);
     // Check if there is an error and log it
     if (eventsError) {
       console.error(eventsError);
@@ -48,37 +45,40 @@ export const MyCalendar = ({_id}) => {
     }
   }, [eventsError]);
 
-  const handleClick=()=>
-  {
-
+  const handleClick = () => {
     setShow(true);
-  }
-  
-  return (
+  };
 
+  return (
     <div className="myCustomHeight w-full mx-4 h-screen">
       {show && (
-        <EventForm _id={_id} onClose={()=>{setShow(false)}}/>
+        <EventForm
+          _id={_id}
+          onClose={() => {
+            setShow(false);
+          }}
+        />
       )}
       {idea?.ownerId == currentUser && (
-         <div className="mb-4 text-right">
+        <div className="mb-4 text-right">
+          <button
+            className="bg-purple-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded inline-flex items-center"
+            onClick={handleClick}
+          >
+            <span>Add Event</span>
+          </button>
+        </div>
+      )}
 
-         <button className="bg-purple-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded inline-flex items-center" onClick={handleClick}>
-             <span>Add Event</span>
-           </button>
-         </div>
-      )}
-      
-      {!show &&(
+      {!show && (
         <Calendar
-        localizer={localizer}
-        events={dates}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 700 }}
-      />
+          localizer={localizer}
+          events={dates}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 700 }}
+        />
       )}
-      
     </div>
   );
 };

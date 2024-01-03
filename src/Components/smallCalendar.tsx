@@ -9,9 +9,9 @@ import { useAppDispatch } from "../app/hook";
 import "react-calendar/dist/Calendar.css";
 import { MyCalendar } from "./calendar";
 
-export const SmallCalendar = ({id}) => {
+export const SmallCalendar = () => {
   const dispatch = useAppDispatch();
- 
+
   const dates = useSelector(selectEvents);
   const dateValues = dates.map((event) => new Date(event.start));
 
@@ -20,16 +20,21 @@ export const SmallCalendar = ({id}) => {
     dispatch(fetchEventByUserId());
   }, [dispatch]);
 
-
-
-  const formattedDateValues = dateValues.map((date) => date.toISOString().split('T')[0]);
-  const dateObjects = formattedDateValues.map((dateString) => new Date(dateString));
+  const formattedDateValues = dateValues.map(
+    (date) => date.toISOString().split("T")[0]
+  );
+  const dateObjects = formattedDateValues.map(
+    (dateString) => new Date(dateString)
+  );
   console.log(dateObjects);
 
   return (
     <div className="w-full">
-      <div className="w-1/3 h-1/3">
-      <MyCalendar _id={id}/>
+      <div className="text-black text-3xl font-normal font-['Inter']">
+        <p>Your Calendar</p>
+      </div>
+      <div className="w-fit h-81">
+        <MyCalendar _id={""} />
       </div>
     </div>
   );
