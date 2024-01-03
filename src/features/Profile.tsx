@@ -34,31 +34,31 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
   console.log(profile.name);
   const [formValues, setFormValues] = useState({});
 
-  const handleSkillsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleSkillsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({
       ...formValues,
       skills: e.target.value,
     });
   };
-  const handleInstitutionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleInstitutionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({
       ...formValues,
       institution: e.target.value,
     });
   };
-  const handleNameChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({
       ...formValues,
       name: e.target.value,
     });
   };
-  const handleAddressChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({
       ...formValues,
       address: e.target.value,
     });
   };
-  const handleEmailChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({
       ...formValues,
       email: e.target.value,
