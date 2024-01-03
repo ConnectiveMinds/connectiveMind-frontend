@@ -294,6 +294,7 @@ export const createReview = async (review: string) => {
       review: review,
       status: open,
     });
+    
     return response.data;
   } catch (e: any) {
     throw new Error(e);
