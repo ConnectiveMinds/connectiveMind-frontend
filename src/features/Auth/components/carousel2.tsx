@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
 import { getReviews } from "../../../services/api.services";
 
-
 const Carousel2 = () => {
   const [reviews, setReviews] = useState([]);
 
@@ -12,7 +11,7 @@ const Carousel2 = () => {
     getReviews().then((data) => {
       setReviews(data["data"]);
     });
-  });
+  }, []);
   const settings = {
     arrows: true,
     dots: false,

@@ -4,13 +4,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // import Upload from "./Components/upload";
 
-
 import JoinRequest from "./features/Request/pages/JoinRequest";
 import PrivateRoute from "./utils/privateRoute";
 import { LandingPage } from "./features/LandingPage/pages/LandingPage";
 import { HomePage } from "./features/HomePage/pages/HomePage";
 import { SignUp } from "./features/Auth/pages/SignUp";
-import ProfilePage from "./features/Profile";
+import ProfilePage from "./features/Profile/page/Profile";
 
 import CreateGroup from "./features/CreateGroup/pages/CreateGroup";
 import { Login } from "./features/Auth/pages/SignIn";
@@ -29,7 +28,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          
+
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
@@ -37,8 +36,6 @@ const App = () => {
           <Route path="/Calendar" element={<SmallCalendar />} />
           <Route path="/CreateGroup" element={<CreateGroup />} />
           <Route path="/join-requests" element={<JoinRequest />} />
-        
-         
         </Routes>
       </BrowserRouter>
     </div>

@@ -13,7 +13,10 @@ export interface IUser {
   _id: string;
   name: string;
   email: string;
+  skills: string[];
   avatar: string;
+  institution: string;
+  address: string;
 }
 
 export interface IMember extends IProject {

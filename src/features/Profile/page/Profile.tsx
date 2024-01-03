@@ -1,37 +1,49 @@
 import React, { useEffect, useState } from "react";
-import { NavBar } from "../Components/NavBar/navbar";
-import { getProfile } from "../services/api.services";
+import { NavBar } from "../../../Components/NavBar/navbar";
 
-interface ProfilePageProps {
-  _id: string;
-  name: string;
-  email: string;
-  skills: string[];
-  avatar: string;
-  institution: string;
-  address: string;
-  userId: string;
-}
+import {
+  getProfile,
+  getProfileStatus,
+  selectUser,
+  updateProfileImage,
+} from "../profileslice";
+import { useSelector } from "react-redux";
 
-const ProfilePage: React.FC<ProfilePageProps> = () => {
+import { useAppDispatch } from "../../../app/hook";
+import { IUser } from "../../HomePage/Interface";
+
+const ProfilePage: React.FC<IUser> = () => {
   // Initial profile information
-  const [profile, setProfile] = useState<ProfilePageProps>({
-    userId: "",
-    address: "",
+  const [profile, setProfile] = useState<IUser>({
+    address: "NA",
     _id: "",
     name: "NA",
     email: "NA",
     skills: [],
-    avatar: "",
+    avatar: "NA",
     institution: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const currentdata = useSelector(selectUser);
+  const profileStatus = useSelector(getProfileStatus);
   useEffect(() => {
-    getProfile().then((data) => {
-      console.log(data.data);
-      setProfile(data.data);
-    });
-  }, []);
-  console.log(profile.name);
+    if (profileStatus === "idle") {
+      dispatch(getProfile());
+    } else if (profileStatus == "loading") {
+      setIsLoading(true);
+    } else if (profileStatus == "fetched") {
+      setIsLoading(false);
+      setProfile(currentdata);
+    } else if (profileStatus == "failed") {
+      console.log("Error");
+    } else if (profileStatus == "updated") {
+      console.log(currentdata);
+      setIsLoading(false);
+      setProfile(currentdata);
+    }
+  }, [dispatch, profileStatus, currentdata]);
+
   const [formValues, setFormValues] = useState({});
 
   const handleSkillsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,30 +82,31 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
     if (file) {
       const reader = new FileReader();
 
-      reader.onloadend = () => {
-        const newProfile = {
-          ...profile,
-          avatar: reader.result as string,
-        };
-        setProfile(newProfile);
+      reader.onloadend = async () => {
+        dispatch(updateProfileImage(file));
       };
 
       reader.readAsDataURL(file);
     }
   };
 
-  return (
+  return isLoading ? (
+    <div className="flex items-center justify-center h-screen w-full">
+      <div className="relative">
+        <div className="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"></div>
+        <div className="absolute top-0 left-0 h-24 w-24 rounded-full border-t-8 border-b-8 border-blue-500 animate-spin"></div>
+      </div>
+    </div>
+  ) : (
     <div>
       <NavBar
         isHomePage={false}
         isLandingpage={false}
         name={""}
         error={false}
-        onChange={
-          function (): void {
-            throw new Error("Function not implemented.");
-          }
-        }
+        onChange={function (): void {
+          throw new Error("Function not implemented.");
+        }}
       />
       <div className="flex h-full bg-white">
         {/* Left Column */}
@@ -123,74 +136,96 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
 
         {/* Right Column */}
         <div className="w-1/3 p-3">
-        <div className="mb-2">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <div className="mb-2">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
               Name
-            </label><input
+            </label>
+            <input
               id="name"
               name="name"
-              value={""} 
+              value={""}
               onChange={handleNameChange}
               className="mt-1 p-2 border rounded-md w-full"
             ></input>
-            
           </div>
           <div className="mb-2">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email
-            </label><input
+            </label>
+            <input
               id="email"
               name="email"
-              value={""} 
+              value={""}
               onChange={handleEmailChange}
               className="mt-1 p-2 border rounded-md w-full"
             ></input>
-            
           </div>
           <div className="mb-2">
-            <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="address"
+              className="block text-sm font-medium text-gray-700"
+            >
               Address
-            </label><input
+            </label>
+            <input
               id="address"
               name="address"
-              value={""} 
+              value={""}
               onChange={handleAddressChange}
               className="mt-1 p-2 border rounded-md w-full"
             ></input>
-            
           </div>
           <div className="mb-2">
-            <label htmlFor="institution" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="institution"
+              className="block text-sm font-medium text-gray-700"
+            >
               Institution
-            </label><input
+            </label>
+            <input
               id="institution"
               name="institution"
-              value={""} 
+              value={""}
               onChange={handleInstitutionChange}
               className="mt-1 p-2 border rounded-md w-full"
             ></input>
-            
           </div>
 
           <div className="mb-2">
-            <label htmlFor="skills" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="skills"
+              className="block text-sm font-medium text-gray-700"
+            >
               Skills (comma-separated)
             </label>
             <input
               id="skills"
               name="skills"
-              value={""} 
+              value={""}
               onChange={handleSkillsChange}
               className="mt-1 p-2 border rounded-md w-full"
             ></input>
           </div>
 
           <div className="mb-2">
-            <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="gender"
+              className="block text-sm font-medium text-gray-700"
+            >
               Gender
             </label>
             {/* Placeholder for gender dropdown */}
-            <select id="gender" name="gender" className="mt-1 p-2 border rounded-md w-full">
+            <select
+              id="gender"
+              name="gender"
+              className="mt-1 p-2 border rounded-md w-full"
+            >
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -210,5 +245,3 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
 };
 
 export default ProfilePage;
-
-
