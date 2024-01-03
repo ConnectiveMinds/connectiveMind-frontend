@@ -22,6 +22,6 @@ export const getdates = `/calendar/`;
 export const postdates = `/v1/calendar/crud/create/`;
 export const createprofile = `/v1/profile/crud/createprofile`;
 export const updateprofile = `/v1/profile/crud/updateprofile`;
-export const getprofile = `/v1/profile/get/`;
+export const getprofile = `/v1/user/get/userprofile`;
 export const AuthToken =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGViNDg5YTBiOTVkZDg4Y2UwMTI2Y2YiLCJlbWFpbCI6InN1ZGVlcGJoYXR0YXJhaTE3OTJAZ21haWwuY29tIiwiaWF0IjoxNzAyMDU3NjY5LCJleHAiOjE3MDIxNDQwNjl9.NDTsmFFXcSNaO69IZAremzLlnxyqUwrKR83K_DQ_NxQ";

@@ -41,7 +41,7 @@ api.interceptors.request.use(
   (config) => {
     const url: string = config.url!;
 
-    if (url.includes("auth") || url.includes("user") || url.includes("otp")) {
+    if (url.includes("auth") || url.includes("otp")) {
       return config;
     } else {
       const user = JSON.parse(localStorage.getItem("user")!);
@@ -176,6 +176,7 @@ export const getIdeaByUserId = async () => {
     /* empty */
   }
 };
+
 export const getIdeaByProjectId = async (projectId: string) => {
   try {
     const response = await api.get(getprojectbyid + projectId);
@@ -442,17 +443,13 @@ export const updateProfile = async (
   address: string,
   gender: string,
   institution: string,
-  about: string
+  about: string,
+  avatar: string,
+  body: FormData,
+  config: AxiosRequestConfig
 ) => {
   try {
-    const response = await api.patch(updateprofile, {
-      name: name,
-      address: address,
-      gender: gender,
-      institution: institution,
-      about: about,
-      status: open,
-    });
+    const response = await api.patch(updateprofile, body, config);
     return response.data;
   } catch (e: any) {
     throw new Error(e);
@@ -462,6 +459,7 @@ export const updateProfile = async (
 export const getProfile = async () => {
   try {
     const response = await api.get(getprofile);
+    console.log(response.data);
 
     return response.data;
   } catch (e: any) {

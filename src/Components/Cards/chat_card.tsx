@@ -10,14 +10,10 @@ export function ChatCard(props: IChatCard) {
   const bgcolor = props.issender ? " bg-blue-600" : " bg-white";
   return (
     <div className={sender}>
-      <div
-        className={
-          "mt-3  h-4 md:h-8 lg:h-12 rounded-full  text-center" + bgcolor
-        }
-      >
+      <div className={"mt-3  h-4 md:h-8 lg:h-12 rounded-full  text-center"}>
         <img
-          src="public\avatar.png"
-          className="h-4 md:h-8 lg:h-12 rounded-full"
+          src={props.avatar == null ? "public/avatar.png" : props.avatar}
+          className="h-4 md:h-8 lg:h-12 rounded-full border-0"
         />
         {/* <img src={`data:image/svg+xml;base64,${props.avatar}`} alt="img"   /> */}
       </div>
