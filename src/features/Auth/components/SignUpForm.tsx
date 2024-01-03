@@ -121,17 +121,17 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <div className=" w-[100%] max-w-lg mx-auto mt-4 md:mt-8 p-8 bg-white rounded-3xl shadow-lg border-2 border-[purple] ">
-      <h1 className="font-bold text-[2rem]">Sign Up</h1>
+    <div className=" w-[100%] max-w-md mx-auto mt-4 md:mt-4 px-16">
+      <h1 className="font-bold text-purple-700 text-4xl tracking-normal">Sign Up</h1>
 
-      <p>
+      <p className="mt-2">
         Have an account?{" "}
         <a href="/login">
-          <span className="text-[purple]">Sign In</span>
+          <span className="text-[purple] text-sm">Sign In</span>
         </a>
       </p>
 
-      <form className="mt-10">
+      <form className="mt-4">
         <input
           className="w-full mt-4 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 shadow-md"
           type="email"
@@ -214,7 +214,7 @@ const SignUpForm: React.FC = () => {
         <button
           type="submit"
           onClick={handleValidation}
-          className="block p-1 mt-8 rounded-md drop-shadow-lg colored m-4"
+          className="my-6 w-auto text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-xl text-lg px-8 py-2 text-center mr-2 mb-2 "
         >
           Sign Up
         </button>

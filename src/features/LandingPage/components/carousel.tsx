@@ -34,6 +34,7 @@ const Carousel = () => {
               <h2 className="text-purple-500 font-bold font-poppins text-xl">
                 {d.title}
               </h2>
+              
               <p className="mt-4 mb-8">{d.description}</p>
             </div>
           ))}
