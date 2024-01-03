@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../app/hook";
 import { IUser } from "../../HomePage/Interface";
 
+
+
 const ProfilePage: React.FC<IUser> = () => {
   // Initial profile information
   const [profile, setProfile] = useState<IUser>({
@@ -25,6 +27,9 @@ const ProfilePage: React.FC<IUser> = () => {
     avatar: "",
     institution: "",
   });
+  // Inside the ProfilePage component
+const [selectedGender, setSelectedGender] = useState<string | null>(null);
+
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const currentdata = useSelector(selectUser);
@@ -51,17 +56,23 @@ const ProfilePage: React.FC<IUser> = () => {
   }, [dispatch, profileStatus, currentdata]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     if (name === "skills") {
       const skillsArray = value.split(",").map((skill) => skill.trim());
       setProfile({ ...profile, [name]: skillsArray });
-    } else {
+    }else if (name === "gender") {
+      // Handle gender selection
+      setSelectedGender(value);
+      setProfile({ ...profile, gender: value });
+    }
+     else {
       setProfile({ ...profile, [name]: value });
     }
   };
 
+  
   const handleUpdatePicture = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -75,6 +86,7 @@ const ProfilePage: React.FC<IUser> = () => {
   const handleSubmit = () => {
     dispatch(updateProfile(profile));
   };
+
 
   return isLoading ? (
     <div className="flex items-center justify-center h-screen w-full">
@@ -200,23 +212,49 @@ const ProfilePage: React.FC<IUser> = () => {
           </div>
 
           <div className="mb-2">
-            <label
-              htmlFor="gender"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Gender
-            </label>
-            {/* Placeholder for gender dropdown */}
-            <select
-              id="gender"
-              name="gender"
-              className="mt-1 p-2 border rounded-md w-full"
-            >
-              <option value="M">M</option>
-              <option value="F">F</option>
-              <option value="O">O</option>
-            </select>
-          </div>
+  <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
+    Gender
+  </label>
+  {/* Radio buttons for gender selection */}
+  <div className="flex">
+    <label className="inline-flex items-center mr-4">
+      <input
+        type="radio"
+        id="male"
+        name="gender"
+        value="M"
+        checked={selectedGender === 'M'}
+        onChange={handleChange}
+        className="form-radio h-4 w-4 text-indigo-600"
+      />
+      <span className="ml-2">Male</span>
+    </label>
+    <label className="inline-flex items-center mr-4">
+      <input
+        type="radio"
+        id="female"
+        name="gender"
+        value="F"
+        checked={selectedGender === 'F'}
+        onChange={handleChange}
+        className="form-radio h-4 w-4 text-indigo-600"
+      />
+      <span className="ml-2">Female</span>
+    </label>
+    <label className="inline-flex items-center">
+      <input
+        type="radio"
+        id="other"
+        name="gender"
+        value="O"
+        checked={selectedGender === 'O'}
+        onChange={handleChange}
+        className="form-radio h-4 w-4 text-indigo-600"
+      />
+      <span className="ml-2">Other</span>
+    </label>
+  </div>
+</div>
 
           <button
             className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 mt-4 mx-auto block"
