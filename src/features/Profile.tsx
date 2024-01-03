@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavBar } from "../Components/NavBar/navbar";
+import { Link } from "react-router-dom";
 
 interface ProfilePageProps {
 }
@@ -95,6 +96,13 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
         >
           Update
         </button>
+        <Link to="../SignUp">
+        <button
+          className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 mt-4 mx-auto block"
+        >
+          logout
+        </button></Link>
+        
       </div>
     </div>
   </div>

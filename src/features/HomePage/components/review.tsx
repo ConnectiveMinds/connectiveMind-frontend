@@ -27,8 +27,8 @@ const Review = () => {
     <div className=" fixed bottom-8 left-8">
       <CustomButton
         text={textareaVisibility ? "Hide review" : "Write review"}
-        height={5}
-        width={10}
+        height={7}
+        width={12}
         onClick={toggleTextAreaVisibility}
       ></CustomButton>
       {textareaVisibility && (
