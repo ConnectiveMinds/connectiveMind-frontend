@@ -26,6 +26,9 @@ import {
   createprofile,
   getprofile,
   updateprofile,
+  deleteFies,
+  getdatesbyProject
+  
 } from "../utils/apiroutes";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -323,8 +326,7 @@ const apiService = {
 
 export default apiService;
 //files//
-export const getFilesById = createAsyncThunk(
-  "file/fetch",
+export const getFilesById = 
   async (id: string) => {
     try {
       console.log("using");
@@ -338,13 +340,13 @@ export const getFilesById = createAsyncThunk(
       }
 
       // Parse and return the response data
+      console.log(response.data);
       return response.data;
     } catch (error: any) {
       // Handle errors
       throw new Error(`An error occurred: ${error.message}`);
     }
   }
-);
 
 export const saveFile = createAsyncThunk(
   "file/saveFile",
@@ -369,6 +371,28 @@ export const saveFile = createAsyncThunk(
     }
   }
 );
+
+export const deleteFile = createAsyncThunk<void, string>(
+  'file/deleteFile',
+  async (id: string) => {
+    try {
+      const url = deleteFies + id
+      console.log(url)
+      const response = await api.delete(url);
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      // File deletion was successful
+      return response.data;
+  } catch (error: any) {
+    // Handle errors
+    throw new Error(`An error occurred: ${error.message}`);
+  }
+});
+
+
+
+
 
 //calendar//
 
@@ -425,6 +449,30 @@ export const saveDates = createAsyncThunk(
     }
   }
 );
+export const getDatesbyProjectId = async (id: string) => {
+  try {
+    // Use the axios instance to make the GET request
+    const url = getdatesbyProject + id;
+    const response = await api.get(url);
+
+    // Check if the response is ok
+    if (response.status !== 200) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // Convert date strings to JavaScript Date objects
+    const eventsWithDateObjects = response.data.map((event) => ({
+      ...event,
+      start: new Date(event.start),
+      end: new Date(event.end),
+    }));
+
+    return eventsWithDateObjects;
+  } catch (error: any) {
+    // Handle errors
+    throw new Error(`An error occurred: ${error.message}`);
+  }
+};
 
 //*************************************************profile Service************************************************************ */
 export const createProfile = async () => {

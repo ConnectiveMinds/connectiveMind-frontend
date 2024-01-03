@@ -27,9 +27,15 @@ export const fetchEventByUserId = createAsyncThunk(
   async () => {
     const response = await apiService.getEventsByUserId();
 
-    return response.data;
-  }
-);
+  const eventsWithDateObjects = response.data.map((event) => ({
+        ...event,
+        start: new Date(event.start),
+        end: new Date(event.end),
+      }));
+
+      return eventsWithDateObjects;
+    }
+) ;
 
 
 
