@@ -1,4 +1,3 @@
-import { IChatCard } from "../../../Components/Cards/chat_card";
 import { IEventCard } from "../../../Components/Cards/events_card";
 
 export interface IProject {
@@ -27,7 +26,7 @@ export interface IRequest extends IProject {
 export interface IChat {
   message?: string;
   projectId: string;
-  senderId?: IChatCard;
+  senderId?: IUser;
 }
 
 export interface IUpcomingEvent {

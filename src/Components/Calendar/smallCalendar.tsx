@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import {
   fetchEventByUserId,
   selectEvents,
-} from "../features/Calendar/components/calendarSlice";
-import { useAppDispatch } from "../app/hook";
+} from "../../features/Calendar/components/calendarSlice";
+import { useAppDispatch } from "../../app/hook";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";
@@ -33,14 +33,19 @@ export const SmallCalendar = () => {
 
   return (
     <div className="w-full">
-      <Calendar
-        localizer={localizer}
-        events={dates}
-        defaultView="month"
-        view="month"
-        views={["month"]}
-        style={{ height: 400, width: 300 }}
-      />
+      <div className="text-black text-3xl font-normal font-['Inter']">
+        <p>Your Calendar</p>
+      </div>
+      <div className="w-fit h-81">
+        <Calendar
+          localizer={localizer}
+          events={dates}
+          defaultView="month"
+          view="month"
+          views={["month"]}
+          style={{ height: 400, width: 300 }}
+        />
+      </div>
     </div>
   );
 };

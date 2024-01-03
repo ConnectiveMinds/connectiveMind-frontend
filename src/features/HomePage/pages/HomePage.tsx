@@ -22,9 +22,9 @@ import { FilePage } from "../../../Pages/FilePage";
 
 import { EventForm } from "../../../Components/eventform";
 import { IProject } from "../Interface";
-import { MyCalendar } from "../../../Components/calendar";
+import { MyCalendar } from "../../../Components/Calendar/calendar";
 import Upload from "../../../Components/upload";
-import { SmallCalendar } from "../../../Components/smallCalendar";
+import { SmallCalendar } from "../../../Components/Calendar/smallCalendar";
 import Calendar from "react-calendar";
 
 export interface IHomePage {
@@ -59,14 +59,14 @@ export function HomePage() {
         break;
       case "Project Timeline":
         // setcurrentsection(<MyCalendar _id={id}/>);
-        setcurrentsection(<MyCalendar _id={id}/>)
+        setcurrentsection(<MyCalendar _id={id} />);
         break;
       case "Team":
         setcurrentsection(<TeamMembersPage _id={id} />);
         break;
       case "Resources":
         // setcurrentsection(<FilePage _id={id} />);
-        setcurrentsection(<Upload id={id}/>);
+        setcurrentsection(<Upload id={id} />);
         break;
       default:
         setcurrentsection(<RecommendedProjects />);
@@ -74,10 +74,8 @@ export function HomePage() {
     }
   };
 
-  
   return (
     <div>
-      
       <NavBar
         isHomePage={true}
         isLandingpage={false}
@@ -99,8 +97,7 @@ export function HomePage() {
         <VerticalDivider />
         {currentSection}
         <div className="flex flex-col">
-        <SmallCalendar/>
-        <EventSection />
+          <EventSection />
         </div>
       </div>
       <Review />

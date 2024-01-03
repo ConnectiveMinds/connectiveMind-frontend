@@ -27,17 +27,10 @@ export function EventCard(props: IEventCard) {
     }
     if (difference <= 0) {
       return {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-        isStarted: false,
-        isPassed: true,
         timerColor: "red",
       };
     }
 
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
     const hours = Math.floor(
       (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
     );
@@ -50,12 +43,14 @@ export function EventCard(props: IEventCard) {
       } else if (minutes <= 30) {
         return "green";
       } else {
-        return "blue";
+        return "yellow";
       }
     };
     const timerColor = getTimerColor();
 
-    return { days, hours, minutes, seconds, isStarted: false, isPassed: false, timerColor };
+    return {
+      timerColor,
+    };
   }
 
   useEffect(() => {
@@ -66,7 +61,7 @@ export function EventCard(props: IEventCard) {
     return () => clearInterval(interval);
   }, []);
 
-  const { days, hours, minutes, seconds, isStarted, isPassed, timerColor } = starttimeRemaining;
+  const { timerColor } = starttimeRemaining;
 
   return (
     <div
@@ -76,19 +71,11 @@ export function EventCard(props: IEventCard) {
       <div
         className={`absolute top-2 right-2 h-4 w-4 rounded-full bg-${timerColor}-500`}
       ></div>
-      <p className="ml-3 mt-2 mb-4 overflow-x-clip overflow-y-clip">{props.title}</p>
-      <p className="ml-3 mt-2 overflow-x-clip overflow-y-clip">Project: {props.projectid.title}</p>
-      <p className="ml-4 mt-2 mr-4 mb-2 overflow-x-clip overflow-y-clip">
-        {isStarted && !isPassed ? "Ends In: " : isPassed ? null : "In: "}
-        {days !== 0
-          ? `${days} Days`
-          : hours !== 0
-          ? `${hours} hrs`
-          : minutes !== 0
-          ? ` ${minutes} min`
-          : seconds !== 0
-          ? ` ${seconds} secs`
-          : null}
+      <p className="ml-3 mt-2 mb-4 overflow-x-clip overflow-y-clip">
+        {props.title}
+      </p>
+      <p className="ml-3 mt-2 overflow-x-clip overflow-y-clip">
+        Project: {props.projectid.title}
       </p>
     </div>
   );

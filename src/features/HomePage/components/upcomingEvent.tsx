@@ -8,7 +8,6 @@ import {
 import { useAppDispatch } from "../../../app/hook";
 import { EventCard, IEventCard } from "../../../Components/Cards/events_card";
 
-
 export function UpcomingEvents() {
   const dispatch = useAppDispatch();
   const [upcomingEventList, setUpcomningEventList] = useState<
@@ -25,7 +24,7 @@ export function UpcomingEvents() {
       setCurrentStatus("Loading");
     } else if (eventStatus == "eventfetchedbyid") {
       setUpcomningEventList(events);
-      setCurrentStatus("No Upcoming Request");
+      setCurrentStatus("No Upcoming Events");
     } else if (eventStatus == "failed") {
       setCurrentStatus("Error Fetching");
     }
@@ -33,16 +32,15 @@ export function UpcomingEvents() {
 
   return (
     <div>
-      
       <div className="flex h-[464px] flex-col overflow-y-auto">
         <div className="text-black text-3xl font-normal font-['Inter']">
           <p>Upcoming Events</p>
         </div>
         <div className="flex items-center mt-4">
           <div className="w-4 h-4 rounded-full bg-red-500 mr-2"></div>
-          <span className="text-sm text-gray-500">Late</span>
+          <span className="text-sm text-gray-500">Elapsed</span>
           <div className="w-4 h-4 rounded-full bg-green-500 mx-2"></div>
-          <span className="text-sm text-gray-500">in less than 30 mins</span>
+          <span className="text-sm text-gray-500">Ongoing</span>
           <div className="w-4 h-4 rounded-full bg-blue-500 ml-2"></div>
           <span className="text-sm text-gray-500">Upcomming</span>
         </div>
@@ -59,7 +57,7 @@ export function UpcomingEvents() {
                   title={event.title}
                   start={event.start}
                   projectid={event.projectid}
-                  end={""}
+                  end={event.end}
                 />
               );
             })}
