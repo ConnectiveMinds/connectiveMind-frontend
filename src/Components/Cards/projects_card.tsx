@@ -1,3 +1,4 @@
+import { ToastContainer, toast } from "react-toastify";
 import { updatejoinRequest } from "../../services/api.services";
 import { CustomButton } from "../Button/customButton";
 import { SkillCard } from "./skills_card";
@@ -14,9 +15,9 @@ export function ProjectCard(props: IProjectCard) {
     try {
       console.log("actual", props._id);
       await updatejoinRequest(props._id).then(async () => {});
-      alert("Request sent");
+      toast.success("Request sent");
     } catch (e: any) {
-      alert("Request Already Sent or already a member");
+      toast.error("Request Already Sent or already a member");
     }
   };
 
@@ -50,6 +51,7 @@ export function ProjectCard(props: IProjectCard) {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

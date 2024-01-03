@@ -121,6 +121,12 @@ export function NavBar(props: INavBarProps) {
           <button onClick={createUserProfile}><img src="public\avatar.png" className="h-4 md:h-8 lg:h-12 rounded-full"/></button>
           </Link>
         )}
+         <Link to="../SignUp">
+        <div>
+        logout
+        </div>
+          
+        </Link>
       </div>
     </nav>
   );
