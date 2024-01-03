@@ -45,7 +45,7 @@ export const updateProfileImage = createAsyncThunk(
     };
     const response = await apiService.updateProfileImage(image, config);
 
-    return response.data;
+    return response;
   }
 );
 export const updateProfile = createAsyncThunk(
