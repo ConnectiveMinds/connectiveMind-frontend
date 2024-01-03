@@ -8,12 +8,12 @@ import {
   fetchEventByUserId,
   getEventsError,
   selectEvents,
-} from "../features/Calendar/components/calendarSlice";
+} from "../../features/Calendar/components/calendarSlice";
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../app/hook";
-import { getIdeaByProjectId } from "../services/api.services";
-import { IMember } from "../features/HomePage/Interface";
-import { EventForm } from "./eventform";
+import { useAppDispatch } from "../../app/hook";
+import { getIdeaByProjectId } from "../../services/api.services";
+import { IMember } from "../../features/HomePage/Interface";
+import { EventForm } from "../eventform";
 
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
@@ -51,14 +51,6 @@ export const MyCalendar = ({ _id }) => {
 
   return (
     <div className="myCustomHeight w-full mx-4 h-screen">
-      {show && (
-        <EventForm
-          _id={_id}
-          onClose={() => {
-            setShow(false);
-          }}
-        />
-      )}
       {idea?.ownerId == currentUser && (
         <div className="mb-4 text-right">
           <button
@@ -77,6 +69,14 @@ export const MyCalendar = ({ _id }) => {
           startAccessor="start"
           endAccessor="end"
           style={{ height: 700 }}
+        />
+      )}
+      {show && (
+        <EventForm
+          _id={_id}
+          onClose={() => {
+            setShow(false);
+          }}
         />
       )}
     </div>

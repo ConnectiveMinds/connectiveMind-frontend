@@ -14,7 +14,7 @@ import ProfilePage from "./features/Profile";
 
 import CreateGroup from "./features/CreateGroup/pages/CreateGroup";
 import { Login } from "./features/Auth/pages/SignIn";
-import { SmallCalendar } from "./Components/smallCalendar";
+import { SmallCalendar } from "./Components/Calendar/smallCalendar";
 
 const App = () => {
   return (

@@ -1,4 +1,4 @@
-import { SmallCalendar } from "../../../Components/smallCalendar";
+import { SmallCalendar } from "../../../Components/Calendar/smallCalendar";
 import { UpcomingEvents } from "./upcomingEvent";
 
 export function EventSection() {

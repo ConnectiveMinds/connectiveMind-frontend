@@ -8,17 +8,27 @@ import { sendOTP, signUp, verifyOTP } from "../../../services/api.services";
 import { ToastContainer, toast } from "react-toastify";
 import OTPDialog from "./OTPfield";
 
+interface FormData {
+  userName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phoneNo: string;
+  skills: string[];
+}
+
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
 
   const [showFrogotpassword, setShowFrogotpassword] = useState(false); // State to track the OTP dialog
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     userName: "",
     email: "",
     password: "",
     confirmPassword: "",
     phoneNo: "",
+    skills:[]
   });
 
   //validation errors of input fields
@@ -28,15 +38,21 @@ const SignUpForm: React.FC = () => {
     password: "",
     confirmPassword: "",
     phoneNo: "",
+    skills:"",
   });
 
-  const { userName, email, password, phoneNo } = formData;
+  const { userName, email, password, phoneNo,skills } = formData;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+   if (name === "skills") {
+     const skillsArray = value.split(",").map((skill) => skill.trim());
+     setFormData({ ...formData, [name]: skillsArray });
+   } else {
+     setFormData({ ...formData, [name]: value });
+   }
   };
 
   //invoked when form is submitted
@@ -73,7 +89,7 @@ const SignUpForm: React.FC = () => {
   };
   const handleSubmit = async () => {
     try {
-      await signUp(userName, email, password, Number(phoneNo))
+      await signUp(userName, email, password, Number(phoneNo),skills)
         .then((data) => {
           if (data) {
             navigate("/login");
@@ -91,8 +107,11 @@ const SignUpForm: React.FC = () => {
   //validation check of form input fields
   const handleValidation = (e: React.FormEvent) => {
     e.preventDefault();
-
+   
+    
     const tempErrors = validation(formData);
+    console.log(formData);
+    
     setErrors(tempErrors);
 
     //if no validation errors submit the form
@@ -177,6 +196,19 @@ const SignUpForm: React.FC = () => {
         />
         {errors.confirmPassword && (
           <p className="text-[red] text-[0.75rem]">{errors.confirmPassword}</p>
+        )}
+
+        <input
+          className="w-full mt-4 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 shadow-md"
+          placeholder="Your skills"
+          name="skills"
+          required
+          value={formData.skills}
+          onChange={handleChange}
+          onSubmit={handleValidation}
+        />
+        {errors.skills && (
+          <p className="text-[red] text-[0.75rem]">{errors.skills}</p>
         )}
 
         <button

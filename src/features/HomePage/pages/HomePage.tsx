@@ -3,7 +3,7 @@ import { NavBar } from "../../../Components/NavBar/navbar";
 import { SideBar } from "../../../Components/NavBar/sidebar";
 import { HorizontalDivider } from "../../../Components/Divider/horizontalDivider";
 import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
-
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import Review from "../components/review";
 import { ChangeEvent, useEffect, useState } from "react";
 import { RecommendedProjects } from "../components/recommendsection";
@@ -11,7 +11,7 @@ import { ChatSection } from "../components/chatsection";
 import TeamMembersPage from "../components/teamSection";
 import { EventSection } from "../components/eventSection";
 import { useSelector } from "react-redux";
-import {
+import ideaSlice, {
   fetchProjectByProjectId,
   fetchProjectByUserId,
   getIdeaStatus,
@@ -22,9 +22,9 @@ import { FilePage } from "../../../Pages/FilePage";
 
 import { EventForm } from "../../../Components/eventform";
 import { IProject } from "../Interface";
-import { MyCalendar } from "../../../Components/calendar";
+import { MyCalendar } from "../../../Components/Calendar/calendar";
 import Upload from "../../../Components/upload";
-import { SmallCalendar } from "../../../Components/smallCalendar";
+import { SmallCalendar } from "../../../Components/Calendar/smallCalendar";
 import Calendar from "react-calendar";
 
 export interface IHomePage {
@@ -49,7 +49,7 @@ export function HomePage() {
     } else if (homePageStatus == "failed") {
       setCurrentStatus("Error Fetching");
     }
-  }, [homePageStatus, dispatch]);
+  }, [homePageStatus]);
 
   const [currentSection, setcurrentsection] = useState(<RecommendedProjects />);
   const handledeitemClick = (section: string, id: string) => {
@@ -59,20 +59,21 @@ export function HomePage() {
         break;
       case "Project Timeline":
         // setcurrentsection(<MyCalendar _id={id}/>);
-        setcurrentsection(<Calendar />);
+        setcurrentsection(<MyCalendar _id={id} />);
         break;
       case "Team":
         setcurrentsection(<TeamMembersPage _id={id} />);
         break;
       case "Resources":
         // setcurrentsection(<FilePage _id={id} />);
-        setcurrentsection(<Upload _id={id} />);
+        setcurrentsection(<Upload id={id} />);
         break;
       default:
         setcurrentsection(<RecommendedProjects />);
         break;
     }
   };
+
   return (
     <div>
       <NavBar
@@ -95,7 +96,9 @@ export function HomePage() {
         ></SideBar>
         <VerticalDivider />
         {currentSection}
-        <EventSection />
+        <div className="flex flex-col">
+          <EventSection />
+        </div>
       </div>
       <Review />
     </div>
