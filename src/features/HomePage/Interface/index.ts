@@ -17,6 +17,7 @@ export interface IUser {
   avatar: string;
   institution: string;
   address: string;
+  gender: string;
 }
 
 export interface IMember extends IProject {

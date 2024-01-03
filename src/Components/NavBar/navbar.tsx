@@ -35,7 +35,9 @@ export function NavBar(props: INavBarProps) {
     } else if (profileStatus == "failed") {
       setavatar("publicavatar.png");
       console.log("Error");
-    } else if (profileStatus == "updated") {
+    } else if (profileStatus == "imageupdated") {
+      setavatar(currentdata.avatar);
+    } else if (profileStatus == "userdetailsupdated") {
       setavatar(currentdata.avatar);
     }
   }, [dispatch, currentdata]);

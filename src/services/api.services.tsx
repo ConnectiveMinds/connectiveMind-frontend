@@ -30,6 +30,7 @@ import {
   getdatesbyProject,
 } from "../utils/apiroutes";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { IUser } from "../features/HomePage/Interface";
 
 export const api = axios.create({
   baseURL: `${host}/api`,
@@ -481,6 +482,15 @@ const updateProfileImage = async (image: File, config: AxiosRequestConfig) => {
     throw new Error(e);
   }
 };
+const updateProfile = async (body: IUser) => {
+  try {
+    const response = await api.patch(updateprofile, body);
+    console.log(response.data);
+    return response.data;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
 
 const getProfile = async () => {
   try {
@@ -492,6 +502,7 @@ const getProfile = async () => {
   }
 };
 const apiService = {
+  updateProfile,
   updateProfileImage,
   getProfile,
   createGroup,
