@@ -2,22 +2,17 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import React, {  useEffect, useState } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
-
-import {
-  getEventsError,
-} from "../features/Calendar/components/calendarSlice";
-import { useSelector } from "react-redux";
-import {  getDatesbyProjectId, getIdeaByProjectId } from "../services/api.services";
-import { IMember } from "../features/HomePage/Interface";
-import { EventForm } from "./eventform";
-import { IEventCard } from "./Cards/events_card";
+import { IEventCard } from "../Cards/events_card";
+import { IMember } from "../../features/HomePage/Interface";
+import { getDatesbyProjectId, getIdeaByProjectId } from "../../services/api.services";
+import { EventForm } from "../eventform";
 
 const localizer = momentLocalizer(moment);
 
 
 export const MyCalendar = ({ _id }) => {
   const [dates,setDates] = useState<IEventCard[]>();
-  const eventsError = useSelector(getEventsError);
+ 
   const [idea, setIdea] = useState<IMember>();
   const [show, setShow] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
@@ -38,11 +33,7 @@ export const MyCalendar = ({ _id }) => {
     setCurrentUser(JSON.parse(localStorage.getItem("user")!).data.userId);
   }, [idea]);
 
-  useEffect(() => {
-    if (eventsError) {
-      console.error(eventsError);
-    }
-  }, [eventsError]);
+
 
   const handleClick = () => {
     setShow(true);

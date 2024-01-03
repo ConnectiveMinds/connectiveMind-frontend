@@ -20,8 +20,9 @@ import { useAppDispatch } from "../../../app/hook";
 import { FilePage } from "../../../Pages/FilePage";
 
 import { IProject } from "../Interface";
-import { MyCalendar } from "../../../Components/calendar";
-import { SmallCalendar } from "../../../Components/smallCalendar";
+import { MyCalendar } from "../../../Components/Calendar/calendar";
+
+
 export interface IHomePage {
   title: string;
   _id: string;
@@ -54,7 +55,7 @@ export function HomePage() {
         break;
       case "Project Timeline":
         // setcurrentsection(<MyCalendar _id={id}/>);
-        setcurrentsection(<MyCalendar _id={id}/>)
+        setcurrentsection(<MyCalendar _id={id} />);
         break;
       case "Team":
         setcurrentsection(<TeamMembersPage _id={id} />);
@@ -68,6 +69,7 @@ export function HomePage() {
         break;
     }
   };
+
   return (
     <div>
       <NavBar
@@ -91,8 +93,7 @@ export function HomePage() {
         <VerticalDivider />
         {currentSection}
         <div className="flex flex-col">
-        <SmallCalendar/>
-        <EventSection />
+          <EventSection />
         </div>
       </div>
       <Review />

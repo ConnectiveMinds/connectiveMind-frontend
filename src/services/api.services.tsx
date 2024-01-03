@@ -32,7 +32,6 @@ import {
 } from "../utils/apiroutes";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-
 export const api = axios.create({
   baseURL: `${host}/api`,
   headers: {
@@ -84,7 +83,8 @@ export const signUp = async (
   name: string,
   email: string,
   password: string,
-  phoneNo: number
+  phoneNo: number,
+  skills: string[]
 ) => {
   try {
     const response = await api.post(userSignUp, {
@@ -94,6 +94,7 @@ export const signUp = async (
       status: "open",
       // gender: "M",
       phoneNo: phoneNo,
+      skills: skills,
       // address: "afnfsnn",
     });
     console.log(response.data);
@@ -156,6 +157,16 @@ export const getAllProjects = async () => {
   } catch (e: any) {
     throw new Error(`Error: ${e.message}`);
     /* empty */
+  }
+};
+
+export const getprojectForlanding = async () => {
+  try {
+    const response = await axios.get(`${host}/landing`, {});
+    console.log(response.data);
+    return response.data;
+  } catch (e: any) {
+    throw new Error(`Error: ${e.message}`);
   }
 };
 export const getIdeaByUserId = async () => {
@@ -336,16 +347,16 @@ export const getFilesById =
     }
   }
 
-
-
-
 export const saveFile = createAsyncThunk(
   "file/saveFile",
-  async ({ body, config }: { body: FormData; config: AxiosRequestConfig }, thunkAPI) => {
+  async (
+    { body, config }: { body: FormData; config: AxiosRequestConfig },
+    thunkAPI
+  ) => {
     try {
       const url = postFiles;
       const response = await api.post(url, body, config);
-     
+
       if (response.status !== 200) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }

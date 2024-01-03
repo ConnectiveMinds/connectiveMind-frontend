@@ -14,7 +14,7 @@ import ProfilePage from "./features/Profile";
 
 import CreateGroup from "./features/CreateGroup/pages/CreateGroup";
 import { Login } from "./features/Auth/pages/SignIn";
-import { SmallCalendar } from "./Components/smallCalendar";
+import { SmallCalendar } from "./Components/Calendar/smallCalendar";
 
 const App = () => {
   return (
@@ -35,7 +35,6 @@ const App = () => {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/Profile" element={<ProfilePage />} />
           <Route path="/Calendar" element={<SmallCalendar />} />
-
           <Route path="/CreateGroup" element={<CreateGroup />} />
           <Route path="/join-requests" element={<JoinRequest />} />
         

@@ -37,7 +37,7 @@ export function RecommendedProjects() {
     );
   });
   return (
-    <div className="ml-8 mr-8 overflow-y-auto max-h-screen">
+    <div className="ml-8 mr-8 overflow-y-auto max-h-screen max-w-full">
       <h1 className=" h-[17px] pb-10 text-black text-[22px] font-bold font-['Inter'] ">
         Recommended Projects
       </h1>
