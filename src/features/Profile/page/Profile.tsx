@@ -5,6 +5,7 @@ import {
   getProfile,
   getProfileStatus,
   selectUser,
+  updateProfile,
   updateProfileImage,
 } from "../profileslice";
 import { useSelector } from "react-redux";
@@ -12,17 +13,23 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../app/hook";
 import { IUser } from "../../HomePage/Interface";
 
+
+
 const ProfilePage: React.FC<IUser> = () => {
   // Initial profile information
   const [profile, setProfile] = useState<IUser>({
-    address: "NA",
+    gender: "",
+    address: "",
     _id: "",
     name: "NA",
     email: "NA",
     skills: [],
-    avatar: "NA",
+    avatar: "",
     institution: "",
   });
+  // Inside the ProfilePage component
+const [selectedGender, setSelectedGender] = useState<string | null>(null);
+
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const currentdata = useSelector(selectUser);
@@ -36,59 +43,50 @@ const ProfilePage: React.FC<IUser> = () => {
       setIsLoading(false);
       setProfile(currentdata);
     } else if (profileStatus == "failed") {
-      console.log("Error");
-    } else if (profileStatus == "updated") {
-      console.log(currentdata);
       setIsLoading(false);
+      console.log("Error");
+    } else if (profileStatus == "imageupdated") {
+      setIsLoading(false);
+      setProfile(currentdata);
+    } else if (profileStatus == "userdetailsupdated") {
+      setIsLoading(false);
+      console.log(currentdata);
       setProfile(currentdata);
     }
   }, [dispatch, profileStatus, currentdata]);
 
-  const [formValues, setFormValues] = useState({});
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    if (name === "skills") {
+      const skillsArray = value.split(",").map((skill) => skill.trim());
+      setProfile({ ...profile, [name]: skillsArray });
+    }else if (name === "gender") {
+      // Handle gender selection
+      setSelectedGender(value);
+      setProfile({ ...profile, gender: value });
+    }
+     else {
+      setProfile({ ...profile, [name]: value });
+    }
+  };
 
-  const handleSkillsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormValues({
-      ...formValues,
-      skills: e.target.value,
-    });
-  };
-  const handleInstitutionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormValues({
-      ...formValues,
-      institution: e.target.value,
-    });
-  };
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormValues({
-      ...formValues,
-      name: e.target.value,
-    });
-  };
-  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormValues({
-      ...formValues,
-      address: e.target.value,
-    });
-  };
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormValues({
-      ...formValues,
-      email: e.target.value,
-    });
-  };
+  
   const handleUpdatePicture = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-
     if (file) {
       const reader = new FileReader();
 
       reader.onloadend = async () => {
         dispatch(updateProfileImage(file));
       };
-
-      reader.readAsDataURL(file);
     }
   };
+  const handleSubmit = () => {
+    dispatch(updateProfile(profile));
+  };
+
 
   return isLoading ? (
     <div className="flex items-center justify-center h-screen w-full">
@@ -146,8 +144,8 @@ const ProfilePage: React.FC<IUser> = () => {
             <input
               id="name"
               name="name"
-              value={""}
-              onChange={handleNameChange}
+              value={profile.name}
+              onChange={handleChange}
               className="mt-1 p-2 border rounded-md w-full"
             ></input>
           </div>
@@ -161,8 +159,8 @@ const ProfilePage: React.FC<IUser> = () => {
             <input
               id="email"
               name="email"
-              value={""}
-              onChange={handleEmailChange}
+              value={profile.email}
+              onChange={handleChange}
               className="mt-1 p-2 border rounded-md w-full"
             ></input>
           </div>
@@ -176,8 +174,8 @@ const ProfilePage: React.FC<IUser> = () => {
             <input
               id="address"
               name="address"
-              value={""}
-              onChange={handleAddressChange}
+              value={profile.address}
+              onChange={handleChange}
               className="mt-1 p-2 border rounded-md w-full"
             ></input>
           </div>
@@ -191,8 +189,8 @@ const ProfilePage: React.FC<IUser> = () => {
             <input
               id="institution"
               name="institution"
-              value={""}
-              onChange={handleInstitutionChange}
+              value={profile.institution}
+              onChange={handleChange}
               className="mt-1 p-2 border rounded-md w-full"
             ></input>
           </div>
@@ -207,34 +205,60 @@ const ProfilePage: React.FC<IUser> = () => {
             <input
               id="skills"
               name="skills"
-              value={""}
-              onChange={handleSkillsChange}
+              value={profile.skills}
+              onChange={handleChange}
               className="mt-1 p-2 border rounded-md w-full"
             ></input>
           </div>
 
           <div className="mb-2">
-            <label
-              htmlFor="gender"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Gender
-            </label>
-            {/* Placeholder for gender dropdown */}
-            <select
-              id="gender"
-              name="gender"
-              className="mt-1 p-2 border rounded-md w-full"
-            >
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
+  <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
+    Gender
+  </label>
+  {/* Radio buttons for gender selection */}
+  <div className="flex">
+    <label className="inline-flex items-center mr-4">
+      <input
+        type="radio"
+        id="male"
+        name="gender"
+        value="M"
+        checked={selectedGender === 'M'}
+        onChange={handleChange}
+        className="form-radio h-4 w-4 text-indigo-600"
+      />
+      <span className="ml-2">Male</span>
+    </label>
+    <label className="inline-flex items-center mr-4">
+      <input
+        type="radio"
+        id="female"
+        name="gender"
+        value="F"
+        checked={selectedGender === 'F'}
+        onChange={handleChange}
+        className="form-radio h-4 w-4 text-indigo-600"
+      />
+      <span className="ml-2">Female</span>
+    </label>
+    <label className="inline-flex items-center">
+      <input
+        type="radio"
+        id="other"
+        name="gender"
+        value="O"
+        checked={selectedGender === 'O'}
+        onChange={handleChange}
+        className="form-radio h-4 w-4 text-indigo-600"
+      />
+      <span className="ml-2">Other</span>
+    </label>
+  </div>
+</div>
 
           <button
             className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 mt-4 mx-auto block"
-            onClick={() => console.log("Update Skills")}
+            onClick={handleSubmit}
           >
             Update
           </button>

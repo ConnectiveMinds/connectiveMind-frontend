@@ -26,7 +26,7 @@ const CreateGroup: React.FC = () => {
     const { name, value } = e.target;
 
     if (name === "skillsRequired") {
-      const skillsArray = value.split(',').map(skill => skill.trim());
+      const skillsArray = value.split(",").map((skill) => skill.trim());
       setFormData({ ...formData, [name]: skillsArray });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -37,7 +37,6 @@ const CreateGroup: React.FC = () => {
     e.preventDefault();
 
     try {
-      
       const response = await createGroup(
         teamName,
         projectDescription,
