@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import {
   fetchEventByUserId,
   selectEvents,
-} from "../../features/Calendar/components/calendarSlice";
-import { useAppDispatch } from "../../app/hook";
+} from "../features/Calendar/components/calendarSlice";
+import { useAppDispatch } from "../app/hook";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import { Calendar, momentLocalizer } from "react-big-calendar";

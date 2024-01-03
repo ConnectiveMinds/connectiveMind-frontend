@@ -144,7 +144,9 @@ const Login = () => {
             </button>
             <div className="my-2 flex text-sm text-purple-700 tracking-wide">
               <p className="font-normal">Don’t have and account?</p>
-              <p className="font-bold">Register</p>
+              <a href="/signup">
+                <p className="font-bold">Register</p>
+              </a>
             </div>
           </div>
         </div>
