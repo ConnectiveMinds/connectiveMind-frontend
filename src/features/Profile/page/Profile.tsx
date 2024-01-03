@@ -41,10 +41,9 @@ const ProfilePage: React.FC<IUser> = () => {
       setIsLoading(false);
       console.log("Error");
     } else if (profileStatus == "imageupdated") {
-      setIsLoading(false);
       setProfile(currentdata);
-    } else if (profileStatus == "userdetailsupdated") {
       setIsLoading(false);
+    } else if (profileStatus == "userdetailsupdated") {
       console.log(currentdata);
       setProfile(currentdata);
     }
@@ -64,6 +63,7 @@ const ProfilePage: React.FC<IUser> = () => {
 
   const handleUpdatePicture = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+
     if (file) {
       const reader = new FileReader();
 

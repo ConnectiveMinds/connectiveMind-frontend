@@ -23,6 +23,7 @@ export const getdatesbyProject = `v1/calendar/crud/`;
 export const getdates = `/calendar/`;
 export const postdates = `/v1/calendar/crud/create/`;
 export const createprofile = `/v1/profile/crud/createprofile`;
+export const updateProfileimage = `/v1/user/crud/updateprofile`;
 export const updateprofile = `/v1/user/crud/`;
 export const getprofile = `/v1/user/get/userprofile`;
 
