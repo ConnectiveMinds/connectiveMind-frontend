@@ -103,7 +103,7 @@ export function NavBar(props: INavBarProps) {
 
         {isMenuOpen && (
           <div className="md:hidden absolute top-12 right-4 p-4 bg-white shadow-md rounded">
-            <a href="">Me</a>
+            <a href="Profile">Me</a>
             <a href="Home" className="block my-2 text-gray-800">
               Home
             </a>
@@ -113,20 +113,24 @@ export function NavBar(props: INavBarProps) {
             <a href="join-requests" className="block my-2 text-gray-800">
               Join Request
             </a>
+            <a href="login" className="block my-2 text-gray-800">
+              log out
+            </a>
           </div>
         )}
 
-        {!props.isLandingpage && (
-          <Link to="../Profile">
-          <button onClick={createUserProfile}><img src="public\avatar.png" className="h-4 md:h-8 lg:h-12 rounded-full"/></button>
-          </Link>
-        )}
-         <Link to="../SignUp">
-        <div>
-        logout
-        </div>
-          
-        </Link>
+{!props.isLandingpage && (
+  <div className="hidden md:flex items-center space-x-2">
+    <Link to="../Profile">
+      <button onClick={createUserProfile}>
+        <img src="public\avatar.png" className="h-4 md:h-8 lg:h-12 rounded-full" />
+      </button>
+    </Link>
+    <Link to="../SignUp">
+      <img src="public\logout.png" className="m-4 h-3 md:h-4 lg:h-8" />
+    </Link>
+  </div>
+)}
       </div>
     </nav>
   );
