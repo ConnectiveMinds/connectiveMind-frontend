@@ -5,14 +5,14 @@ import { ToastContainer, toast } from "react-toastify";
 import { useAppDispatch } from "../app/hook";
 import { IMember } from "../features/HomePage/Interface";
 import { getIdeaByProjectId, saveDates } from "../services/api.services";
-import { fetchEventByUserId } from "../features/Calendar/components/calendarSlice";
 import { Choose } from "./search";
+import { fetchEventByUserId } from "../features/Calendar/components/calendarSlice";
 
 // import { useSelector } from "react-redux";
 // import { useNavigate } from "react-router";
 // import { useAppDispatch } from "../app/hook";
 
-export const EventForm = ({ _id,onClose }) => {
+export const EventForm = ({ _id,onClose,onLoading }) => {
   const dispatch = useAppDispatch();
   // const { dates } = useSelector(selectEvents);
   // const eventsError = useSelector(getEventsError);
@@ -32,6 +32,7 @@ export const EventForm = ({ _id,onClose }) => {
   const [FormValue, setFormValue] = useState(initialState);
   const [selectedMembers, setSelectedMembers] = useState<Array<string>>([]);
   const { title, start, end, assigned } = FormValue;
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     getIdeaByProjectId(_id).then((data) => {
       setIdea(data.data);
@@ -61,6 +62,7 @@ export const EventForm = ({ _id,onClose }) => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
     dispatch(
       saveDates({
@@ -75,13 +77,16 @@ export const EventForm = ({ _id,onClose }) => {
       })
     )
       .then((resultAction) => {
+        setIsLoading(false);
         if (saveDates.fulfilled.match(resultAction)) {
           // Handle success (if needed)
 
           setFormValue(initialState);
           toast.success("Event added Successfully");
-          dispatch(fetchEventByUserId());
-          handleClose();
+          dispatch(fetchEventByUserId);
+
+          
+
         } else if (saveDates.rejected.match(resultAction)) {
           // Handle rejection (if needed)
           console.log(resultAction.error.message);
@@ -92,14 +97,26 @@ export const EventForm = ({ _id,onClose }) => {
       .catch((error) => {
         // Handle unexpected errors
         console.error("Unexpected error:", error);
+      }).finally(() => {
+        if (onLoading) {
+          onLoading(false);
+        }
       });
   };
+  
   const handleClose = () => {
+    setIsLoading(false);
     // Call the onClose function passed from the parent component
     if (onClose) {
       onClose();
     }
   };
+  useEffect(() => {
+    // Notify the parent component about the loading state
+    if (onLoading) {
+      onLoading(isLoading);
+    }
+  }, [isLoading, onLoading]);
 
   return (
     <div className="max-w-sm mx-auto ">
@@ -160,7 +177,7 @@ export const EventForm = ({ _id,onClose }) => {
               onClick={handleSubmit}
               className="mt-6 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             >
-              Set Event
+              {isLoading ? "Adding Event..." : "Set Event"}
             </button>
           </div>
         </div>

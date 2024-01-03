@@ -16,29 +16,23 @@ export const SmallCalendar = () => {
   const dispatch = useAppDispatch();
 
   const dates = useSelector(selectEvents);
-  const dateValues = dates.map((event) => new Date(event.start));
+  
 
   useEffect(() => {
     // Fetch events when the component mounts
     dispatch(fetchEventByUserId());
   }, [dispatch]);
 
-  const formattedDateValues = dateValues.map(
-    (date) => date.toISOString().split("T")[0]
-  );
-  const dateObjects = formattedDateValues.map(
-    (dateString) => new Date(dateString)
-  );
-  console.log(dateObjects);
+ 
 
   return (
-    <div className="w-full">
+    <div className="max-w-full realtive ">
       <Calendar
         localizer={localizer}
         events={dates}
         defaultView="month"
-        view="month"
-        views={["month"]}
+        // view="month"
+        // views={["month"]}
         style={{ height: 400, width: 300 }}
       />
     </div>

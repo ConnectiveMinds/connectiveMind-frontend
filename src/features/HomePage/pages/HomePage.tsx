@@ -11,8 +11,7 @@ import { ChatSection } from "../components/chatsection";
 import TeamMembersPage from "../components/teamSection";
 import { EventSection } from "../components/eventSection";
 import { useSelector } from "react-redux";
-import ideaSlice, {
-  fetchProjectByProjectId,
+import {
   fetchProjectByUserId,
   getIdeaStatus,
   selectIdea,
@@ -20,13 +19,9 @@ import ideaSlice, {
 import { useAppDispatch } from "../../../app/hook";
 import { FilePage } from "../../../Pages/FilePage";
 
-import { EventForm } from "../../../Components/eventform";
 import { IProject } from "../Interface";
 import { MyCalendar } from "../../../Components/calendar";
-import Upload from "../../../Components/upload";
 import { SmallCalendar } from "../../../Components/smallCalendar";
-import Calendar from "react-calendar";
-
 export interface IHomePage {
   title: string;
   _id: string;
@@ -66,7 +61,7 @@ export function HomePage() {
         break;
       case "Resources":
         // setcurrentsection(<FilePage _id={id} />);
-        setcurrentsection(<Upload id={id}/>);
+        setcurrentsection(<FilePage _id={id}/>);
         break;
       default:
         setcurrentsection(<RecommendedProjects />);
