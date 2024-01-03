@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { TextField } from "../TextField/texfield";
 import { Link } from "react-router-dom";
+import { createprofile } from "../../utils/apiroutes";
+import { createProfile } from "../../services/api.services";
 
 interface INavBarProps {
   isHomePage: boolean;
@@ -16,6 +18,18 @@ export function NavBar(props: INavBarProps) {
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
+
+  async function createUserProfile() {
+    try {
+      const profile = await createProfile();
+      console.log(profile);
+      
+    }
+    catch (e: any) {
+      console.log(e);
+      
+    }
+  }
 
   return (
     <nav className="flex justify-between items-center p-2">
@@ -104,7 +118,7 @@ export function NavBar(props: INavBarProps) {
 
         {!props.isLandingpage && (
           <Link to="../Profile">
-          <img src="public\avatar.png" className="h-4 md:h-8 lg:h-12 rounded-full"/>
+          <button onClick={createUserProfile}><img src="public\avatar.png" className="h-4 md:h-8 lg:h-12 rounded-full"/></button>
           </Link>
         )}
       </div>

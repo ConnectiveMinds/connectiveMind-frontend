@@ -80,7 +80,8 @@ export const signUp = async (
   name: string,
   email: string,
   password: string,
-  phoneNo: number
+  phoneNo: number,
+  skills:string[]
 ) => {
   try {
     const response = await api.post(userSignUp, {
@@ -90,6 +91,7 @@ export const signUp = async (
       status: "open",
       // gender: "M",
       phoneNo: phoneNo,
+      skills:skills,
       // address: "afnfsnn",
     });
     console.log(response.data);

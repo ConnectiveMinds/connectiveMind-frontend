@@ -73,8 +73,11 @@ export function HomePage() {
         break;
     }
   };
+
+  
   return (
     <div>
+      
       <NavBar
         isHomePage={true}
         isLandingpage={false}
