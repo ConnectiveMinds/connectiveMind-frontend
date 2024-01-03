@@ -11,17 +11,12 @@ import { ChatSection } from "../components/chatsection";
 import TeamMembersPage from "../components/teamSection";
 import { EventSection } from "../components/eventSection";
 import { useSelector } from "react-redux";
-import {
-  fetchProjectByUserId,
-  getIdeaStatus,
-  selectIdea,
-} from "../ideaSlice";
+import { fetchProjectByUserId, getIdeaStatus, selectIdea } from "../ideaSlice";
 import { useAppDispatch } from "../../../app/hook";
 import { FilePage } from "../../../Pages/FilePage";
 
 import { IProject } from "../Interface";
 import { MyCalendar } from "../../../Components/Calendar/calendar";
-
 
 export interface IHomePage {
   title: string;
@@ -62,7 +57,7 @@ export function HomePage() {
         break;
       case "Resources":
         // setcurrentsection(<FilePage _id={id} />);
-        setcurrentsection(<FilePage _id={id}/>);
+        setcurrentsection(<FilePage _id={id} />);
         break;
       default:
         setcurrentsection(<RecommendedProjects />);
@@ -82,7 +77,7 @@ export function HomePage() {
           throw new Error("Function not implemented.");
         }}
       ></NavBar>
-      <HorizontalDivider />
+
       <div className="flex flex-row">
         <SideBar
           groups={mygrouplist}

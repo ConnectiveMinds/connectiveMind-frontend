@@ -1,37 +1,49 @@
 import React, { useEffect, useState } from "react";
-import { NavBar } from "../Components/NavBar/navbar";
-import { getProfile } from "../services/api.services";
+import { NavBar } from "../../../Components/NavBar/navbar";
 
-interface ProfilePageProps {
-  _id: string;
-  name: string;
-  email: string;
-  skills: string[];
-  avatar: string;
-  institution: string;
-  address: string;
-  userId: string;
-}
+import {
+  getProfile,
+  getProfileStatus,
+  selectUser,
+  updateProfileImage,
+} from "../profileslice";
+import { useSelector } from "react-redux";
 
-const ProfilePage: React.FC<ProfilePageProps> = () => {
+import { useAppDispatch } from "../../../app/hook";
+import { IUser } from "../../HomePage/Interface";
+
+const ProfilePage: React.FC<IUser> = () => {
   // Initial profile information
-  const [profile, setProfile] = useState<ProfilePageProps>({
-    userId: "",
-    address: "",
+  const [profile, setProfile] = useState<IUser>({
+    address: "NA",
     _id: "",
     name: "NA",
     email: "NA",
     skills: [],
-    avatar: "",
+    avatar: "NA",
     institution: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const currentdata = useSelector(selectUser);
+  const profileStatus = useSelector(getProfileStatus);
   useEffect(() => {
-    getProfile().then((data) => {
-      console.log(data.data);
-      setProfile(data.data);
-    });
-  }, []);
-  console.log(profile.name);
+    if (profileStatus === "idle") {
+      dispatch(getProfile());
+    } else if (profileStatus == "loading") {
+      setIsLoading(true);
+    } else if (profileStatus == "fetched") {
+      setIsLoading(false);
+      setProfile(currentdata);
+    } else if (profileStatus == "failed") {
+      console.log("Error");
+    } else if (profileStatus == "updated") {
+      console.log(currentdata);
+      setIsLoading(false);
+      setProfile(currentdata);
+    }
+  }, [dispatch, profileStatus, currentdata]);
+
   const [formValues, setFormValues] = useState({});
 
   const handleSkillsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -47,19 +59,22 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
     if (file) {
       const reader = new FileReader();
 
-      reader.onloadend = () => {
-        // const newProfile = {
-        //   ...profile,
-        //   avatar: reader.result as string,
-        // };
-        // setProfile(newProfile);
+      reader.onloadend = async () => {
+        dispatch(updateProfileImage(file));
       };
 
       reader.readAsDataURL(file);
     }
   };
 
-  return (
+  return isLoading ? (
+    <div className="flex items-center justify-center h-screen w-full">
+      <div className="relative">
+        <div className="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"></div>
+        <div className="absolute top-0 left-0 h-24 w-24 rounded-full border-t-8 border-b-8 border-blue-500 animate-spin"></div>
+      </div>
+    </div>
+  ) : (
     <div>
       <NavBar
         isHomePage={false}
