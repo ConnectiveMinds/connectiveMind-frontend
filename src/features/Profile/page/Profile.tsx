@@ -46,13 +46,36 @@ const ProfilePage: React.FC<IUser> = () => {
 
   const [formValues, setFormValues] = useState({});
 
-  const handleSkillsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleSkillsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({
       ...formValues,
       skills: e.target.value,
     });
   };
-
+  const handleInstitutionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValues({
+      ...formValues,
+      institution: e.target.value,
+    });
+  };
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValues({
+      ...formValues,
+      name: e.target.value,
+    });
+  };
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValues({
+      ...formValues,
+      address: e.target.value,
+    });
+  };
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValues({
+      ...formValues,
+      email: e.target.value,
+    });
+  };
   const handleUpdatePicture = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
@@ -85,13 +108,14 @@ const ProfilePage: React.FC<IUser> = () => {
           throw new Error("Function not implemented.");
         }}
       />
-      <div className="flex items-center justify-center h-full bg-white">
-        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+      <div className="flex h-full bg-white">
+        {/* Left Column */}
+        <div className="w-1/2 p-6">
           <label htmlFor="profilePicture" className="block cursor-pointer">
             <img
               src={profile.avatar}
               alt="Profile"
-              className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-white"
+              className="w-48 h-48 rounded-full mx-auto mb-4 border-4 border-white"
             />
             <input
               id="profilePicture"
@@ -105,22 +129,107 @@ const ProfilePage: React.FC<IUser> = () => {
             <h1 className="text-3xl font-bold mb-2">{profile.name}</h1>
             <p className="text-gray-500 mb-2">{profile.email}</p>
             <p className="text-gray-500">{profile.address}</p>
+            <p className="text-gray-500 mb-2">{profile.institution}</p>
+            <p className="text-gray-500">{profile.skills}</p>
+          </div>
+        </div>
+
+        {/* Right Column */}
+        <div className="w-1/3 p-3">
+          <div className="mb-2">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              value={""}
+              onChange={handleNameChange}
+              className="mt-1 p-2 border rounded-md w-full"
+            ></input>
+          </div>
+          <div className="mb-2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              value={""}
+              onChange={handleEmailChange}
+              className="mt-1 p-2 border rounded-md w-full"
+            ></input>
+          </div>
+          <div className="mb-2">
+            <label
+              htmlFor="address"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Address
+            </label>
+            <input
+              id="address"
+              name="address"
+              value={""}
+              onChange={handleAddressChange}
+              className="mt-1 p-2 border rounded-md w-full"
+            ></input>
+          </div>
+          <div className="mb-2">
+            <label
+              htmlFor="institution"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Institution
+            </label>
+            <input
+              id="institution"
+              name="institution"
+              value={""}
+              onChange={handleInstitutionChange}
+              className="mt-1 p-2 border rounded-md w-full"
+            ></input>
           </div>
 
-          <div className="mt-4">
+          <div className="mb-2">
             <label
               htmlFor="skills"
               className="block text-sm font-medium text-gray-700"
             >
               Skills (comma-separated)
             </label>
-            <textarea
+            <input
               id="skills"
               name="skills"
               value={""}
               onChange={handleSkillsChange}
               className="mt-1 p-2 border rounded-md w-full"
-            ></textarea>
+            ></input>
+          </div>
+
+          <div className="mb-2">
+            <label
+              htmlFor="gender"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Gender
+            </label>
+            {/* Placeholder for gender dropdown */}
+            <select
+              id="gender"
+              name="gender"
+              className="mt-1 p-2 border rounded-md w-full"
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
           </div>
 
           <button

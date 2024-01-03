@@ -133,9 +133,20 @@ export function NavBar(props: INavBarProps) {
           )}
 
           {!props.isLandingpage && (
-            <Link to="../Profile">
-              <img src={useravatar} className="lg:h-16 lg:w-16 rounded-full" />
-            </Link>
+            <div className="hidden md:flex items-center space-x-2">
+              <Link to="../Profile">
+                <img
+                  src={useravatar}
+                  className="h-4 md:h-8 lg:h-12 rounded-full"
+                />
+              </Link>
+              <Link to="../SignUp">
+                <img
+                  src="public\logout.png"
+                  className="m-4 h-3 md:h-4 lg:h-8"
+                />
+              </Link>
+            </div>
           )}
         </div>
       </nav>
