@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { TextField } from "../TextField/texfield";
 import { Link } from "react-router-dom";
-import { createprofile } from "../../utils/apiroutes";
+
 import { createProfile } from "../../services/api.services";
 
 interface INavBarProps {
