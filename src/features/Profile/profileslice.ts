@@ -5,7 +5,13 @@ import { IUser } from "../HomePage/Interface";
 
 interface IProfileState {
   data: IUser;
-  status: "idle" | "loading" | "failed" | "fetched" | "updated"; // Change "fulfilled" to "succeeded"
+  status:
+    | "idle"
+    | "loading"
+    | "failed"
+    | "fetched"
+    | "imageupdated"
+    | "userdetailsupdated"; // Change "fulfilled" to "succeeded"
   error: string;
 }
 
@@ -18,6 +24,7 @@ const initialState: IProfileState = {
     skills: [],
     institution: "",
     address: "",
+    gender: "",
   },
   status: "idle",
   error: "",
@@ -29,7 +36,7 @@ export const getProfile = createAsyncThunk("profile/get", async () => {
 });
 
 export const updateProfileImage = createAsyncThunk(
-  "profile/update",
+  "profile/updateprofile",
   async (image: File) => {
     const config = {
       headers: {
@@ -39,6 +46,13 @@ export const updateProfileImage = createAsyncThunk(
     const response = await apiService.updateProfileImage(image, config);
 
     return response;
+  }
+);
+export const updateProfile = createAsyncThunk(
+  "profile/update",
+  async (body: IUser) => {
+    const response = await apiService.updateProfile(body);
+    return response.data;
   }
 );
 export const profileSlice = createSlice({
@@ -61,13 +75,24 @@ export const profileSlice = createSlice({
       })
 
       .addCase(updateProfileImage.fulfilled, (state, action) => {
-        state.status = "updated";
+        state.status = "imageupdated";
         state.data = action.payload;
       })
       .addCase(updateProfileImage.pending, (state) => {
         state.status = "loading";
       })
       .addCase(updateProfileImage.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message || "An error occurred";
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.status = "userdetailsupdated";
+        state.data = action.payload;
+      })
+      .addCase(updateProfile.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message || "An error occurred";
       });
