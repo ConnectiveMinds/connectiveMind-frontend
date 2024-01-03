@@ -1,29 +1,30 @@
 import { Calendar, momentLocalizer } from "react-big-calendar";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 import { IEventCard } from "../Cards/events_card";
 import { IMember } from "../../features/HomePage/Interface";
-import { getDatesbyProjectId, getIdeaByProjectId } from "../../services/api.services";
+import {
+  getDatesbyProjectId,
+  getIdeaByProjectId,
+} from "../../services/api.services";
 import { EventForm } from "../eventform";
 
 const localizer = momentLocalizer(moment);
 
-
 export const MyCalendar = ({ _id }) => {
-  const [dates,setDates] = useState<IEventCard[]>();
- 
+  const [dates, setDates] = useState<IEventCard[]>();
+
   const [idea, setIdea] = useState<IMember>();
   const [show, setShow] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getDatesbyProjectId(_id).then((data)=>
-    {
-      console.log(data)
+    getDatesbyProjectId(_id).then((data) => {
+      console.log(data);
       setDates(data);
-    })
+    });
   }, []);
 
   useEffect(() => {
@@ -33,8 +34,6 @@ export const MyCalendar = ({ _id }) => {
     setCurrentUser(JSON.parse(localStorage.getItem("user")!).data.userId);
   }, [idea]);
 
-
-
   const handleClick = () => {
     setShow(true);
   };
@@ -42,29 +41,28 @@ export const MyCalendar = ({ _id }) => {
   const handleLoading = (isLoading) => {
     setLoading(isLoading);
   };
- 
-    
 
   const eventStyleGetter = (event) => {
-    const backgroundColor = event.allday ? 'yellow' : '#ED5694';
+    const backgroundColor = event.allday ? "yellow" : "#ED5694";
     return {
       style: {
         backgroundColor,
-        borderRadius: '5px',
+        borderRadius: "5px",
         opacity: 0.8,
-        color: 'white',
-        border: '0px',
-        display: 'block',
-
-
+        color: "white",
+        border: "0px",
+        display: "block",
       },
-
     };
   };
   return (
     <div className="myCustomHeight w-full mx-4 h-screen">
       {show && (
-        <EventForm _id={_id} onClose={() => setShow(false)} onLoading={handleLoading} />
+        <EventForm
+          _id={_id}
+          onClose={() => setShow(false)}
+          onLoading={handleLoading}
+        />
       )}
       {idea?.ownerId == currentUser && !loading && (
         <div className="mb-4 text-right">
@@ -79,12 +77,10 @@ export const MyCalendar = ({ _id }) => {
 
       {!show && !loading && (
         <Calendar
-        
           localizer={localizer}
           events={dates}
           startAccessor="start"
           endAccessor="end"
-          
           eventPropGetter={eventStyleGetter}
         />
       )}

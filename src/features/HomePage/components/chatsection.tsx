@@ -8,7 +8,7 @@ import { ChatCard } from "../../../Components/Cards/chat_card";
 export function ChatSection(props: IChat) {
   const [currentMessage, setMessage] = useState("");
   const [messagelist, setMessageList] = useState<Array<IChat>>([]);
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
   useEffect(() => {
     getmessages(props.projectId).then((data) => {
       console.log(data["data"], "data", messagelist.length);
@@ -50,7 +50,7 @@ export function ChatSection(props: IChat) {
                 _id={message.senderId!._id}
                 name={message.senderId!.name}
                 message={message.message!}
-                avatar={""}
+                avatar={message.senderId!.avatar}
                 issender={issender}
               ></ChatCard>
             );
