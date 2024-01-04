@@ -27,7 +27,7 @@ const ProfilePage: React.FC<IUser> = () => {
   });
   // Inside the ProfilePage component
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
-
+  const [message, setmessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const currentdata = useSelector(selectUser);
@@ -37,15 +37,17 @@ const ProfilePage: React.FC<IUser> = () => {
       dispatch(getProfile());
     } else if (profileStatus == "loading") {
       setIsLoading(true);
+      setmessage("Loading Profile");
     } else if (profileStatus == "fetched") {
       console.log(currentdata);
       setIsLoading(false);
+      setSelectedGender(currentdata.gender);
       setProfile(currentdata);
     } else if (profileStatus == "failed") {
       setIsLoading(false);
       console.log("Error");
     } else if (profileStatus == "imageupdated") {
-      console.log(currentdata.avatar);
+      dispatch(getProfile());
       setProfile(currentdata);
       
       setIsLoading(false);
@@ -80,7 +82,11 @@ const ProfilePage: React.FC<IUser> = () => {
       dispatch(updateProfileImage(file));
     }
   };
+
   const handleSubmit = () => {
+    // Check if a new image is selected, and dispatch the appropriate action
+
+    // If no new image is selected, proceed with updating other profile details
     dispatch(updateProfile(profile));
   };
 
@@ -89,6 +95,9 @@ const ProfilePage: React.FC<IUser> = () => {
       <div className="relative">  
         <div className="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"></div>
         <div className="absolute top-0 left-0 h-24 w-24 rounded-full border-t-8 border-b-8 border-blue-500 animate-spin"></div>
+        <div>
+          <h1>{message}</h1>
+        </div>
       </div>
     </div>
   ) : (

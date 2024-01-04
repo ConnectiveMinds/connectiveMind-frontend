@@ -36,7 +36,7 @@ export const getProfile = createAsyncThunk("profile/get", async () => {
 });
 
 export const updateProfileImage = createAsyncThunk(
-  "profile/updateprofile",
+  "profile/updateimage",
   async (image: File) => {
     const config = {
       headers: {

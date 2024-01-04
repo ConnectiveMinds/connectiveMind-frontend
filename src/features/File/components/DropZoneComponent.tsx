@@ -1,6 +1,11 @@
-import React, { FunctionComponent, useCallback, Dispatch, SetStateAction } from "react";
+import React, {
+  FunctionComponent,
+  useCallback,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { useDropzone } from "react-dropzone";
-import SFile from "../Data/file.svg";
+import SFile from "../../../Data/file.svg";
 
 interface DropZoneComponentProps {
   setFile: Dispatch<SetStateAction<File | null>>;
@@ -9,16 +14,18 @@ interface DropZoneComponentProps {
 const DropZoneComponent: FunctionComponent<DropZoneComponentProps> = ({
   setFile,
 }) => {
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    console.log(acceptedFiles);
-    setFile(acceptedFiles[0]);
-  }, [setFile]);
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      console.log(acceptedFiles);
+      setFile(acceptedFiles[0]);
+    },
+    [setFile]
+  );
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject } =
     useDropzone({
       onDrop,
       multiple: false,
-      
     });
 
   return (
@@ -44,7 +51,6 @@ const DropZoneComponent: FunctionComponent<DropZoneComponentProps> = ({
           </div>
         </div>
       </div>
-      
     </div>
   );
 };
