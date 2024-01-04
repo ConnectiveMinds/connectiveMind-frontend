@@ -52,6 +52,7 @@ const ProfilePage: React.FC<IUser> = () => {
       
       setIsLoading(false);
     } else if (profileStatus == "userdetailsupdated") {
+      dispatch(getProfile());
       setProfile(currentdata);
       setIsLoading(false);
     }
@@ -116,7 +117,9 @@ const ProfilePage: React.FC<IUser> = () => {
         <div className="w-1/2 p-6">
           <label htmlFor="profilePicture" className="block cursor-pointer">
             <img
-              src={profile.avatar}
+              src={
+                profile.avatar == null ? "public/avatar.png" : profile.avatar
+              }
               alt="Profile"
               className="w-48 h-48 rounded-full mx-auto mb-4 border-4 border-white"
             />
