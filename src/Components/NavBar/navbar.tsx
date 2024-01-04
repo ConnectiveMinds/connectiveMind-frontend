@@ -20,7 +20,7 @@ interface INavBarProps {
 
 export function NavBar(props: INavBarProps) {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const [useravatar, setavatar] = useState<string>("publicavatar.png");
+  const [useravatar, setavatar] = useState<string>("public/avatar.png");
 
   const dispatch = useAppDispatch();
   const currentdata = useSelector(selectUser);
@@ -142,7 +142,7 @@ export function NavBar(props: INavBarProps) {
             <div className="hidden md:flex items-center space-x-2">
               <Link to="../Profile">
                 <img
-                  src={useravatar}
+                  src={useravatar == null ? "public/avatar.png" : useravatar}
                   className="md:h-8 lg:h-12 lg:w-12 rounded-full"
                 />
               </Link>
