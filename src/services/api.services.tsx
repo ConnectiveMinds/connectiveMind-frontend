@@ -324,7 +324,6 @@ const getEventsByUserId = async () => {
 //files//
 export const getFilesById = async (id: string) => {
   try {
-
     // Use the axios instance to make the GET request
     const url = getFiles + id;
     const response = await api.get(url);

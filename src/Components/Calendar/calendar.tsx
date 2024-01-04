@@ -8,7 +8,7 @@ import {
   getDatesbyProjectId,
   getIdeaByProjectId,
 } from "../../services/api.services";
-import { EventForm } from "../eventform";
+import { EventForm } from "./eventform";
 
 const localizer = momentLocalizer(moment);
 

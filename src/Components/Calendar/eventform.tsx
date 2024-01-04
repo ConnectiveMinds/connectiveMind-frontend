@@ -2,18 +2,18 @@ import { SyntheticEvent, useEffect, useState } from "react";
 // import { useAddDateMutation } from "../services/calendarApi";
 import { ToastContainer, toast } from "react-toastify";
 
-import { useAppDispatch } from "../app/hook";
-import { IMember } from "../features/HomePage/Interface";
-import {  getIdeaByProjectId, saveDates } from "../services/api.services";
-import { Choose } from "./search";
-import { fetchEventByUserId } from "../features/Calendar/components/calendarSlice";
-
+import { useAppDispatch } from "../../app/hook";
+import { IMember } from "../../features/HomePage/Interface";
+import { getIdeaByProjectId } from "../../services/api.services";
+import { Choose } from "../search";
+import { fetchEventByUserId } from "../../features/Calendar/components/calendarSlice";
+import { saveDates } from "../../services/api.services";
 
 // import { useSelector } from "react-redux";
 // import { useNavigate } from "react-router";
 // import { useAppDispatch } from "../app/hook";
 
-export const EventForm = ({ _id,onClose,onLoading }) => {
+export const EventForm = ({ _id, onClose, onLoading }) => {
   const dispatch = useAppDispatch();
   // const { dates } = useSelector(selectEvents);
   // const eventsError = useSelector(getEventsError);
@@ -32,7 +32,7 @@ export const EventForm = ({ _id,onClose,onLoading }) => {
   const [idea, setIdea] = useState<IMember>();
   const [FormValue, setFormValue] = useState(initialState);
   const [selectedMembers, setSelectedMembers] = useState<Array<string>>([]);
-  const { title, start, end, assigned } = FormValue;
+  const { title, start, end } = FormValue;
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     getIdeaByProjectId(_id).then((data) => {
@@ -57,9 +57,9 @@ export const EventForm = ({ _id,onClose,onLoading }) => {
       e.target.selectedOptions,
       (option) => option.value
     );
-    
+
     setSelectedMembers(selectedOptions);
-    
+
     setFormValue({ ...FormValue, assigned: selectedOptions });
   };
 
@@ -88,12 +88,6 @@ export const EventForm = ({ _id,onClose,onLoading }) => {
           setFormValue(initialState);
           toast.success("Event added Successfully");
           dispatch(fetchEventByUserId);
-          
-           
-        
-
-          
-
         } else if (saveDates.rejected.match(resultAction)) {
           // Handle rejection (if needed)
           console.log(resultAction.error.message);
@@ -104,13 +98,14 @@ export const EventForm = ({ _id,onClose,onLoading }) => {
       .catch((error) => {
         // Handle unexpected errors
         console.error("Unexpected error:", error);
-      }).finally(() => {
+      })
+      .finally(() => {
         if (onLoading) {
           onLoading(false);
         }
       });
   };
-  
+
   const handleClose = () => {
     setIsLoading(false);
     // Call the onClose function passed from the parent component
@@ -130,16 +125,32 @@ export const EventForm = ({ _id,onClose,onLoading }) => {
       <div className="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-75 backdrop-blur">
         <div className="bg-white p-6 rounded-lg shadow-md">
           <div className="flex flex-row items-center justify-between">
-          <p className="text-xl font-medium">Create Event</p>
-          <button type="button" className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" onClick={handleClose}>
+            <p className="text-xl font-medium">Create Event</p>
+            <button
+              type="button"
+              className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              onClick={handleClose}
+            >
               <span className="sr-only">Close menu</span>
-            
-              <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+
+              <svg
+                className="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
-          
+
           <div className="mb-5 mt-5">
             <p className="block mb-2 text-lg font-medium text-gray-900">
               Title

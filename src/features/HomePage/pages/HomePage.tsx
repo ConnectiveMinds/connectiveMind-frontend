@@ -13,7 +13,7 @@ import { EventSection } from "../components/eventSection";
 import { useSelector } from "react-redux";
 import { fetchProjectByUserId, getIdeaStatus, selectIdea } from "../ideaSlice";
 import { useAppDispatch } from "../../../app/hook";
-import { FilePage } from "../../../Pages/FilePage";
+import { FilePage } from "../../File/Pages/FilePage";
 
 import { IProject } from "../Interface";
 import { MyCalendar } from "../../../Components/Calendar/calendar";

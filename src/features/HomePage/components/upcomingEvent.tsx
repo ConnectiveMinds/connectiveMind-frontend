@@ -21,7 +21,7 @@ export function UpcomingEvents() {
     if (eventStatus === "idle") {
       dispatch(fetchEventByUserId());
     } else if (eventStatus == "loading") {
-      setCurrentStatus("Loading");
+      console.log("message");
     } else if (eventStatus == "eventfetchedbyid") {
       setUpcomningEventList(events);
       setCurrentStatus("No Upcoming Events");
