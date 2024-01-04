@@ -24,33 +24,16 @@ export function EventCard(props: IEventCard) {
     if (difference <= 0) {
       // Timer has reached or passed the future time
       difference = end - now;
-    }
-    if (difference <= 0) {
-      return {
-        timerColor: "red",
-      };
-    }
-
-    const hours = Math.floor(
-      (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-    const getTimerColor = (): string => {
-      if (seconds <= 0 && minutes <= 0 && hours <= 0) {
-        return "red";
-      } else if (minutes <= 30) {
-        return "green";
+      if (difference <= 0) {
+        return { timerColor: "red" };
       } else {
-        return "yellow";
+        return {
+          timerColor: "green",
+        };
       }
-    };
-    const timerColor = getTimerColor();
-
-    return {
-      timerColor,
-    };
+    } else {
+      return { timerColor: "blue" };
+    }
   }
 
   useEffect(() => {
@@ -62,7 +45,7 @@ export function EventCard(props: IEventCard) {
   }, []);
 
   const { timerColor } = starttimeRemaining;
-
+  console.log(timerColor)
   return (
     <div
       className={`relative h-15 bg-white rounded-lg mr-4 mt-4 flex flex-col justify-between text-black text-xl font-normal font-['Inter'] 

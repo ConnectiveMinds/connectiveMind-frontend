@@ -45,6 +45,10 @@ export function NavBar(props: INavBarProps) {
     setMenuOpen(!isMenuOpen);
   };
 
+  const logout = () => {
+    localStorage.removeItem("user");
+  };
+
   return (
     <div className="flex flex-col">
       <nav className="flex justify-between items-center p-2">
@@ -139,14 +143,16 @@ export function NavBar(props: INavBarProps) {
               <Link to="../Profile">
                 <img
                   src={useravatar}
-                  className="h-4 md:h-8 lg:h-12 rounded-full"
+                  className="md:h-8 lg:h-12 lg:w-12 rounded-full"
                 />
               </Link>
-              <Link to="../SignUp">
-                <img
-                  src="public\logout.png"
-                  className="m-4 h-3 md:h-4 lg:h-8"
-                />
+              <Link to="../login">
+                <button onClick={logout}>
+                  <img
+                    src="public\logout.png"
+                    className="m-4 h-3 md:h-4 lg:h-8"
+                  />
+                </button>
               </Link>
             </div>
           )}

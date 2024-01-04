@@ -1,9 +1,9 @@
 import DropZoneComponent from "./DropZoneComponent";
 import { useState } from "react";
-import { RenderFile } from "./RenderFile";
-import { useAppDispatch } from "../app/hook";
+import { RenderFile } from "../../../Components/RenderFile";
+import { useAppDispatch } from "../../../app/hook";
 
-import { saveFile } from "../services/api.services"; // Assuming this file exports `api` instance
+import { saveFile } from "../../../services/api.services"; // Assuming this file exports `api` instance
 import { ToastContainer, toast } from "react-toastify";
 
 export default function Upload({ id, onClose }) {

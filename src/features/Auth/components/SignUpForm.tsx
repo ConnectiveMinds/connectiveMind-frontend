@@ -28,7 +28,7 @@ const SignUpForm: React.FC = () => {
     password: "",
     confirmPassword: "",
     phoneNo: "",
-    skills:[]
+    skills: [],
   });
 
   //validation errors of input fields
@@ -38,21 +38,21 @@ const SignUpForm: React.FC = () => {
     password: "",
     confirmPassword: "",
     phoneNo: "",
-    skills:"",
+    skills: "",
   });
 
-  const { userName, email, password, phoneNo,skills } = formData;
+  const { userName, email, password, phoneNo, skills } = formData;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-   if (name === "skills") {
-     const skillsArray = value.split(",").map((skill) => skill.trim());
-     setFormData({ ...formData, [name]: skillsArray });
-   } else {
-     setFormData({ ...formData, [name]: value });
-   }
+    if (name === "skills") {
+      const skillsArray = value.split(",").map((skill) => skill.trim());
+      setFormData({ ...formData, [name]: skillsArray });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   //invoked when form is submitted
@@ -89,7 +89,7 @@ const SignUpForm: React.FC = () => {
   };
   const handleSubmit = async () => {
     try {
-      await signUp(userName, email, password, Number(phoneNo),skills)
+      await signUp(userName, email, password, Number(phoneNo), skills)
         .then((data) => {
           if (data) {
             navigate("/login");
@@ -107,11 +107,10 @@ const SignUpForm: React.FC = () => {
   //validation check of form input fields
   const handleValidation = (e: React.FormEvent) => {
     e.preventDefault();
-   
-    
+
     const tempErrors = validation(formData);
     console.log(formData);
-    
+
     setErrors(tempErrors);
 
     //if no validation errors submit the form
@@ -122,7 +121,9 @@ const SignUpForm: React.FC = () => {
 
   return (
     <div className=" w-[100%] max-w-md mx-auto mt-4 md:mt-4 px-16">
-      <h1 className="font-bold text-purple-700 text-4xl tracking-normal">Sign Up</h1>
+      <h1 className="font-bold text-purple-700 text-4xl tracking-normal">
+        Sign Up
+      </h1>
 
       <p className="mt-2">
         Have an account?{" "}
