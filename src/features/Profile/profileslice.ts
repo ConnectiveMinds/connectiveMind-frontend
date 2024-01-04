@@ -44,7 +44,8 @@ export const updateProfileImage = createAsyncThunk(
       },
     };
     const response = await apiService.updateProfileImage(image, config);
-
+    
+  
     return response;
   }
 );
@@ -52,6 +53,7 @@ export const updateProfile = createAsyncThunk(
   "profile/update",
   async (body: IUser) => {
     const response = await apiService.updateProfile(body);
+    
     return response.data;
   }
 );
