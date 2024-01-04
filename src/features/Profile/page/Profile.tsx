@@ -39,6 +39,7 @@ const ProfilePage: React.FC<IUser> = () => {
       setIsLoading(true);
       setmessage("Loading Profile");
     } else if (profileStatus == "fetched") {
+      console.log(currentdata);
       setIsLoading(false);
       setSelectedGender(currentdata.gender);
       setProfile(currentdata);
@@ -48,12 +49,13 @@ const ProfilePage: React.FC<IUser> = () => {
     } else if (profileStatus == "imageupdated") {
       dispatch(getProfile());
       setProfile(currentdata);
+      
       setIsLoading(false);
     } else if (profileStatus == "userdetailsupdated") {
       setProfile(currentdata);
       setIsLoading(false);
     }
-  }, [dispatch, profileStatus, currentdata]);
+  }, [dispatch, profile,profileStatus, currentdata]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -90,7 +92,7 @@ const ProfilePage: React.FC<IUser> = () => {
 
   return isLoading ? (
     <div className="flex items-center justify-center h-screen w-full">
-      <div className="relative">
+      <div className="relative">  
         <div className="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"></div>
         <div className="absolute top-0 left-0 h-24 w-24 rounded-full border-t-8 border-b-8 border-blue-500 animate-spin"></div>
         <div>
