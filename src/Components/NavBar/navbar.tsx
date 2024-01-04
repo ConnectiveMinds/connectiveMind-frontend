@@ -29,11 +29,11 @@ export function NavBar(props: INavBarProps) {
     if (profileStatus === "idle") {
       dispatch(getProfile());
     } else if (profileStatus == "loading") {
-      setavatar("publicavatar.png");
+      setavatar("public/avatar.png");
     } else if (profileStatus == "fetched") {
       setavatar(currentdata.avatar);
     } else if (profileStatus == "failed") {
-      setavatar("publicavatar.png");
+      setavatar("public/avatar.png");
       console.log("Error");
     } else if (profileStatus == "imageupdated") {
       setavatar(currentdata.avatar);
