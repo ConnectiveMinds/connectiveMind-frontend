@@ -42,10 +42,10 @@ export function EventCard(props: IEventCard) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [calculateTimeRemaining]);
 
   const { timerColor } = starttimeRemaining;
-  console.log(timerColor)
+
   return (
     <div
       className={`relative h-15 bg-white rounded-lg mr-4 mt-4 flex flex-col justify-between text-black text-xl font-normal font-['Inter'] 

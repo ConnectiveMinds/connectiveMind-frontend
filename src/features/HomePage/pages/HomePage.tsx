@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NavBar } from "../../../Components/NavBar/navbar";
 import { SideBar } from "../../../Components/NavBar/sidebar";
-import { HorizontalDivider } from "../../../Components/Divider/horizontalDivider";
 import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import Review from "../components/review";
@@ -73,7 +72,7 @@ export function HomePage() {
         name={""}
         error={false}
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        onChange={function (e: ChangeEvent<HTMLInputElement>): void {
+        onChange={function (): void {
           throw new Error("Function not implemented.");
         }}
       ></NavBar>

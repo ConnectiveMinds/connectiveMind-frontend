@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState, useRef, useEffect, ReactEventHandler } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 interface OTPDialogProps {
   onSubmit: (otp: string) => void;
@@ -51,7 +51,7 @@ const OTPDialog: React.FC<OTPDialogProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const enteredOTP = otp.join("");
     console.log("Entered OTP:", enteredOTP);
     if (enteredOTP.length == 6) {

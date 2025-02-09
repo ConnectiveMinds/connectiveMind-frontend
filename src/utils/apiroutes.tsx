@@ -1,4 +1,4 @@
-export const host = "http://localhost:3000";
+export const host = "http://localhost:4500";
 export const sendotp = "/v1/otp/send";
 export const verifyotp = "/v1/otp/verify";
 export const group = `/v1/idea/crud/`;

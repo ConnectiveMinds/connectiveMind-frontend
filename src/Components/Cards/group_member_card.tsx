@@ -15,7 +15,6 @@ const TeamMemberTile: React.FC<TeamMemberTileProps> = ({
   memberName,
   ownerId,
   loggedInUserId,
-  groupId,
   onRemove,
 }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -73,7 +72,7 @@ const TeamMemberTile: React.FC<TeamMemberTileProps> = ({
             )}
           </>
         )}
-        {(loggedInUserId === id && ownerId !== loggedInUserId)&& (
+        {loggedInUserId === id && ownerId !== loggedInUserId && (
           <>
             <button
               onClick={handleRemoveClick}

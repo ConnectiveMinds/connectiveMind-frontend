@@ -1,5 +1,5 @@
 import { Calendar, momentLocalizer } from "react-big-calendar";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 import { IEventCard } from "../Cards/events_card";
