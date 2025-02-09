@@ -4,7 +4,7 @@ import { SideBar } from "../../../Components/NavBar/sidebar";
 import { VerticalDivider } from "../../../Components/Divider/verticalDivider";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import Review from "../components/review";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RecommendedProjects } from "../components/recommendsection";
 import { ChatSection } from "../components/chatsection";
 import TeamMembersPage from "../components/teamSection";
