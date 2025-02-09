@@ -1,4 +1,6 @@
+
 export const host = "https://connectiveminds-backend.onrender.com";
+
 export const sendotp = "/v1/otp/send";
 export const verifyotp = "/v1/otp/verify";
 export const group = `/v1/idea/crud/`;

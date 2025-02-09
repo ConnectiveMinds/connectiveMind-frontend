@@ -4,14 +4,12 @@ import { Explore } from "../components/Explore";
 
 export function LandingPage() {
   // console.log(typeof(exploreToSection))
-
+  console.log("here");
   return (
     <div className="max-w-screen-xl mx-auto my-4">
       <Navbar />
       <Description />
-      <Explore/>
+      <Explore />
     </div>
   );
 }
-
-

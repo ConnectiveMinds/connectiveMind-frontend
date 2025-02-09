@@ -37,11 +37,7 @@ const CreateGroup: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await createGroup(
-        teamName,
-        projectDescription,
-        skillsRequired
-      );
+      await createGroup(teamName, projectDescription, skillsRequired);
 
       navigate("/Home");
     } catch (error: any) {

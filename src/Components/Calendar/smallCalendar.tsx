@@ -16,14 +16,11 @@ export const SmallCalendar = () => {
   const dispatch = useAppDispatch();
 
   const dates = useSelector(selectEvents);
-  
 
   useEffect(() => {
     // Fetch events when the component mounts
     dispatch(fetchEventByUserId());
-  }, [dates]);
-
- 
+  }, []);
 
   return (
     <div className="max-w-full realtive ">

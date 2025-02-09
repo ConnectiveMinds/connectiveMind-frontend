@@ -9,7 +9,6 @@ import { useLoginUserMutation } from "../../../services/authApi";
 import { setUser } from "../components/authSlice";
 import { TextField } from "../../../Components/textfield";
 import OTPDialog from "../components/OTPfield";
-import { sendOTP } from "../../../services/api.services";
 
 const Login = () => {
   const initialState: {
@@ -112,15 +111,13 @@ const Login = () => {
               handle={handleChange}
             />
 
-            
-
             {isForgetPasswordOpen && (
               <div className="overlay">
                 <OTPDialog
                   onClose={() => {
                     setForgetPasswordOpen(false);
                   }}
-                  onSubmit={function (otp: string): void {
+                  onSubmit={function (): void {
                     throw new Error("Function not implemented.");
                   }}
                   resendOTP={function (): void {

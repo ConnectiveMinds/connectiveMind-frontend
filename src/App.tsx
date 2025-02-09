@@ -10,7 +10,6 @@ import { LandingPage } from "./features/LandingPage/pages/LandingPage";
 import { HomePage } from "./features/HomePage/pages/HomePage";
 import { SignUp } from "./features/Auth/pages/SignUp";
 import ProfilePage from "./features/Profile/page/Profile";
-
 import CreateGroup from "./features/CreateGroup/pages/CreateGroup";
 import { Login } from "./features/Auth/pages/SignIn";
 import { SmallCalendar } from "./Components/Calendar/smallCalendar";
@@ -32,7 +31,21 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/Profile" element={<ProfilePage />} />
+          <Route
+            path="/Profile"
+            element={
+              <ProfilePage
+                _id={""}
+                name={""}
+                email={""}
+                skills={[]}
+                avatar={""}
+                institution={""}
+                address={""}
+                gender={""}
+              />
+            }
+          />
           <Route path="/Calendar" element={<SmallCalendar />} />
           <Route path="/CreateGroup" element={<CreateGroup />} />
           <Route path="/join-requests" element={<JoinRequest />} />

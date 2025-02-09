@@ -13,7 +13,6 @@ export interface IProjectCard {
 export function ProjectCard(props: IProjectCard) {
   const handleClick = async () => {
     try {
-      console.log("actual", props._id);
       await updatejoinRequest(props._id).then(async () => {});
       toast.success("Request sent");
     } catch (e: any) {
